@@ -11,6 +11,6 @@ package Backend;
 public interface details {
     String getId();
     String getEmail();
-    
-    
-}
+    String getPasswordHash();
+    void setPasswordHash(String hashPassword);
+} 

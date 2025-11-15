@@ -8,10 +8,7 @@ package Backend;
 
 import javax.swing.JOptionPane;
 
-/**
- *
- * @author DELL
- */
+
 public abstract class Person {
     
     
