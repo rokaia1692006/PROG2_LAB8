@@ -16,8 +16,8 @@ public class Instructor extends Person implements details {
     private String email;
     private String passwordHash;
     private ArrayList<String> createdCourses;
-public Instructor(String fullName, int age, String gender,String id,String email,String hashPassword) {
-        super(fullName, age, gender);
+public Instructor(String fullName, String id,String email,String hashPassword) {
+        super(fullName);
        setEmail(email);
        setId(id);
        setPasswordHash (passwordHash);

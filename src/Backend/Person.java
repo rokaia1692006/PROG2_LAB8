@@ -13,15 +13,15 @@ public abstract class Person {
     
     
     private String fullName;
-    private int age;
-    private String gender;
+//    private int age;
+//    private String gender;
     
     
-    public Person(String fullName,int age,String gender) {
+    public Person(String fullName) {
         
         setFullName(fullName);
-        setAge(age);
-        setGender(gender);
+//        setAge(age);
+//        setGender(gender);
         
     }
     
@@ -62,50 +62,50 @@ public abstract class Person {
     }
     
     
-    public static boolean validAge ( int age )
-    {
-        if (age < 1 || age > 90)
-        {
-            JOptionPane.showMessageDialog(null,"Error Iinvalid range of age!","Error",JOptionPane.ERROR_MESSAGE);
-            return false;
-        }
-        else{
-          
-              return true;
-        }
-      
-    }
-    public void setAge(int age) {
-        
-        if (validAge(age))
-        {
-            this.age = age;
-            
-        }
-    }
-
-    public void setGender(String gender) {
-        
-        if (!gender.isEmpty())
-        {this.gender = gender;
-         
-        }
-        else{
-             JOptionPane.showMessageDialog(null,"Error gender entering error..","Error",JOptionPane.ERROR_MESSAGE);
-        }
-    }
+//    public static boolean validAge ( int age )
+//    {
+//        if (age < 1 || age > 90)
+//        {
+//            JOptionPane.showMessageDialog(null,"Error Iinvalid range of age!","Error",JOptionPane.ERROR_MESSAGE);
+//            return false;
+//        }
+//        else{
+//          
+//              return true;
+//        }
+//      
+//    }
+//    public void setAge(int age) {
+//        
+//        if (validAge(age))
+//        {
+//            this.age = age;
+//            
+//        }
+//    }
+//
+//    public void setGender(String gender) {
+//        
+//        if (!gender.isEmpty())
+//        {this.gender = gender;
+//         
+//        }
+//        else{
+//             JOptionPane.showMessageDialog(null,"Error gender entering error..","Error",JOptionPane.ERROR_MESSAGE);
+//        }
+//    }
 
 
     public String getFullName() {
         return fullName;
     }
 
-    public int getAge() {
-        return age;
-    }
-
-    public String getGender() {
-        return gender;
-    }
+//    public int getAge() {
+//        return age;
+//    }
+//
+//    public String getGender() {
+//        return gender;
+//    }
     
 }
