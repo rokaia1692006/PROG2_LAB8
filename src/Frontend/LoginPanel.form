@@ -35,8 +35,8 @@
                       <EmptySpace type="separate" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" max="-2" attributes="0">
                           <Component id="Title" min="-2" max="-2" attributes="0"/>
-                          <Component id="emailField" max="32767" attributes="0"/>
-                          <Component id="passwordField" alignment="0" pref="191" max="32767" attributes="0"/>
+                          <Component id="emailField" pref="191" max="32767" attributes="0"/>
+                          <Component id="passwordField" alignment="0" max="32767" attributes="0"/>
                       </Group>
                   </Group>
               </Group>
@@ -104,11 +104,6 @@
         <Property name="text" type="java.lang.String" value="Don&apos;t have an account? "/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JPasswordField" name="passwordField">
-      <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="passwordFieldActionPerformed"/>
-      </Events>
-    </Component>
     <Component class="javax.swing.JButton" name="jButton1">
       <Properties>
         <Property name="text" type="java.lang.String" value="Signup"/>
@@ -124,6 +119,8 @@
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="loginBtnActionPerformed"/>
       </Events>
+    </Component>
+    <Component class="javax.swing.JPasswordField" name="passwordField">
     </Component>
   </SubComponents>
 </Form>

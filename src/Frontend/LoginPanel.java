@@ -33,9 +33,9 @@ public class LoginPanel extends javax.swing.JPanel {
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
-        passwordField = new javax.swing.JPasswordField();
         jButton1 = new javax.swing.JButton();
         loginBtn = new javax.swing.JButton();
+        passwordField = new javax.swing.JPasswordField();
 
         Title.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
         Title.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -53,12 +53,6 @@ public class LoginPanel extends javax.swing.JPanel {
         jLabel2.setText("Email");
 
         jLabel3.setText("Don't have an account? ");
-
-        passwordField.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                passwordFieldActionPerformed(evt);
-            }
-        });
 
         jButton1.setText("Signup");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
@@ -95,8 +89,8 @@ public class LoginPanel extends javax.swing.JPanel {
                         .addGap(18, 18, 18)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(Title)
-                            .addComponent(emailField)
-                            .addComponent(passwordField, javax.swing.GroupLayout.DEFAULT_SIZE, 191, Short.MAX_VALUE))))
+                            .addComponent(emailField, javax.swing.GroupLayout.DEFAULT_SIZE, 191, Short.MAX_VALUE)
+                            .addComponent(passwordField))))
                 .addGap(85, 85, 85))
         );
         layout.setVerticalGroup(
@@ -126,10 +120,6 @@ public class LoginPanel extends javax.swing.JPanel {
         // TODO add your handling code here:
     }//GEN-LAST:event_emailFieldActionPerformed
 
-    private void passwordFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_passwordFieldActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_passwordFieldActionPerformed
-
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
         
@@ -137,7 +127,9 @@ public class LoginPanel extends javax.swing.JPanel {
 
     private void loginBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_loginBtnActionPerformed
         // TODO add your handling code here:
-        if(passwordField.getPassword().length==0||emailField.getText().trim().isEmpty()){
+        String email=emailField.getText().trim();
+        char[] password=passwordField.getPassword();
+        if(password.length==0||email.isEmpty()){
             JOptionPane.showMessageDialog(this, "Empty field, please enter both email and password.", "Error", JOptionPane.ERROR_MESSAGE);
         }
     }//GEN-LAST:event_loginBtnActionPerformed

@@ -20,15 +20,6 @@ public class SignupPanel extends javax.swing.JPanel {
         initComponents();
         idField.setEnabled(false);
     }
-public static void main(String[] args) {
-    javax.swing.SwingUtilities.invokeLater(() -> {
-        javax.swing.JFrame frame = new javax.swing.JFrame("Signup Test");
-        frame.setDefaultCloseOperation(javax.swing.JFrame.EXIT_ON_CLOSE);
-        frame.setSize(400, 400);
-        frame.add(new SignupPanel());
-        frame.setVisible(true);
-    });
-}
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -220,8 +211,8 @@ public static void main(String[] args) {
             jsonFile.addInstructor(ins);
         }
         else{
-//            Student stu=new Student(username, id, email, new String(password));
-//            jsonFile.addStudent(stu);
+            Student stu=new Student(username, id, email, new String(password));
+            jsonFile.addStudent(stu);
         }
     }//GEN-LAST:event_signupBtnActionPerformed
 
