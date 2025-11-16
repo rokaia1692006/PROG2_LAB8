@@ -23,6 +23,10 @@ public class Lesson {
         this.resources = resources;
     }
 
+    public String getLessonID() {
+        return lessonID;
+    }
+
     public String getTitle() {
         return title;
     }
