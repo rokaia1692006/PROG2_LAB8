@@ -150,6 +150,8 @@ public class LoginFrame extends javax.swing.JFrame {
             new InstructorDashboardFrame().setVisible(true);
             this.dispose();
         }
+        else
+            JOptionPane.showMessageDialog(this, "Incorrect email or password.", "Error", JOptionPane.ERROR_MESSAGE);
     }//GEN-LAST:event_loginBtnActionPerformed
 
     /**
