@@ -33,7 +33,7 @@ public class LoginFrame extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
-        jButton1 = new javax.swing.JButton();
+        signupBtn = new javax.swing.JButton();
         loginBtn = new javax.swing.JButton();
         passwordField = new javax.swing.JPasswordField();
 
@@ -56,10 +56,10 @@ public class LoginFrame extends javax.swing.JFrame {
 
         jLabel3.setText("Don't have an account? ");
 
-        jButton1.setText("Signup");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        signupBtn.setText("Signup");
+        signupBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                signupBtnActionPerformed(evt);
             }
         });
 
@@ -80,7 +80,7 @@ public class LoginFrame extends javax.swing.JFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 139, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jButton1))
+                        .addComponent(signupBtn))
                     .addComponent(loginBtn)
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -111,7 +111,7 @@ public class LoginFrame extends javax.swing.JFrame {
                 .addGap(50, 50, 50)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3)
-                    .addComponent(jButton1))
+                    .addComponent(signupBtn))
                 .addContainerGap())
         );
 
@@ -122,10 +122,12 @@ public class LoginFrame extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_emailFieldActionPerformed
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void signupBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_signupBtnActionPerformed
         // TODO add your handling code here:
-
-    }//GEN-LAST:event_jButton1ActionPerformed
+        SignupFrame signup=new SignupFrame();
+        signup.setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_signupBtnActionPerformed
 
     private void loginBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_loginBtnActionPerformed
         // TODO add your handling code here:
@@ -175,11 +177,11 @@ public class LoginFrame extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel Title;
     private javax.swing.JTextField emailField;
-    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JButton loginBtn;
     private javax.swing.JPasswordField passwordField;
+    private javax.swing.JButton signupBtn;
     // End of variables declaration//GEN-END:variables
 }

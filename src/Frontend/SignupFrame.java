@@ -231,6 +231,8 @@ public class SignupFrame extends javax.swing.JFrame {
             Student stu=new Student(username, id, email, new String(password));
             jsonFile.addStudent(stu);
         }
+        JOptionPane.showMessageDialog(this, "Sign-up successful!");
+        this.dispose();
     }//GEN-LAST:event_signupBtnActionPerformed
 
     private void roleBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_roleBoxActionPerformed
