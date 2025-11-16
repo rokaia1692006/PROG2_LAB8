@@ -36,6 +36,13 @@ public class Course {
         this.lessons  = new ArrayList<>();
         this.students  = new ArrayList<>(); 
     }
+    public void addLessons(ArrayList<Lesson> l , Person I){
+    if(!checkIfInstructor(I)){
+        JOptionPane.showMessageDialog(null, "CANT CREATE COURSE");
+        return;
+       }
+       this.lessons.addAll(l);
+    }
     public void enrollInCourse(Student s ){
     if(!students.contains(s)){
     students.add(s);
@@ -53,6 +60,10 @@ public class Course {
     public ArrayList<Lesson> getLessons() {
         return lessons;
     }
-    
+
+    public String getCourseId() {
+        return courseId;
+    }
     
 }
+
