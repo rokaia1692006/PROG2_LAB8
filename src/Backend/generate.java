@@ -5,6 +5,7 @@
 
 package Backend;
 import java.util.Random;
+import javax.swing.JOptionPane;
 /**
  *
  * @author it
@@ -25,7 +26,9 @@ public class generate {
         StringBuilder s = new StringBuilder();
         s.append("C_");
         String id  = RandomString(s);
-        
+        if(jsonFile.containsCourse(id)!=null){
+          id  = RandomString(s);
+        }
         return id;
     
     
@@ -36,6 +39,7 @@ public class generate {
         s.append("L_");
         String id  = RandomString(s);
         
+        
         return id;
     
     
@@ -45,7 +49,9 @@ public class generate {
         StringBuilder s = new StringBuilder();
         s.append("I_");
         String id  = RandomString(s);
-        
+        if(jsonFile.containsInstructor(id)!=null){
+          id  = RandomString(s);
+        }
         return id;
     
     
@@ -55,7 +61,9 @@ public class generate {
         StringBuilder s = new StringBuilder();
         s.append("S_");
         String id  = RandomString(s);
-        
+        if(jsonFile.containsStudent(id)!=null){
+          id  = RandomString(s);
+        }
         return id;
     
     

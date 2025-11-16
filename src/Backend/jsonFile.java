@@ -21,6 +21,7 @@ public class jsonFile {
     private static ArrayList<Course> AllCourses;
     private static ArrayList<Student> Students;
     private static ArrayList<Instructor> instructors;
+    private static ArrayList<String> lids;
     private static final String CFile = "courses.json";
     private static final String UFile = "users.json";
     static{LoadAllFiles();}
@@ -28,6 +29,8 @@ public class jsonFile {
     AllCourses = new ArrayList<>();
     Students = new ArrayList<>();
     instructors = new ArrayList<>();
+    lids = new ArrayList<>();
+
     loadUsers();
     loadCourses();
     FinalValidationIns();
@@ -87,7 +90,9 @@ public class jsonFile {
               resources.add(rarr.getString(j));
           }
           }
-            ls.add(new Lesson(lTitle, lContent, resources));
+              Lesson ltenp = new Lesson(lTitle, lContent, resources);
+              lids.add(ltenp.getLessonID());
+            ls.add(ltenp);
               
           }
          
