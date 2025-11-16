@@ -4,6 +4,7 @@ package Frontend;
 import Backend.Enrollment;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.List;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
@@ -24,24 +25,23 @@ public class BrowseCourses extends javax.swing.JPanel {
         JScrollPane scrollPane = new JScrollPane(coursesScroll);
     this.add(scrollPane); 
         try {
-        List<Courses> = 
+            
+        List<Course> coursesArray = loadCourses();
         
-        for (int i = 0; i < coursesArray.length(); i++) {
+        for (int i = 0; i < coursesArray.size(); i++) {
         
             
-           JSONObject course = coursesArray.getJSONObject(i);
+           Course course = coursesArray.get(i);
            JPanel panel = new JPanel();
            panel.setLayout(coursePanelMain.getLayout());
         
-           JLabel courseName = new JLabel (course.getString("title"));
-           JLabel coursedescription = new JLabel (course.getString("description"));
+           JLabel courseName = new JLabel (course.getTitle());
+           JLabel coursedescription = new JLabel (course.getDescription());
            JButton button = new JButton("Enroll");
            button.addActionListener(new ActionListener() {
                    public void actionPerformed(ActionEvent evt) {
-                       int studentID = 1000; 
-                        int courseID = course.getInt("courseId");
-                        Enrollment enroll = new Enrollment();
-                    enroll.enrollstudentincourse(courseID, studentID);
+                       
+                       addStudent /////
               
                    }});
         
