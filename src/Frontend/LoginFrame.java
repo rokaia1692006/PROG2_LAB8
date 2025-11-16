@@ -4,6 +4,8 @@
  */
 package Frontend;
 
+import Backend.Instructor;
+import Backend.jsonFile;
 import javax.swing.JOptionPane;
 
 /**
@@ -136,7 +138,18 @@ public class LoginFrame extends javax.swing.JFrame {
         if(password.length==0||email.isEmpty()){
             JOptionPane.showMessageDialog(this, "Empty field, please enter both email and password.", "Error", JOptionPane.ERROR_MESSAGE);
         }
-
+        Student stu=jsonFile.studentEmail(email,new String(password));
+        Instructor ins=jsonFile.instructorEmail(email,new String(password));
+        if(stu!=null){
+            JOptionPane.showMessageDialog(this, "Login successful!");
+            new StudentDashboardFrame().setVisible(true);
+            this.dispose();
+        }
+        else if(ins!=null){
+            JOptionPane.showMessageDialog(this, "Login successful!");
+            new InstructorDashboardFrame().setVisible(true);
+            this.dispose();
+        }
     }//GEN-LAST:event_loginBtnActionPerformed
 
     /**
