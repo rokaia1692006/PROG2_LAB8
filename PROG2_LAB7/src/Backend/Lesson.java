@@ -11,13 +11,13 @@ import java.util.ArrayList;
  * @author it
  */
 public class Lesson {
-    private String lessonID;
+    private final String lessonID;
     private String title;
     private String content;
     private ArrayList<String> resources;
 
     public Lesson(String title, String content, ArrayList resources) {
-        this.lessonID  = Generate.lessonId();
+        this.lessonID  = generate.LessonID();
         this.title = title;
         this.content = content;
         this.resources = resources;

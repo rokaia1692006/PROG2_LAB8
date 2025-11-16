@@ -29,7 +29,7 @@ public class Course {
         JOptionPane.showMessageDialog(null, "CANT CREATE COURSE");
         return;
        }
-        this.courseId = Generate.generateCourseId();
+        this.courseId = generate.CourseId();
         this.title = title;
         this.description = description;
         this.InstructorId = Instructor.getId();
