@@ -142,12 +142,12 @@ public class LoginFrame extends javax.swing.JFrame {
         Instructor ins=jsonFile.instructorEmail(email,new String(password));
         if(stu!=null){
             JOptionPane.showMessageDialog(this, "Login successful!");
-            new StudentDashboardFrame().setVisible(true);
+            new StudentDashboardFrame(stu).setVisible(true);
             this.dispose();
         }
         else if(ins!=null){
             JOptionPane.showMessageDialog(this, "Login successful!");
-            new InstructorDashboardFrame().setVisible(true);
+            new InstructorDashboardFrame(ins).setVisible(true);
             this.dispose();
         }
         else
