@@ -5,6 +5,7 @@
 package Backend;
 
 import java.util.ArrayList;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -17,7 +18,11 @@ public class Instructor extends PersonDetails {
 
     public Instructor(String userName, String id, String email, String hashPassword) {
         super(id, email, hashPassword, userName);
-        
+        this.createdCourses = new ArrayList<>();
+    }
+
+    public String getRole() {
+        return role;
     }
     
     public ArrayList<String> getCreatedCourse() {
@@ -27,7 +32,7 @@ public class Instructor extends PersonDetails {
 
     public void addCourse(String courseId) {
         if (courseId == null || courseId.trim().isEmpty()) {
-            throw new IllegalArgumentException("Course ID cannot be empty!!");            
+            JOptionPane.showMessageDialog(null, "course id can't be empty", "Error", JOptionPane.ERROR_MESSAGE);           
         } else {
             createdCourses.add(courseId);
         }
