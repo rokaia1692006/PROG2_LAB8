@@ -1,24 +1,23 @@
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JPanel.java to edit this template
+ * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
 package Frontend;
-import Backend.Instructor;
-import Backend.generate;
-import Backend.jsonFile;
+
+import Backend.*;
 import javax.swing.JOptionPane;
+
 /**
  *
  * @author malak
  */
-public class SignupPanel extends javax.swing.JPanel {
+public class SignupFrame extends javax.swing.JFrame {
 
     /**
-     * Creates new form SignupPanel
+     * Creates new form SignupFrame
      */
-    public SignupPanel() {
+    public SignupFrame() {
         initComponents();
-        idField.setEnabled(false);
     }
 
     /**
@@ -30,10 +29,12 @@ public class SignupPanel extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        buttonGroup1 = new javax.swing.ButtonGroup();
-        buttonGroup2 = new javax.swing.ButtonGroup();
+        usernameField = new javax.swing.JTextField();
+        jLabel5 = new javax.swing.JLabel();
         Title = new javax.swing.JLabel();
+        emailField = new javax.swing.JTextField();
         idField = new javax.swing.JTextField();
+        generateId = new javax.swing.JButton();
         passwordField = new javax.swing.JPasswordField();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
@@ -41,19 +42,40 @@ public class SignupPanel extends javax.swing.JPanel {
         jLabel3 = new javax.swing.JLabel();
         roleBox = new javax.swing.JComboBox<>();
         jLabel4 = new javax.swing.JLabel();
-        usernameField = new javax.swing.JTextField();
-        jLabel5 = new javax.swing.JLabel();
-        emailField = new javax.swing.JTextField();
-        generateId = new javax.swing.JButton();
+
+        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+
+        usernameField.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        usernameField.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                usernameFieldActionPerformed(evt);
+            }
+        });
+
+        jLabel5.setText("Email");
 
         Title.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
         Title.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         Title.setText("SIGNUP");
 
+        emailField.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        emailField.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                emailFieldActionPerformed(evt);
+            }
+        });
+
         idField.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         idField.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 idFieldActionPerformed(evt);
+            }
+        });
+
+        generateId.setText("Generate");
+        generateId.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                generateIdActionPerformed(evt);
             }
         });
 
@@ -85,31 +107,8 @@ public class SignupPanel extends javax.swing.JPanel {
 
         jLabel4.setText("Username");
 
-        usernameField.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        usernameField.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                usernameFieldActionPerformed(evt);
-            }
-        });
-
-        jLabel5.setText("Email");
-
-        emailField.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        emailField.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                emailFieldActionPerformed(evt);
-            }
-        });
-
-        generateId.setText("Generate");
-        generateId.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                generateIdActionPerformed(evt);
-            }
-        });
-
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
-        this.setLayout(layout);
+        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
+        getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
@@ -180,11 +179,29 @@ public class SignupPanel extends javax.swing.JPanel {
                 .addComponent(signupBtn)
                 .addGap(24, 24, 24))
         );
+
+        pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void usernameFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_usernameFieldActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_usernameFieldActionPerformed
+
+    private void emailFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_emailFieldActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_emailFieldActionPerformed
 
     private void idFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_idFieldActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_idFieldActionPerformed
+
+    private void generateIdActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_generateIdActionPerformed
+        // TODO add your handling code here:
+        if(roleBox.getSelectedItem().toString().equals("Instructor"))
+        idField.setText(generate.InstructorID());
+        else
+        idField.setText(generate.StudentID());
+    }//GEN-LAST:event_generateIdActionPerformed
 
     private void passwordFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_passwordFieldActionPerformed
         // TODO add your handling code here:
@@ -220,27 +237,43 @@ public class SignupPanel extends javax.swing.JPanel {
         // TODO add your handling code here:
     }//GEN-LAST:event_roleBoxActionPerformed
 
-    private void usernameFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_usernameFieldActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_usernameFieldActionPerformed
+    /**
+     * @param args the command line arguments
+     */
+    public static void main(String args[]) {
+        /* Set the Nimbus look and feel */
+        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
+        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
+         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
+         */
+        try {
+            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
+                if ("Nimbus".equals(info.getName())) {
+                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
+                    break;
+                }
+            }
+        } catch (ClassNotFoundException ex) {
+            java.util.logging.Logger.getLogger(SignupFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (InstantiationException ex) {
+            java.util.logging.Logger.getLogger(SignupFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (IllegalAccessException ex) {
+            java.util.logging.Logger.getLogger(SignupFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
+            java.util.logging.Logger.getLogger(SignupFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        }
+        //</editor-fold>
 
-    private void emailFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_emailFieldActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_emailFieldActionPerformed
-
-    private void generateIdActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_generateIdActionPerformed
-        // TODO add your handling code here:
-        if(roleBox.getSelectedItem().toString().equals("Instructor"))
-            idField.setText(generate.InstructorID());
-        else
-            idField.setText(generate.StudentID());
-    }//GEN-LAST:event_generateIdActionPerformed
-
+        /* Create and display the form */
+        java.awt.EventQueue.invokeLater(new Runnable() {
+            public void run() {
+                new SignupFrame().setVisible(true);
+            }
+        });
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel Title;
-    private javax.swing.ButtonGroup buttonGroup1;
-    private javax.swing.ButtonGroup buttonGroup2;
     private javax.swing.JTextField emailField;
     private javax.swing.JButton generateId;
     private javax.swing.JTextField idField;
@@ -255,4 +288,3 @@ public class SignupPanel extends javax.swing.JPanel {
     private javax.swing.JTextField usernameField;
     // End of variables declaration//GEN-END:variables
 }
-
