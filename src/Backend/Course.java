@@ -65,6 +65,16 @@ public class Course {
         return courseId;
     }
 
+    public String getInstructorId() {
+        return InstructorId;
+    }
+
+    public void UpdateValues(String Title , String description){
+        
+        this.title = Title;
+        this.description = description;
+    }
+
     
 }
 

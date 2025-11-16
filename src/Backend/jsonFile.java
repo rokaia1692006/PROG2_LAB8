@@ -20,7 +20,7 @@ import org.json.JSONArray;
 public class jsonFile {
     private static ArrayList<Course> AllCourses;
     private static ArrayList<Student> Students;
-    private static ArrayList<Instructors> instructors;
+    private static ArrayList<Instructor> instructors;
     private static final String CFile = "courses.json";
     private static final String UFile = "users.json";
     static{LoadAllFiles();}
@@ -66,7 +66,13 @@ public class jsonFile {
               JOptionPane.showMessageDialog(null, "FILE ERROR");
               return null;
           }
-          Course c = new Course(title, dis, ins);
+          Course c;
+          if(course.has("ID")){
+          String cid = course.getString("ID");
+          c = new Course(title, dis, ins, cid);
+          } else {
+          c = new Course(title, dis, ins);
+          }
           if(course.has("Lessons")){
               ArrayList<Lesson> ls = new ArrayList<>();
           JSONArray larr = course.getJSONArray("Lessons");
@@ -81,7 +87,7 @@ public class jsonFile {
               resources.add(rarr.getString(j));
           }
           }
-            ls.add(new Lesson(title, lContent, resources));
+            ls.add(new Lesson(lTitle, lContent, resources));
               
           }
          
@@ -102,7 +108,7 @@ public class jsonFile {
     
     }
     catch(Exception e){
-        
+        e.printStackTrace();
     }
     return AllCourses;
     }
@@ -156,7 +162,7 @@ public class jsonFile {
       }
       }
       catch(Exception e){
-          
+          e.printStackTrace();
       }
     }
         public static void addStudent(Student s){
@@ -164,7 +170,7 @@ public class jsonFile {
         return;
         }
         Students.add(s);
-        
+            SAVE();
         
         }
         public static void addInstructor(Instructor i){
@@ -172,15 +178,57 @@ public class jsonFile {
         return;
         }
         instructors.add(i);
+        SAVE();
         
         
         }
         
+         public static void CreateCourse (String insID, String title, String description){
+             Instructor ins = containsInstructor(insID);
+             if(ins  == null){
+             JOptionPane.showMessageDialog(null, "NO INSTRUCTOR");
+             return;
+             
+             
+             }
+             Course c = new Course(title,description,ins);
+             ins.addCourse(c.getCourseId());
+             AllCourses.add(c);
+             SAVE();
         
+        }
+         public static void updatecourse (String insID, String CId , String title, String description){
+              Instructor ins = containsInstructor(insID);
+              Course c= containsCourse(CId);
+             if(ins  == null || c == null || !insID.equals(c.getInstructorId())){
+             JOptionPane.showMessageDialog(null, "NO INSTRUCTOR");
+             return;
+             
+             
+             }
+             c.UpdateValues(title, description);
+             SAVE();
+             
+             
+         }
+         
+        public static void DeleteCourse(String cId , String insID){
+         Instructor ins = containsInstructor(insID);
+              Course c= containsCourse(cId);
+             if(ins  == null || c == null || !insID.equals(c.getInstructorId())){
+             JOptionPane.showMessageDialog(null, "CANNOT DELETE");
+             return;
+             
+             }
+             
+             ins.deleteCourse(cId);
+             AllCourses.remove(c);
+             SAVE();
+        }
                                           
     public static Instructor containsInstructor(String id){
     for(Instructor i : instructors){
-    if(i.getid().equals(id)){
+    if(i.getId().equals(id)){
     return i;
     }
     }
@@ -190,7 +238,7 @@ public class jsonFile {
     
     public static Student containsStudent(String id){
     for(Student i : Students){
-    if(i.getid().equals(id)){
+    if(i.getId().equals(id)){
     return i;
     }
     }
@@ -206,4 +254,74 @@ public class jsonFile {
     return null;
     
     }
-}
+     public static void SAVE(){
+     SaveCourse();
+     SaveUsers();
+     
+     }
+     private static void SaveCourse(){
+     try{
+        JSONArray arr = new JSONArray();
+        for(Course c : AllCourses){
+        JSONObject o = new JSONObject();
+        o.put("ID", c.getCourseId());
+        o.put("Title", c.getTitle());
+        o.put("Description", c.getDescription());
+        o.put("InstructorID", c.getInstructorId());
+        JSONArray ls = new JSONArray();
+        
+        
+        for(Lesson l : c.getLessons()){
+        JSONObject lo = new JSONObject();
+        lo.put("Title", l.getTitle());
+        lo.put("Content", l.getContent());
+        lo.put("Resources", new JSONArray(l.getResources()));
+        ls.put(lo);
+        }
+        o.put("Lessons", ls);
+        arr.put(o);
+        }
+        JSONObject root = new JSONObject();
+        root.put("Courses", arr);
+        Files.write(Paths.get(CFile), root.toString(4).getBytes());
+        }
+        catch(Exception e){
+        e.printStackTrace();
+        }
+        }
+     
+     
+private static void SaveUsers(){
+    try{
+    JSONObject root = new JSONObject();
+    JSONArray stuarr = new JSONArray();
+    for(Student s : Students){
+    JSONObject o = new JSONObject();
+    o.put("ID", s.getId());
+    o.put("Name", s.getName());
+    o.put("Email", s.getEmail());
+    o.put("PasswordHash", s.getPasswordHash());
+    o.put("Enrolled_Courses", new JSONArray(s.getCourses()));
+    stuarr.put(o);
+    }
+    JSONArray insarr = new JSONArray();
+    for(Instructor i : instructors){
+    JSONObject o = new JSONObject();
+    o.put("ID", i.getId());
+    o.put("Name", i.getName());
+    o.put("Email", i.getEmail());
+    o.put("PasswordHash", i.getPasswordHash());
+    o.put("CreatedCourses", new JSONArray(i.getCourses()));
+    insarr.put(o);
+    }
+    root.put("Students", stuarr);
+    root.put("Instructors", insarr);
+    Files.write(Paths.get(UFile), root.toString(4).getBytes());
+    }
+    catch(Exception e){
+    e.printStackTrace();
+    }
+    }
+
+     
+     }
