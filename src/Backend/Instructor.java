@@ -16,14 +16,19 @@ public class Instructor extends PersonDetails {
     private final String role = "instructor";
     private ArrayList<String> createdCourses;
 
-    public Instructor(String userName, String id, String email, String hashPassword) {
-        super(id, email, hashPassword, userName);
+    public Instructor(String userName, String email, byte [] hashPassword, byte[]salt) {
+        super( email, hashPassword, salt,userName);
         this.createdCourses = new ArrayList<>();
     }
-public Instructor(String userName, String id, String email, String hashPassword,ArrayList<String> CreatedCourses) {
-        super(id, email, hashPassword, userName);
+public Instructor(String userName, String id, String email, byte [] hashPassword,byte[]salt,ArrayList<String> CreatedCourses) {
+        super(id, email, hashPassword,salt, userName);
         this.createdCourses =CreatedCourses ;
     }
+@Override
+public void settRandomId(){
+this.setId(generate.InstructorID());
+
+}
 @Override
     public String getRole() {
         return role;

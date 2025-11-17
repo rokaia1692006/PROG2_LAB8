@@ -3,12 +3,15 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
 package Backend;
+import java.nio.charset.StandardCharsets;
 
 import java.io.File;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.security.MessageDigest;
 import java.util.ArrayList;
+import java.util.Base64;
 import java.util.HashMap;
 import java.util.Map;
 import javax.swing.JOptionPane;
@@ -136,7 +139,10 @@ public class jsonFile {
                   String id = s.getString("ID");
                   String name = s.getString("Name");
                   String email = s.getString("Email");
-                  String passwordHash = s.getString("PasswordHash");
+                 String password = s.getString("PasswordHash");
+                  byte[] passwordHash = Base64.getDecoder().decode(password);
+                  String saltStr = s.getString("Salt");
+                  byte[] salt = Base64.getDecoder().decode(saltStr);
           
                    ArrayList<StudentProgressInCourse> enrolledCourses = new ArrayList<>();
                   if(s.has("Enrolled_Courses")){
@@ -157,7 +163,7 @@ public class jsonFile {
                           enrolledCourses.add(new StudentProgressInCourse(ID,AllLessons,LMap,ALLPROGRESS));
                       }
                   }
-                  Students.add(new Students(id, name, email, passwordHash ,enrolledCourses));
+                  Students.add(new Students(id, name, email, passwordHash ,salt,enrolledCourses));
               }
           }
           if(o.has("Instructors")){
@@ -167,7 +173,10 @@ public class jsonFile {
                   String id = ins.getString("ID");
                   String name = ins.getString("Name");
                   String email = ins.getString("Email");
-                  String passwordHash = ins.getString("PasswordHash");
+                  String password = ins.getString("PasswordHash");
+                  byte[] passwordHash = Base64.getDecoder().decode(password);
+                  String saltStr = ins.getString("Salt");
+                  byte[] salt = Base64.getDecoder().decode(saltStr);
                   ArrayList<String> createdCourses = new ArrayList<>();
                   if(ins.has("CreatedCourses")){
                       JSONArray carr = ins.getJSONArray("CreatedCourses");
@@ -175,7 +184,7 @@ public class jsonFile {
                           createdCourses.add(carr.getString(j));
                       }
                   }
-                  instructors.add(new Instructor(id, name, email, passwordHash, createdCourses));
+                  instructors.add(new Instructor(id, name, email, passwordHash, salt ,createdCourses));
               }
           }
       }
@@ -288,20 +297,34 @@ public static void updatecourse (String insID, String CId , String title, String
     return null;
     
     }
-     public static Students studentEmail(String email, String password){
+     
+    private static byte[] hashPassword(char[] password, byte[] salt){
+    try {
+    MessageDigest md = MessageDigest.getInstance("SHA-512");
+    md.update(salt);
+    return md.digest(new String(password).getBytes(StandardCharsets.UTF_8));
+    } 
+    catch(Exception e){
+    e.printStackTrace();
+    return null;
+    }
+}
+     public static Students studentEmail(String email, char [] password){
          for(Students i:Students){
              if(i.getEmail().equals(email)){
-                 if(i.getPasswordHash().equals(password))
+                 byte[] hashP = hashPassword(password, i.getSalt());
+                 if(MessageDigest.isEqual(hashP, i.getPasswordHash()))
                  return i;
              }
          }
          return null;
      }
-     public static Instructor instructorEmail(String email, String password){
+     public static Instructor instructorEmail(String email, char [] password){
          for(Instructor i:instructors){
              if(i.getEmail().equals(email)){
-                 if(i.getPasswordHash().equals(password))
-                     return i;
+                 byte[] hashP = hashPassword(password, i.getSalt());
+                 if(MessageDigest.isEqual(hashP, i.getPasswordHash()))
+                 return i;
              }
          }
          return null;
@@ -352,7 +375,8 @@ private static void SaveUsers(){
     o.put("ID", s.getId());
     o.put("Name", s.getUserName());
     o.put("Email", s.getEmail());
-    o.put("PasswordHash", s.getPasswordHash());
+    o.put("PasswordHash", Base64.getEncoder().encodeToString(s.getPasswordHash()));
+    o.put("Salt", Base64.getEncoder().encodeToString(s.getSalt()));
 
     JSONArray Enrolled = new JSONArray();
     for(StudentProgressInCourse spc : s.getEnrolledCourses()){
@@ -379,7 +403,8 @@ private static void SaveUsers(){
     o.put("ID", i.getId());
     o.put("Name", i.getUserName());
     o.put("Email", i.getEmail());
-    o.put("PasswordHash", i.getPasswordHash());
+   o.put("PasswordHash", Base64.getEncoder().encodeToString(i.getPasswordHash()));
+    o.put("Salt", Base64.getEncoder().encodeToString(i.getSalt()));
     o.put("CreatedCourses", new JSONArray(i.getCreatedCourse()));
     insarr.put(o);
     }

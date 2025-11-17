@@ -1,0 +1,18 @@
+{
+    "Students": [{
+        "Salt": "d1NGRq5W2uHglcbvYws25g==",
+        "Enrolled_Courses": [],
+        "Email": "aaa@gmail.com",
+        "ID": "S_ynOf22fl4r",
+        "PasswordHash": "M+aTbdHHCobsIdh1XBq4QhC3xal+1wCG71DHbZM5vvRUu9dLQ44u01oX2pwrJHrLbRe2xOfewo7HMQgOYjbnWQ==",
+        "Name": "aaa"
+    }],
+    "Instructors": [{
+        "CreatedCourses": [],
+        "Salt": "4YKGhEsFHOd9+rRX+WZLuQ==",
+        "Email": "aa@gmail.com",
+        "ID": "aaa",
+        "PasswordHash": "4Spzv0F4HRIMe5bYuEMUvEDnUcnbCEq46ibEJ4NsSY7vCcnLBFhEKiu3/IDbzBCVoQk/mlpw8X0cXHEogfjOWg==",
+        "Name": "I_rmNOGXFqYL"
+    }]
+}

@@ -3,7 +3,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JPanel.java to edit this template
  */
 package Frontend;
-import Backend.Student;
+import Backend.Students;
 import Backend.Course;
 import Backend.Lesson;
 import Backend.StudentProgressInCourse;
@@ -27,19 +27,28 @@ public class ViewLessons extends javax.swing.JPanel {
      * Creates new form ViewLessons
      */
     private   Course course;
-    private Student currentStudent;
+    private Students currentStudent;
     private JButton backButton;
 
     
      private StudentProgressInCourse studetProgressInCourse;
      
     
-    public ViewLessons(Course course, Student currentStudent) {
+    public ViewLessons(Course course, Students currentStudent) {
         
           initComponents();
           this.course = course;
           this.currentStudent=currentStudent;
-          this.studetProgressInCourse = new StudentProgressInCourse(currentStudent, course);
+          
+          this.studetProgressInCourse = currentStudent.SearchINEnrolled(course.getCourseId());
+          if(this.studetProgressInCourse  == null){
+          ArrayList<String> lessonIDs = new ArrayList<>();
+          for (Lesson l : course.getLessons()) {
+          lessonIDs.add(l.getLessonID());
+          }
+          currentStudent.newEnrollCourses(course.getCourseId(), lessonIDs);
+          
+          }
          
 
       loadLessons();
@@ -170,13 +179,14 @@ public class ViewLessons extends javax.swing.JPanel {
             ArrayList<Lesson> lessons = course.getLessons();
             Lesson lesson = lessons.get(index);
             
-            currentStudent.UpdateLesson(course.getCourseId,lesson.getLessonID); //n3mlha mark enaha done
+            float prog =  currentStudent.UpdateLesson(course.getCourseId(),lesson.getLessonID()); //n3mlha mark enaha done
             
             DefaultListModel<String> listModel = (DefaultListModel<String>) lessonsList.getModel();
             listModel.set(index, lesson.getTitle() + " ✅"); //nktb gmbha enaha done
             
-            float prog = studetProgressInCourse.updateAll();
+           // float prog = currentStudent.UpdateLesson(TOOL_TIP_TEXT_KEY, TOOL_TIP_TEXT_KEY);
             int progress = (int) (prog * 100);
+            
              progressBar.setValue(progress); 
                
 

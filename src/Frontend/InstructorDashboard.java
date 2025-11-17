@@ -6,7 +6,8 @@ package Frontend;
 import Backend.Instructor;
 import Backend.InstructorCourseManager;
 import java.util.ArrayList;
-import Backend.Student;
+import Backend.Students;
+import Backend.jsonFile;
 
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
@@ -18,11 +19,12 @@ import javax.swing.table.DefaultTableModel;
 public class InstructorDashboard extends javax.swing.JFrame {
     
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(InstructorDashboard.class.getName());
-
+private Instructor ins;
     /**
      * Creates new form InstructorDashboard
      */
-    public InstructorDashboard() {
+    public InstructorDashboard(Instructor ins) {
+        this.ins  = ins;
         initComponents(); 
         actionpanel.setVisible(false); // hide the panel l7ad ma course ykon selected
         courseTable.addMouseListener(new java.awt.event.MouseAdapter() //lama ndos double click panel yban
@@ -173,7 +175,7 @@ public class InstructorDashboard extends javax.swing.JFrame {
         String newDesc = JOptionPane.showInputDialog(this, "Edit Description:", currentDesc);
 
         if (newTitle != null && newDesc != null) {
-            db.editCourse(courseId, newTitle, newDesc); 
+            jsonFile.updatecourse(ins.getId(), courseId, newTitle, newDesc);
             courseTable.setValueAt(newTitle, selectedRow, 0);
             courseTable.setValueAt(newDesc, selectedRow, 2);
         }
@@ -189,7 +191,7 @@ public class InstructorDashboard extends javax.swing.JFrame {
                         "Confirm Delete", 
                         JOptionPane.YES_NO_OPTION);
         if (confirm == JOptionPane.YES_OPTION) {
-            db.deleteCourse(courseId);
+            jsonFile.DeleteCourse(courseId,ins.getId());
           
             ((DefaultTableModel)courseTable.getModel()).removeRow(selectedRow);
             actionpanel.setVisible(false);
@@ -202,7 +204,7 @@ public class InstructorDashboard extends javax.swing.JFrame {
     int selectedRow = courseTable.getSelectedRow();
     if (selectedRow != -1) {
         String courseId = courseTable.getValueAt(selectedRow, 1).toString(); 
-        ArrayList<Student> students = db.getEnrolledStudents(courseId); 
+        ArrayList<Students> students = jsonFile.getAllStudentinCourse(courseId); 
 
         StudentListDialog dlg = new StudentListDialog(this, true); 
         dlg.setStudents(students);
@@ -213,27 +215,27 @@ public class InstructorDashboard extends javax.swing.JFrame {
     /**
      * @param args the command line arguments
      */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ReflectiveOperationException | javax.swing.UnsupportedLookAndFeelException ex) {
-            logger.log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
-
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(() -> new InstructorDashboard().setVisible(true));
-    }
+//    public static void main(String args[]) {
+//        /* Set the Nimbus look and feel */
+//        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
+//        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
+//         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
+//         */
+//        try {
+//            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
+//                if ("Nimbus".equals(info.getName())) {
+//                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
+//                    break;
+//                }
+//            }
+//        } catch (ReflectiveOperationException | javax.swing.UnsupportedLookAndFeelException ex) {
+//            logger.log(java.util.logging.Level.SEVERE, null, ex);
+//        }
+//        //</editor-fold>
+//
+//        /* Create and display the form */
+//        java.awt.EventQueue.invokeLater(() -> new InstructorDashboard().setVisible(true));
+//    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton CreateCourse;

@@ -5,6 +5,8 @@
 package Backend;
 
 import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.Set;
 import javax.swing.JOptionPane;
 
 /**
@@ -15,16 +17,33 @@ public abstract class PersonDetails {
      private String id; 
     
     private String email;
-    private String passwordHash;
+    private byte[] passwordHash;
+    private byte[] salt;
     private String userName;
 
-    public PersonDetails(String id, String email, String passwordHash, String userName) {
+    public PersonDetails(String id, String email, byte[] passwordHash, byte[] salt,String userName) {
         setId(id);
+        setEmail(email);
+        setSalt(salt);
+        setPasswordHash(passwordHash);
+        setUserName(userName);
+    }
+
+    public void setSalt(byte[] salt) {
+        this.salt = salt;
+    }
+     public PersonDetails(String email, byte[] passwordHash,byte []salt, String userName) {
+         settRandomId();
+         setSalt(salt);
         setEmail(email);
         setPasswordHash(passwordHash);
         setUserName(userName);
     }
 
+    public byte[] getSalt() {
+        return salt;
+    }
+public abstract void settRandomId();
     public String getUserName() {
         return userName;
     }
@@ -59,7 +78,7 @@ public abstract class PersonDetails {
         return email;
     }
 
-    public String getPasswordHash() {
+    public byte [] getPasswordHash() {
         return passwordHash;
     }
 
@@ -78,7 +97,7 @@ public abstract class PersonDetails {
     }
 
     
-    public void setPasswordHash(String passwordHash) {
+    public void setPasswordHash(byte [] passwordHash) {
         this.passwordHash = passwordHash; }
 
     public abstract  String getRole() ;

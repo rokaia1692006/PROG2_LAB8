@@ -20,16 +20,16 @@ public class Students extends PersonDetails{
     
   
     
-    public Students(String userId, String username, String email, String passwordHash) {
+    public Students(String username, String email, byte[] passwordHash,byte[]salt) {
         
-        super(userId, email, passwordHash, username);
+        super( email, passwordHash, salt,username);
         
         this.enrolledCourses  = new ArrayList<>();
         
     }
-    public Students(String userId, String username, String email, String passwordHash,ArrayList<StudentProgressInCourse>enrolledData) {
+    public Students(String userId, String username, String email, byte[] passwordHash,byte[]salt,ArrayList<StudentProgressInCourse>enrolledData) {
         
-        super(userId, email, passwordHash, username);
+        super(userId, email, passwordHash, salt,username);
         
         this.enrolledCourses = enrolledData;
         
@@ -40,6 +40,11 @@ public class Students extends PersonDetails{
     
     }
 
+@Override
+public void settRandomId(){
+this.setId(generate.StudentID());
+
+}
    @Override
     public String getRole() {
         return role;
