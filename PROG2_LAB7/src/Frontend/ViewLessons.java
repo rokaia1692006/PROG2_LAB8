@@ -3,6 +3,19 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JPanel.java to edit this template
  */
 package Frontend;
+import Backend.Student;
+import Backend.Course;
+import Backend.Lesson;
+import Backend.StudentProgressInCourse;
+import java.awt.BorderLayout;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import java.util.ArrayList;
+import javax.swing.DefaultListModel;
+import javax.swing.JButton;
+import javax.swing.JLabel;
+import javax.swing.JScrollPane;
+import javax.swing.JTextArea;
 
 /**
  *
@@ -13,17 +26,74 @@ public class ViewLessons extends javax.swing.JPanel {
     /**
      * Creates new form ViewLessons
      */
-    public ViewLessons() {
-        initComponents();
+    private   Course course;
+    private Student currentStudent;
+    private JButton backButton;
+
+    
+     private StudentProgressInCourse studetProgressInCourse;
+     
+    
+    public ViewLessons(Course course, Student currentStudent) {
         
-       ArrayList<Lesson> lessons = method.getArrayListLessons();
+          initComponents();
+          this.course = course;
+          this.currentStudent=currentStudent;
+          this.studetProgressInCourse = new StudentProgressInCourse(currentStudent, course);
+         
+
+      loadLessons();
+    }
+    
+    private void loadLessons(){
+         ArrayList<Lesson> lessons = course.getLessons();
        
        DefaultListModel<String> listmodel = new DefaultListModel<>();
            for (int i = 0; i < lessons.size(); i++) {
            Lesson l = lessons.get(i);
            listmodel.addElement(l.getTitle());
            }
-           lessonsList.setModel(listmodel);
+            lessonsList.setModel(listmodel);
+            
+             lessonsList.addMouseListener(new MouseAdapter() {
+        @Override
+        public void mouseClicked(MouseEvent e) {
+            if (e.getClickCount() == 2) {
+                int index = lessonsList.getSelectedIndex();
+                if (index != -1) {
+                    Lesson selected = lessons.get(index);
+                    
+                    removeAll();
+                    
+                    backButton = new JButton("Back");
+                     backButton.addActionListener(ae -> {
+                                   removeAll();
+                     initComponents(); 
+                     loadLessons();
+                     revalidate();
+                       repaint();
+                     });
+                     
+                    
+                    setLayout(new BorderLayout());
+
+                    JLabel titleLabel = new JLabel(selected.getTitle());
+                    JTextArea contentArea = new JTextArea(selected.getContent());
+                    contentArea.setEditable(false);
+                    
+                    add(titleLabel, BorderLayout.NORTH);
+                    add(new JScrollPane(contentArea), BorderLayout.CENTER);
+                    add(backButton, BorderLayout.SOUTH);
+
+                    revalidate();
+                    repaint();
+            }
+            }
+                     }
+             });
+
+           
+           
     }
 
     /**
@@ -94,22 +164,20 @@ public class ViewLessons extends javax.swing.JPanel {
     private void markdoneButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_markdoneButtonActionPerformed
         int index = lessonsList.getSelectedIndex();
         
-         int completed = 0;
-        if(index != -1 )
-        {
-            ArrayList<Lesson> lessons = method.getArrayListLessons();
+        
+             if(index != -1 )
+           {
+            ArrayList<Lesson> lessons = course.getLessons();
             Lesson lesson = lessons.get(index);
-            lesson.setCompleted(true);
+            
+            currentStudent.UpdateLesson(course.getCourseId,lesson.getLessonID); //n3mlha mark enaha done
+            
             DefaultListModel<String> listModel = (DefaultListModel<String>) lessonsList.getModel();
-            listModel.set(index, lesson.getTitle() + " ✅");
-
-            for (int i = 0; i < lessons.size(); i++) {
-                if (lessons.get(i).isCompleted()) {
-                  completed++;
-                 }}
-                int total = lessons.size();
-                int progress = (int)((completed * 100.0) / total); 
-                progressBar.setValue(progress); 
+            listModel.set(index, lesson.getTitle() + " ✅"); //nktb gmbha enaha done
+            
+            float prog = studetProgressInCourse.updateAll();
+            int progress = (int) (prog * 100);
+             progressBar.setValue(progress); 
                
 
             }
