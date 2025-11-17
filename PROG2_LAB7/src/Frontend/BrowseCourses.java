@@ -1,14 +1,17 @@
 
 package Frontend;
+import Backend.Student;
+import Backend.Course;
 
-import Backend.Enrollment;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.List;
+import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
 
 /**
  *
@@ -16,10 +19,13 @@ import javax.swing.JPanel;
  */
 public class BrowseCourses extends javax.swing.JPanel {
 
-    
-    public BrowseCourses() {
+    private Student currentStudent;
+    public BrowseCourses(Student currentStudent) {
       initComponents();
+      this.currentStudent=currentStudent;
+      
         coursePanelMain.setVisible(false);
+        
         JPanel coursesScroll = new JPanel();
         coursesScroll.setLayout(new BoxLayout(coursesScroll, BoxLayout.Y_AXIS));
         JScrollPane scrollPane = new JScrollPane(coursesScroll);
@@ -41,7 +47,8 @@ public class BrowseCourses extends javax.swing.JPanel {
            button.addActionListener(new ActionListener() {
                    public void actionPerformed(ActionEvent evt) {
                        
-                       addStudent /////
+                       course.enrollInCourse(currentStudent);
+                             
               
                    }});
         
@@ -149,13 +156,7 @@ public class BrowseCourses extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void enrollbuttonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_enrollbuttonActionPerformed
-       //temporary hard codes for the studentID and courseID
-        int studentID=1000;
-        int courseID=1;
-        
-        Enrollment enroll = new Enrollment();
-        
-        enroll.enrollstudentincourse(courseID,studentID);
+      
     }//GEN-LAST:event_enrollbuttonActionPerformed
 
 
