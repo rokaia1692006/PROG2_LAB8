@@ -3,6 +3,12 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JDialog.java to edit this template
  */
 package Frontend;
+import Backend.Student;
+import Backend.Students;
+
+import java.awt.BorderLayout;
+import javax.swing.JPanel;
+import javax.swing.JTabbedPane;
 
 /**
  *
@@ -11,13 +17,32 @@ package Frontend;
 public class CreateCourseDialog extends javax.swing.JDialog {
     
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(CreateCourseDialog.class.getName());
-
+private Students currentStudent;
     /**
      * Creates new form CreateCourseDialog
      */
     public CreateCourseDialog(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
+    }
+    
+    public void StudentDashboardFrame(Students currentStudent) {
+        
+        this.currentStudent=currentStudent;
         initComponents();
+        
+        BrowseCourses bc = new BrowseCourses(currentStudent);
+        
+      //  ViewLessons vl = new ViewLessons(); /////fe moshkla hena, anhe course?
+        JTabbedPane tabs = new JTabbedPane();
+        ViewEnrolledCourses vnc = new ViewEnrolledCourses(currentStudent,tabs);
+        tabs.addTab("Browse Courses", bc);
+        tabs.addTab("View Enrolled Courses",vnc);
+          tabs.addTab("View Lessons", new JPanel());
+        getContentPane().setLayout(new BorderLayout());
+         getContentPane().add(tabs, BorderLayout.CENTER);
+
+       
+        
     }
 
     /**
@@ -81,6 +106,8 @@ public class CreateCourseDialog extends javax.swing.JDialog {
             }
         });
     }
+
+    
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     // End of variables declaration//GEN-END:variables
