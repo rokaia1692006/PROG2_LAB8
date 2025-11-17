@@ -13,7 +13,7 @@ import javax.swing.JOptionPane;
  * @author DELL
  */
 
-public class Student extends PersonDetails {
+public class Students extends PersonDetails {
     
     private final static String ROLE = "Student";
     private ArrayList<Course> enrolledCourses;
@@ -21,7 +21,7 @@ public class Student extends PersonDetails {
     private float progress;
   
     
-    public Student(int userId, String userName, String email, String passwordHash,float progress) {
+    public Students(int userId, String userName, String email, String passwordHash,float progress) {
         
         super(userId,email,passwordHash,userName);
         this.progress=progress;
