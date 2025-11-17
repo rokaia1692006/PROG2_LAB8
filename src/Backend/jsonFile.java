@@ -259,6 +259,24 @@ public class jsonFile {
     return null;
     
     }
+     public static Student studentEmail(String email, String password){
+         for(Student i:Students){
+             if(i.getEmail().equals(email)){
+                 if(i.getPasswordHash().equals(password))
+                 return i;
+             }
+         }
+         return null;
+     }
+     public static Instructor instructorEmail(String email, String password){
+         for(Instructor i:instructors){
+             if(i.getEmail().equals(email)){
+                 if(i.getPasswordHash().equals(password))
+                     return i;
+             }
+         }
+         return null;
+     }
      public static void SAVE(){
      SaveCourse();
      SaveUsers();
