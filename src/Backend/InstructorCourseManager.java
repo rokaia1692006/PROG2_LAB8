@@ -4,6 +4,8 @@
  */
 package Backend;
 
+import java.util.ArrayList;
+
 /**
  *
  * @author LapTop
@@ -25,9 +27,9 @@ public class InstructorCourseManager {
         }
        
         Course newCourse = new Course( title, description, instructor);
-        
-        instructor.addCourse(newCourse.getCourseId());
-        db.updateInstructor(instructor);
+        db.CreateCourse(instructor.getId(),title,description);
+//        instructor.addCourse(newCourse.getCourseId());
+//        db.updateInstructor(instructor);
         return newCourse;
     }
 
@@ -37,29 +39,28 @@ public class InstructorCourseManager {
         if (!course.getInstructorId().equals(instructor.getId())) {
             throw new IllegalArgumentException("You are not allowed to edit this course.");
         }
-        if (newTitle != null && !newTitle.trim().isEmpty()) {
-            course.setTitle(newTitle);
-        }
-        if (newDescription != null && !newDescription.trim().isEmpty()) {
-            course.setDescription(newDescription);
-        }
-        db.saveCourse(course);
+ if (newTitle == null ||  newTitle.trim().isEmpty()) {
+      newTitle = course.getTitle();
+     }
+        if (newDescription == null || newDescription.trim().isEmpty()) {
+            newDescription  = course.getDescription();
+    }
+//        db.saveCourse(course);
+db.updatecourse(instructor.getId(),courseId,newTitle,newDescription);
     }
 
     public void deleteCourse(String courseId, Instructor instructor) {
 
-        Course course = db.getCourseById(courseId);
+        Course course = db.containsCourse(courseId);
         if (!course.getInstructorId().equals(instructor.getId())) {
             throw new IllegalArgumentException("course can't be deleted");
         }
-        instructor.removeCourse(courseId);
-        db.updateInstructor(instructor);
-        db.deleteCourse(courseId);
+        db.DeleteCourse(courseId,instructor.getId());
     }
 
-    public Lesson addLesson(String courseId, String title, String content, Instructor instructor) {
+    public Lesson addLesson(String courseId, String title, String content ,ArrayList<String> resourcesOptional, Instructor instructor) {
 
-        Course course = db.getCourseById(courseId);
+        Course course = db.containsCourse(courseId);
         if (!course.getInstructorId().equals(instructor.getId())) {
             throw new IllegalArgumentException("can't add lessons to this course!!");
         }
@@ -69,15 +70,30 @@ public class InstructorCourseManager {
         if (content == null || content.trim().isEmpty()) {
             throw new IllegalArgumentException("content can't be empty!");
         }
-        String lessonId = db.generateLessonId();
-        Lesson lesson = new Lesson(lessonId, title, content);
-        course.getLessons().add(lesson);
-        db.saveCourse(course);
+       if(resourcesOptional  == null){
+       resourcesOptional = new ArrayList<>();
+       }
+        Lesson lesson = new Lesson( title, content,resourcesOptional);
+       course.addLesson(lesson, instructor);
+       IncreaseNumberOfLessons(courseId,lesson.getLessonID());
         return lesson;
     }
+   
+     private void IncreaseNumberOfLessons(String lessonid , String courseId){
+     ArrayList<Students> st = db.getAllStudentinCourse(courseId);
+     if(st.isEmpty() || st == null){
+     return;
+     }
+     else{
+     for(Students s : st){
+     s.NewLesson(courseId, lessonid);
+     
+     }
+     }
+     }
 
     public void editLesson(String courseId, String lessonId, String newTitle, String newContent, Instructor instructor) {
-        Course course = db.getCourseById(courseId);//to search for thr code
+        Course course = db.containsCourse(courseId);//to search for thr code
         if (!course.getInstructorId().equals(instructor.getId())) //to be sure en el instructor owns the course
         {
             throw new IllegalArgumentException("can't edit this lesson!");
@@ -99,23 +115,23 @@ public class InstructorCourseManager {
         if (newContent != null && !newContent.trim().isEmpty()) {
             lessonwanted.setContent(newContent);
         }
-        db.saveCourse(course);
+        db.SAVE();
     }
 
     public void deleteLesson(String courseId, String lessonId, Instructor instructor) {
 
-        Course course = db.getCourseById(courseId);
+        Course course = db.containsCourse(courseId);
 
         if (!course.getInstructorId().equals(instructor.getId())) {
             throw new IllegalArgumentException("can't delete this lesson!");
         }
         for (int i = 0; i < course.getLessons().size(); i++) {
             Lesson l = course.getLessons().get(i);
-            if (l.getLessonId().equals(lessonId)) {
+            if (l.getLessonID().equals(lessonId)) {
                 course.getLessons().remove(i);
                 i--;
             }
         }
-    db.saveCourse(course);
+    db.SAVE();
     }
 }

@@ -116,7 +116,7 @@ public class CourseBrowserFrame extends javax.swing.JFrame {
 
     private void enrollbuttonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_enrollbuttonActionPerformed
         //temporary hard codes for the studentID and courseID
-        int studentID=1000;
+        int studentID;
         int courseID=1;
         
         Enrollment enroll = new Enrollment();

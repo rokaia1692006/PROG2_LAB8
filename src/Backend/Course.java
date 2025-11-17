@@ -48,6 +48,13 @@ public class Course {
         this.lessons  = new ArrayList<>();
         this.students  = new ArrayList<>(); 
     }
+        public void addLesson(Lesson l , PersonDetails I){
+    if(!checkIfInstructor(I)){
+        JOptionPane.showMessageDialog(null, "CANT CREATE COURSE");
+        return;
+       }
+       this.lessons.add(l);
+    }
     public void addLessons(ArrayList<Lesson> l , PersonDetails I){
     if(!checkIfInstructor(I)){
         JOptionPane.showMessageDialog(null, "CANT CREATE COURSE");

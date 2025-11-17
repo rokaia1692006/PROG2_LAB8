@@ -77,6 +77,22 @@ private void updateAll(){
         overallProgress = 0f ;
     }
 }
+
+    public float getOverallProgress() {
+        return overallProgress;
+    }
+
+    public String getCourseId() {
+        return CourseId;
+    }
+
+    public HashMap<String, Boolean> getLessonsDone() {
+        return lessonsDone;
+    }
+
+    public int getAllLessonsInCourse() {
+        return AllLessonsInCourse;
+    }
     
 
     

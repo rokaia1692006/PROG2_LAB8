@@ -9,6 +9,8 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 import javax.swing.JOptionPane;
 import org.json.JSONObject;
 import org.json.JSONArray;
@@ -53,6 +55,7 @@ public class jsonFile {
     }
     
     }
+   
     private static ArrayList <Course> loadCourses(){
       try{
       Path p =Paths.get(CFile);
@@ -134,15 +137,27 @@ public class jsonFile {
                   String name = s.getString("Name");
                   String email = s.getString("Email");
                   String passwordHash = s.getString("PasswordHash");
-                  float prog = s.getFloat("Progress");
-                  ArrayList<String> enrolledCourses = new ArrayList<>();
+          
+                   ArrayList<StudentProgressInCourse> enrolledCourses = new ArrayList<>();
                   if(s.has("Enrolled_Courses")){
                       JSONArray earr = s.getJSONArray("Enrolled_Courses");
+                      
+                    
                       for(int j = 0; j < earr.length(); j++){
-                          enrolledCourses.add(earr.getString(j));
+                          JSONObject ClassObj = earr.getJSONObject(j);
+                          String ID = ClassObj.getString("CourseID");
+                          int AllLessons = ClassObj.getInt("AllLessons");
+                          JSONObject Done = ClassObj.getJSONObject("LessonsDone");
+                          HashMap<String, Boolean> LMap = new HashMap<>();
+                          for (String k : Done.keySet()){
+                          LMap.put(k, Done.getBoolean(k));
+                          
+                          }
+                          float ALLPROGRESS = (float) ClassObj.getDouble("CourseProgress");
+                          enrolledCourses.add(new StudentProgressInCourse(ID,AllLessons,LMap,ALLPROGRESS));
                       }
                   }
-                  Students.add(new Students(id, name, email, passwordHash, prog ,enrolledCourses));
+                  Students.add(new Students(id, name, email, passwordHash ,enrolledCourses));
               }
           }
           if(o.has("Instructors")){
@@ -206,7 +221,7 @@ public class jsonFile {
              SAVE();
         
         }
-         public static void updatecourse (String insID, String CId , String title, String description){
+public static void updatecourse (String insID, String CId , String title, String description){
               Instructor ins = containsInstructor(insID);
               Course c= containsCourse(CId);
              if(ins  == null || c == null || !insID.equals(c.getInstructorId())){
@@ -244,6 +259,16 @@ public class jsonFile {
     return null;
     
     }
+     public static ArrayList<Students> getAllStudentinCourse(String courseid){
+         ArrayList<Students> st = new ArrayList<>();
+     for(Students s : Students){
+     if(s.checkifEnrolled(courseid)){
+     st.add(s);
+     }
+     
+     }
+     return st;
+     }
     
     public static Students containsStudent(String id){
     for(Students i : Students){
@@ -328,8 +353,24 @@ private static void SaveUsers(){
     o.put("Name", s.getUserName());
     o.put("Email", s.getEmail());
     o.put("PasswordHash", s.getPasswordHash());
-    o.put("Progress", s.getProgress());
-    o.put("Enrolled_Courses", new JSONArray(s.getEnrolledCourses()));
+
+    JSONArray Enrolled = new JSONArray();
+    for(StudentProgressInCourse spc : s.getEnrolledCourses()){
+    JSONObject ClassObj = new JSONObject();
+    ClassObj.put("CourseID", spc.getCourseId());
+    ClassObj.put("AllLessons", spc.getAllLessonsInCourse());
+
+    JSONObject LessonsDone = new JSONObject();
+    for(Map.Entry<String, Boolean> entry : spc.getLessonsDone().entrySet()){
+    LessonsDone.put(entry.getKey(), entry.getValue());
+    }
+    ClassObj.put("LessonsDone", LessonsDone);
+    ClassObj.put("CourseProgress", spc.getOverallProgress());
+
+    Enrolled.put(ClassObj);
+    }
+
+    o.put("Enrolled_Courses", Enrolled);
     stuarr.put(o);
     }
     JSONArray insarr = new JSONArray();
@@ -349,7 +390,20 @@ private static void SaveUsers(){
     catch(Exception e){
     e.printStackTrace();
     }
+
+}
+
+    public static ArrayList<Course> getAllCourses() {
+        return AllCourses;
     }
 
-     
+    public static ArrayList<Students> getStudents() {
+        return Students;
+    }
+
+    public static ArrayList<String> getLids() {
+        return lids;
+    }
+
+
      }
