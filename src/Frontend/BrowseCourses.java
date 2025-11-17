@@ -20,51 +20,51 @@ import javax.swing.JScrollPane;
  */
 public class BrowseCourses extends javax.swing.JPanel {
 
-    private Students currentStudent;
+   private Students currentStudent;
+
     public BrowseCourses(Students currentStudent) {
+
+         this.currentStudent=currentStudent;
       initComponents();
-      this.currentStudent=currentStudent;
-      
+
         coursePanelMain.setVisible(false);
-        
-        JPanel coursesScroll = new JPanel();
-        coursesScroll.setLayout(new BoxLayout(coursesScroll, BoxLayout.Y_AXIS));
-        JScrollPane scrollPane = new JScrollPane(coursesScroll);
-    this.add(scrollPane); 
+
         try {
-            
+
         ArrayList<Course> coursesArray = jsonFile.getAllCourses();
-        
-        for (int i = 0; i < coursesArray.size(); i++) {
-        
-            
-           Course course = coursesArray.get(i);
-           JPanel panel = new JPanel();
-           panel.setLayout(coursePanelMain.getLayout());
-        
-           JLabel courseName = new JLabel (course.getTitle());
-           JLabel coursedescription = new JLabel (course.getDescription());
-           JButton button = new JButton("Enroll");
-           button.addActionListener(new ActionListener() {
-                   public void actionPerformed(ActionEvent evt) {
-                       
 
-                       course.enrollInCourse(currentStudent);
-                             
+        JPanel container = new JPanel();
+        container.setLayout(new BoxLayout(container, BoxLayout.Y_AXIS));
 
-                   }});
-        
-        
-        panel.add(courseName);
-        panel.add(coursedescription);
-        panel.add(button);
-        coursesScroll.add(panel);
+        for(Course course : coursesArray){
 
+            JPanel panel = new JPanel();
+            panel.setBorder(coursePanelMain.getBorder());
+            panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
+
+            JLabel title = new JLabel(course.getTitle());
+            JLabel desc = new JLabel(course.getDescription());
+            JButton enroll = new JButton("Enroll");
+            enroll.addActionListener(new ActionListener() {
+                public void actionPerformed(ActionEvent evt) {
+                    course.enrollInCourse(currentStudent);
+                }
+            });
+
+            panel.add(title);
+            panel.add(desc);
+            panel.add(enroll);
+
+            container.add(panel);
         }
-           
-       
-        coursesScroll.revalidate();
-        coursesScroll.repaint();
+
+        JScrollPane scrollPane = new JScrollPane(container);
+        scrollPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
+        this.setLayout(new java.awt.BorderLayout());
+        this.add(scrollPane, java.awt.BorderLayout.CENTER);
+
+        coursePanelMain.setVisible(true);
+
         }
         catch (Exception e)
         {
