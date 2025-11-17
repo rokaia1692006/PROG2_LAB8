@@ -14,7 +14,7 @@ public class Students extends PersonDetails{
     
   
     private final static String role = "Student";
-    private ArrayList<String> enrolledCourses;
+    private ArrayList<StudentProgressInCourse> enrolledCourses;
     private float progress;
   
     
@@ -25,7 +25,7 @@ public class Students extends PersonDetails{
         this.enrolledCourses  = new ArrayList<>();
         
     }
-    public Students(String userId, String username, String email, String passwordHash,float progress,ArrayList<String>Enrolled) {
+    public Students(String userId, String username, String email, String passwordHash,float progress,ArrayList<String>Enrolled,) {
         
         super(userId, email, passwordHash, username);
         this.progress=progress;
@@ -41,6 +41,10 @@ public class Students extends PersonDetails{
    @Override
     public String getRole() {
         return role;
+    }
+
+    public void addEnrolledCourses(String enrolledCourses) {
+        this.enrolledCourses.add(enrolledCourses);
     }
 
 //    public String getEmail() {

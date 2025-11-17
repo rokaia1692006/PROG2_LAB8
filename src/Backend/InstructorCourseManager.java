@@ -33,7 +33,7 @@ public class InstructorCourseManager {
 
     public void editCourse(String courseId, String newTitle, String newDescription, Instructor instructor) {
 
-        Course course = db.getCourseById(courseId);
+        Course course = db.containsCourse(courseId);
         if (!course.getInstructorId().equals(instructor.getId())) {
             throw new IllegalArgumentException("You are not allowed to edit this course.");
         }
