@@ -19,12 +19,7 @@ private Students s;
     public StudentDashboardFrame(Students s) {
         this.s = s;
         initComponents();
-        BrowseCourses browsePanel = new BrowseCourses(s);
-//        this.setLayout(new BorderLayout());
-        getContentPane().add(browsePanel, BorderLayout.CENTER);
-        this.setSize(900, 600);    
-        this.setLocationRelativeTo(null);
-        this.setVisible(true);
+       
        }
 
     /**
@@ -35,7 +30,18 @@ private Students s;
     @SuppressWarnings("unchecked")
     private void initComponents() {//GEN-BEGIN:initComponents
 
+        jTabbedPane1 = new javax.swing.JTabbedPane();
+        tabbedDIS = new javax.swing.JTabbedPane();
+        jPanel1 = new BrowseCourses(s);
+        jPanel2 = new ViewEnrolledCourses(s,jTabbedPane1);
+
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        getContentPane().add(jTabbedPane1, java.awt.BorderLayout.PAGE_START);
+
+        tabbedDIS.addTab("BROWSE COURSES", jPanel1);
+        tabbedDIS.addTab("ENROLLED COURSES", jPanel2);
+
+        getContentPane().add(tabbedDIS, java.awt.BorderLayout.CENTER);
 
         pack();
     }//GEN-END:initComponents
@@ -76,5 +82,9 @@ private Students s;
 //    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel2;
+    private javax.swing.JTabbedPane jTabbedPane1;
+    private javax.swing.JTabbedPane tabbedDIS;
     // End of variables declaration//GEN-END:variables
 }

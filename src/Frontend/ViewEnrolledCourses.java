@@ -10,7 +10,9 @@ import Backend.jsonFile;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.util.ArrayList;
+import java.util.HashMap;
 import javax.swing.DefaultListModel;
+import javax.swing.JList;
 import javax.swing.JTabbedPane;
 
 /**
@@ -18,23 +20,33 @@ import javax.swing.JTabbedPane;
  * @author DELL
  */
 public class ViewEnrolledCourses extends javax.swing.JPanel {
-
+private Students currentStudent;
+private JTabbedPane tabs;
     /**
      * Creates new form ViewEnrolledCourses
      */
     public ViewEnrolledCourses(Students currentStudent, JTabbedPane tabs) {
+        this.currentStudent = currentStudent;
+        this.tabs = tabs;
         initComponents();
+        
        
         
-        ArrayList<StudentProgressInCourse> enrolledCourses = currentStudent.getEnrolledCourses();
+           }
+    
+    private void addLIST(){
+      this.enrolledCoursesList = new javax.swing.JList<>();
+        
+     ArrayList<StudentProgressInCourse> enrolledCourses = currentStudent.getEnrolledCourses();
         DefaultListModel<String> listModel = new DefaultListModel<>();
         for (int i = 0; i < enrolledCourses.size(); i++) {
             Course c = jsonFile.containsCourse(enrolledCourses.get(i).getCourseId());
             listModel.addElement(c.getTitle()); //hanhot kol course
         }
         
-        enrolledCoursesList.setModel(listModel);
-        enrolledCoursesList.addMouseListener(new MouseAdapter() {
+        this.enrolledCoursesList.setModel(listModel);
+       
+        this.enrolledCoursesList.addMouseListener(new MouseAdapter() {
         @Override
                public void mouseClicked(MouseEvent e) {
                     if (e.getClickCount() == 2) { 
@@ -58,7 +70,10 @@ public class ViewEnrolledCourses extends javax.swing.JPanel {
                     }
                }
         });
-                }
+        
+    
+    
+    }
    
                
 
@@ -72,20 +87,15 @@ public class ViewEnrolledCourses extends javax.swing.JPanel {
     private void initComponents() {
 
         jScrollPane2 = new javax.swing.JScrollPane();
-        enrolledCoursesList = new javax.swing.JList<>();
+        enrolledCoursesList = new JList<>();
         jLabel1 = new javax.swing.JLabel();
 
         enrolledCoursesList.setFont(new java.awt.Font("Franklin Gothic Demi Cond", 0, 18)); // NOI18N
-        enrolledCoursesList.setModel(new javax.swing.AbstractListModel<String>() {
-            String[] strings = { "Lesson 1", "Lesson 2", "Lesson 3", "Lesson 4", "Lesson 5" };
-            public int getSize() { return strings.length; }
-            public String getElementAt(int i) { return strings[i]; }
-        });
         jScrollPane2.setViewportView(enrolledCoursesList);
 
         jLabel1.setFont(new java.awt.Font("Dutch801 Rm BT", 3, 48)); // NOI18N
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel1.setText("View enrolled lessons");
+        jLabel1.setText("View enrolled Courses");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);

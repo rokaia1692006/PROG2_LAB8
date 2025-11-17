@@ -5,10 +5,12 @@ import Backend.Course;
 import Backend.jsonFile;
 import java.awt.BorderLayout;
 import java.awt.Component;
+import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.List;
+import javax.swing.Box;
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JLabel;
@@ -31,8 +33,11 @@ public class BrowseCourses extends javax.swing.JPanel {
    JPanel textPanel = new JPanel();
    textPanel.setLayout(new BoxLayout(textPanel, BoxLayout.Y_AXIS));
    JLabel name = new JLabel(title);
+   name.setFont(new java.awt.Font("Dutch801 Rm BT", 0, 20));
+   
    JLabel description = new JLabel(desc);
    textPanel.add(name);
+   textPanel.add(Box.createRigidArea(new Dimension(0,20)));
    textPanel.add(description);
    panel.add(textPanel, BorderLayout.CENTER);
    JPanel buttonPanel = new JPanel(new BorderLayout());
@@ -47,12 +52,12 @@ public class BrowseCourses extends javax.swing.JPanel {
    enroll.setEnabled(false);
     }
     });
-   if(!currentStudent.checkifEnrolled(course.getCourseId())){{
+   if(currentStudent.checkifEnrolled(course.getCourseId())){{
        enroll.setEnabled(false);
    }}
    buttonPanel.add(enroll, BorderLayout.NORTH);
    panel.add(buttonPanel, BorderLayout.EAST);
-   panel.setBorder(javax.swing.BorderFactory.createEmptyBorder(10,10,10,10));
+   //panel.setBorder(javax.swing.BorderFactory.createEmptyBorder(10,10,10,10));
    return panel;
 }
 
@@ -172,8 +177,8 @@ public class BrowseCourses extends javax.swing.JPanel {
     private javax.swing.JButton enrollbutton;
     private javax.swing.JLabel viewcourses;
     // End of variables declaration//GEN-END:variables
-}
-class TestBrowseCourses {
+//}
+//class TestBrowseCourses {
 //public static void main(String[] args){
 //javax.swing.SwingUtilities.invokeLater(new Runnable(){
 //public void run(){

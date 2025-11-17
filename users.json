@@ -34,7 +34,12 @@
         },
         {
             "Salt": "2oj5bEcxP/Bm2IOIFunA8g==",
-            "Enrolled_Courses": [],
+            "Enrolled_Courses": [{
+                "CourseID": "C001",
+                "CourseProgress": 0,
+                "AllLessons": 0,
+                "LessonsDone": {}
+            }],
             "Email": "timi@gmail.com",
             "ID": "S_GSNJr6olv6",
             "PasswordHash": "WXEqpaaf/3DFidDsZxBlSBm7hRQLszdYH3tLlEgzWDBAFt9URq1NnUsyMxKyGG6l5t0KwbONRW8WLUA9XcoiKQ==",
