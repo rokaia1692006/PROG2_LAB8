@@ -10,69 +10,34 @@ import java.util.ArrayList;
  *
  * @author LapTop
  */
-public class Instructor extends Person implements details {
-
-    private String id; 
-    private String email;
-    private String passwordHash;
+public class Instructor extends PersonDetails {
+    
+    private final String role = "instructor";
     private ArrayList<String> createdCourses;
-public Instructor(String fullName, String id,String email,String hashPassword) {
-        super(fullName);
-       setEmail(email);
-       setId(id);
-       setPasswordHash (passwordHash);
+
+    public Instructor(String userName, String id, String email, String hashPassword) {
+        super(id, email, hashPassword, userName);
+        this.createdCourses = new ArrayList<>();
+    }
+
+    public String getRole() {
+        return role;
+    }
+    
+    public ArrayList<String> getCreatedCourse() {
+        return createdCourses;
         
     }
 
-    public String getId() {
-        return id;
-    }
-
-    public String getEmail() {
-        return email;
-    }
-
-    public String getPasswordHash() {
-        return passwordHash;
-    }
-
-    public void setId(String id) {
-        this.id = id;
-    }
-
-    public void setEmail(String email){
-        String regex = "^[A-Za-z0-9][A-Za-z0-9+_.-]*[A-Za-z0-9]@[A-Za-z0-9.-]+\\.[A-Za-z]{2,}$"; 
-        if (email.matches(regex)){
-        this.email = email;
-        }
-        else {
-            throw new IllegalArgumentException("Invalid email.");
+    public void addCourse(String courseId) {
+        if (courseId == null || courseId.trim().isEmpty()) {
+            JOptionPane.showMessageDialog(null, "course id can't be empty", "Error", JOptionPane.ERROR_MESSAGE);           
+        } else {
+            createdCourses.add(courseId);
         }
     }
 
-    @Override
-    public void setPasswordHash(String passwordHash) {
-        this.passwordHash = passwordHash; }
-    public ArrayList<String> getCreatedCourse()
-            {
-                return createdCourses;
-
-
-            }
-    public void addCourse (String courseId)
-    {
-    if (courseId==null||courseId.trim().isEmpty())
-    {
-       throw new IllegalArgumentException("Course ID cannot be empty!!"); 
-    }else 
-    {
-        createdCourses.add(courseId);
-    }
-    }
-     public void removeCourse(String courseId) {
+    public void removeCourse(String courseId) {
         createdCourses.remove(courseId);
-    }}
-    
- 
-
-    
+    }
+}
