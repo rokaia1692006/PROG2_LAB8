@@ -3,6 +3,11 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
 package Frontend;
+import Backend.Student;
+
+import java.awt.BorderLayout;
+import javax.swing.JPanel;
+import javax.swing.JTabbedPane;
 
 /**
  *
@@ -13,8 +18,25 @@ public class StudentDashboardFrame extends javax.swing.JFrame {
     /**
      * Creates new form StudentDashboardFrame
      */
-    public StudentDashboardFrame() {
+    private Student currentStudent;
+    public StudentDashboardFrame(Student currentStudent) {
+        
+        this.currentStudent=currentStudent;
         initComponents();
+        
+        BrowseCourses bc = new BrowseCourses(currentStudent);
+        
+      //  ViewLessons vl = new ViewLessons(); /////fe moshkla hena, anhe course?
+        JTabbedPane tabs = new JTabbedPane();
+        ViewEnrolledCourses vnc = new ViewEnrolledCourses(currentStudent,tabs);
+        tabs.addTab("Browse Courses", bc);
+        tabs.addTab("View Enrolled Courses",vnc);
+          tabs.addTab("View Lessons", new JPanel());
+        getContentPane().setLayout(new BorderLayout());
+         getContentPane().add(tabs, BorderLayout.CENTER);
+
+       
+        
     }
 
     /**
@@ -45,37 +67,7 @@ public class StudentDashboardFrame extends javax.swing.JFrame {
     /**
      * @param args the command line arguments
      */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(StudentDashboardFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(StudentDashboardFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(StudentDashboardFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(StudentDashboardFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
-
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new StudentDashboardFrame().setVisible(true);
-            }
-        });
-    }
+    
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     // End of variables declaration//GEN-END:variables
