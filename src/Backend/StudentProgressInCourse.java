@@ -53,7 +53,7 @@ public void markAsDone(String LessonID){
 }
 public void addlesson(String lessonId,String courseID){
 if(CourseId.equals(courseID)){
-lessonsDone.putIfAbsent(courseID, Boolean.FALSE);
+lessonsDone.putIfAbsent(lessonId, Boolean.FALSE);
 AllLessonsInCourse ++;
 updateAll();
 

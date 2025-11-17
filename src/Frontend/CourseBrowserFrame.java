@@ -4,6 +4,7 @@
  */
 package Frontend;
 import Backend.Enrollment;
+import Backend.jsonFile;
 
 /**
  *
@@ -16,10 +17,7 @@ public class CourseBrowserFrame extends javax.swing.JFrame {
      */
     public CourseBrowserFrame() {
         initComponents();
-        try {
-        String content = new String(Files.readAllBytes(Paths.get("courses.json")), StandardCharsets.UTF_8);
-        JSONArray coursesArray = new JSONArray(content);
-        JSONObject course = coursesArray.getJSONObject(0);
+        jsonFile j = new jsonFile();
         
     }
 

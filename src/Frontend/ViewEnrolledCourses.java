@@ -4,7 +4,9 @@
  */
 package Frontend;
 import Backend.Course;
-import Backend.Student;
+import Backend.StudentProgressInCourse;
+import Backend.Students;
+import Backend.jsonFile;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.util.ArrayList;
@@ -20,14 +22,14 @@ public class ViewEnrolledCourses extends javax.swing.JPanel {
     /**
      * Creates new form ViewEnrolledCourses
      */
-    public ViewEnrolledCourses(Student currentStudent, JTabbedPane tabs) {
+    public ViewEnrolledCourses(Students currentStudent, JTabbedPane tabs) {
         initComponents();
        
         
-        ArrayList<Course> enrolledCourses = currentStudent.getEnrolledCourses();
+        ArrayList<StudentProgressInCourse> enrolledCourses = currentStudent.getEnrolledCourses();
         DefaultListModel<String> listModel = new DefaultListModel<>();
         for (int i = 0; i < enrolledCourses.size(); i++) {
-            Course c = enrolledCourses.get(i);
+            Course c = jsonFile.containsCourse(enrolledCourses.get(i).getCourseId());
             listModel.addElement(c.getTitle()); //hanhot kol course
         }
         
@@ -40,7 +42,7 @@ public class ViewEnrolledCourses extends javax.swing.JPanel {
                         if (selectedTitle != null) {
                             Course selectedCourse = null;
                             for (int i = 0; i < enrolledCourses.size(); i++) {
-                            Course c = enrolledCourses.get(i);
+                             Course c = jsonFile.containsCourse(enrolledCourses.get(i).getCourseId());
                            if (c.getTitle().equals(selectedTitle)) {
                            selectedCourse = c;
                                 break;

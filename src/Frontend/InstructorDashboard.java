@@ -6,7 +6,8 @@ package Frontend;
 import Backend.Instructor;
 import Backend.InstructorCourseManager;
 import java.util.ArrayList;
-import Backend.Student;
+import Backend.Students;
+import Backend.jsonFile;
 
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
@@ -18,11 +19,12 @@ import javax.swing.table.DefaultTableModel;
 public class InstructorDashboard extends javax.swing.JFrame {
     
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(InstructorDashboard.class.getName());
-
+private Instructor ins;
     /**
      * Creates new form InstructorDashboard
      */
-    public InstructorDashboard() {
+    public InstructorDashboard(Instructor ins) {
+        this.ins  = ins;
         initComponents(); 
         actionpanel.setVisible(false); // hide the panel l7ad ma course ykon selected
         courseTable.addMouseListener(new java.awt.event.MouseAdapter() //lama ndos double click panel yban
@@ -173,7 +175,7 @@ public class InstructorDashboard extends javax.swing.JFrame {
         String newDesc = JOptionPane.showInputDialog(this, "Edit Description:", currentDesc);
 
         if (newTitle != null && newDesc != null) {
-            db.editCourse(courseId, newTitle, newDesc); 
+            jsonFile.updatecourse(ins.getId(), courseId, newTitle, newDesc);
             courseTable.setValueAt(newTitle, selectedRow, 0);
             courseTable.setValueAt(newDesc, selectedRow, 2);
         }
@@ -189,7 +191,7 @@ public class InstructorDashboard extends javax.swing.JFrame {
                         "Confirm Delete", 
                         JOptionPane.YES_NO_OPTION);
         if (confirm == JOptionPane.YES_OPTION) {
-            db.deleteCourse(courseId);
+            jsonFile.DeleteCourse(courseId,ins.getId());
           
             ((DefaultTableModel)courseTable.getModel()).removeRow(selectedRow);
             actionpanel.setVisible(false);
@@ -202,7 +204,7 @@ public class InstructorDashboard extends javax.swing.JFrame {
     int selectedRow = courseTable.getSelectedRow();
     if (selectedRow != -1) {
         String courseId = courseTable.getValueAt(selectedRow, 1).toString(); 
-        ArrayList<Student> students = db.getEnrolledStudents(courseId); 
+        ArrayList<Students> students = jsonFile.getAllStudentinCourse(courseId); 
 
         StudentListDialog dlg = new StudentListDialog(this, true); 
         dlg.setStudents(students);

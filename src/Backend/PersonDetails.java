@@ -15,7 +15,7 @@ public abstract class PersonDetails {
      private String id; 
     
     private String email;
-    private String passwordHash;
+    private byte[] passwordHash;
     private String userName;
 
     public PersonDetails(String id, String email, String passwordHash, String userName) {

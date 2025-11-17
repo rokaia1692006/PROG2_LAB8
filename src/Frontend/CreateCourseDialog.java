@@ -3,7 +3,6 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JDialog.java to edit this template
  */
 package Frontend;
-import Backend.Student;
 import Backend.Students;
 
 import java.awt.BorderLayout;

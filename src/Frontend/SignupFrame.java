@@ -241,17 +241,17 @@ public class SignupFrame extends javax.swing.JFrame {
             return;
         }
         if(role.equals("Instructor")){
-            Instructor ins=new Instructor(username, id, email, hashedPassword);
+            Instructor ins=new Instructor(username, id, email, newhashedPassword);
             jsonFile.addInstructor(ins);
             JOptionPane.showMessageDialog(this, "Sign-up successful!");
-            new InstructorDashboardFrame(ins).setVisible(true);
+            new InstructorDashboard(ins).setVisible(true);
             this.dispose();
         }
         else{
-            Student stu=new Student(username, id, email, new String(password));
+            Students stu=new Students(username, id, email, password);
             jsonFile.addStudent(stu);
             JOptionPane.showMessageDialog(this, "Sign-up successful!");
-            new StudentDashboardFrame(stu).setVisible(true);
+            new BrowseCourses(stu).setVisible(true);
             this.dispose();
         }
     }//GEN-LAST:event_signupBtnActionPerformed
