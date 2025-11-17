@@ -67,15 +67,26 @@ this.setId(generate.StudentID());
     public float UpdateLesson(String CourseId, String LessonID){
     StudentProgressInCourse course = SearchINEnrolled(CourseId);
     if(course  == null){
-        JOptionPane.showMessageDialog(null, "ERROR");
+    Course c = jsonFile.containsCourse(CourseId);
+    if(c != null){
+    ArrayList<String> lessonIDs = new ArrayList<>();
+    for(Lesson l : c.getLessons()){
+    lessonIDs.add(l.getLessonID());
+    }
+    newEnrollCourses(CourseId, lessonIDs);
+    course = SearchINEnrolled(CourseId);
+    if(course == null){
+    JOptionPane.showMessageDialog(null, "ERRORINUPDATELESSON");
     return 0;
+        }
+   
     }
-    else{
+    }
     course.markAsDone(LessonID);
+     return course.getOverallProgress();
+   
     
-    }
-    
-    return course.getOverallProgress();
+   
     
     
     }

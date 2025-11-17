@@ -34,12 +34,38 @@
         },
         {
             "Salt": "2oj5bEcxP/Bm2IOIFunA8g==",
-            "Enrolled_Courses": [{
-                "CourseID": "C001",
-                "CourseProgress": 0,
-                "AllLessons": 0,
-                "LessonsDone": {}
-            }],
+            "Enrolled_Courses": [
+                {
+                    "CourseID": "C001",
+                    "CourseProgress": 0,
+                    "AllLessons": 0,
+                    "LessonsDone": {}
+                },
+                {
+                    "CourseID": "C_OTDvMTNaab",
+                    "CourseProgress": 0,
+                    "AllLessons": 2,
+                    "LessonsDone": {
+                        "L_9LiH25A4XV": false,
+                        "L_LvMZ7KupBE": false
+                    }
+                },
+                {
+                    "CourseID": "C_daL8FAfKgm",
+                    "CourseProgress": 0,
+                    "AllLessons": 0,
+                    "LessonsDone": {}
+                },
+                {
+                    "CourseID": "C_7iibhMszkz",
+                    "CourseProgress": 0,
+                    "AllLessons": 2,
+                    "LessonsDone": {
+                        "L_7qaaUPg7zc": false,
+                        "L_PZzTUylQZ1": false
+                    }
+                }
+            ],
             "Email": "timi@gmail.com",
             "ID": "S_GSNJr6olv6",
             "PasswordHash": "WXEqpaaf/3DFidDsZxBlSBm7hRQLszdYH3tLlEgzWDBAFt9URq1NnUsyMxKyGG6l5t0KwbONRW8WLUA9XcoiKQ==",

@@ -22,20 +22,23 @@ import javax.swing.JTabbedPane;
 public class ViewEnrolledCourses extends javax.swing.JPanel {
 private Students currentStudent;
 private JTabbedPane tabs;
+private StudentDashboardFrame MainFrame;
     /**
      * Creates new form ViewEnrolledCourses
      */
-    public ViewEnrolledCourses(Students currentStudent, JTabbedPane tabs) {
+    public ViewEnrolledCourses(Students currentStudent, JTabbedPane tabs,StudentDashboardFrame MainFrame) {
         this.currentStudent = currentStudent;
         this.tabs = tabs;
+        this.MainFrame = MainFrame;
         initComponents();
+        addLIST();
         
        
         
            }
     
     private void addLIST(){
-      this.enrolledCoursesList = new javax.swing.JList<>();
+      //this.enrolledCoursesList = new javax.swing.JList<>();
         
      ArrayList<StudentProgressInCourse> enrolledCourses = currentStudent.getEnrolledCourses();
         DefaultListModel<String> listModel = new DefaultListModel<>();
@@ -61,9 +64,17 @@ private JTabbedPane tabs;
                                 
                                     }
                       }if (selectedCourse != null) {
-                        ViewLessons vl = new ViewLessons(selectedCourse,currentStudent);
+                        ViewLessons vl = new ViewLessons(selectedCourse,currentStudent,MainFrame);
                         int viewLessonsIndex = tabs.indexOfTab("View Lessons");
-                    tabs.setComponentAt(viewLessonsIndex, vl);
+                        if(viewLessonsIndex  == -1){
+                        tabs.addTab("View Lessons",vl);
+                        viewLessonsIndex = tabs.indexOfTab("View Lessons");
+                        
+                        }
+                        else {
+                        tabs.setComponentAt(viewLessonsIndex, vl);
+                        }
+                    //tabs.setComponentAt(viewLessonsIndex, vl);
                     tabs.setSelectedIndex(viewLessonsIndex);
                     }
                         }

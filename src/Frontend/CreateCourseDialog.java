@@ -42,25 +42,25 @@ private Instructor currentInstructor;
 //    
 //    }
     
-    public void StudentDashboardFrame(Students currentStudent) {
-        
-        this.currentStudent=currentStudent;
-        initComponents();
-        
-        BrowseCourses bc = new BrowseCourses(currentStudent);
-        
-      //  ViewLessons vl = new ViewLessons(); /////fe moshkla hena, anhe course?
-        JTabbedPane tabs = new JTabbedPane();
-        ViewEnrolledCourses vnc = new ViewEnrolledCourses(currentStudent,tabs);
-        tabs.addTab("Browse Courses", bc);
-        tabs.addTab("View Enrolled Courses",vnc);
-          tabs.addTab("View Lessons", new JPanel());
-        getContentPane().setLayout(new BorderLayout());
-         getContentPane().add(tabs, BorderLayout.CENTER);
-
-       
-        
-    }
+//    public void StudentDashboardFrame(Students currentStudent) {
+//        
+//        this.currentStudent=currentStudent;
+//        initComponents();
+//        
+//        BrowseCourses bc = new BrowseCourses(currentStudent);
+//        
+//      //  ViewLessons vl = new ViewLessons(); /////fe moshkla hena, anhe course?
+//        JTabbedPane tabs = new JTabbedPane();
+//        ViewEnrolledCourses vnc = new ViewEnrolledCourses(currentStudent,tabs,);
+//        tabs.addTab("Browse Courses", bc);
+//        tabs.addTab("View Enrolled Courses",vnc);
+//          tabs.addTab("View Lessons", new JPanel());
+//        getContentPane().setLayout(new BorderLayout());
+//         getContentPane().add(tabs, BorderLayout.CENTER);
+//
+//       
+//        
+//    }
 
     /**
      * This method is called from within the constructor to initialize the form.

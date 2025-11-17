@@ -38,17 +38,7 @@ public class StudentProgressInCourse {
         this.overallProgress = 0f;
     }
 public void markAsDone(String LessonID){
-   
-   if(lessonsDone.containsKey(LessonID)){
-   lessonsDone.put(LessonID, true);
-   updateAll();
-   
-   }else{
-       JOptionPane.showMessageDialog(null, "ERROR");
-   }
-   
-   
-
+      lessonsDone.putIfAbsent(LessonID.trim(), Boolean.TRUE);
 
 }
 public void addlesson(String lessonId,String courseID){
