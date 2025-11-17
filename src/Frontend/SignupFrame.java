@@ -5,6 +5,12 @@
 package Frontend;
 
 import Backend.*;
+import java.nio.charset.StandardCharsets;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
+import java.security.SecureRandom;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 
 /**
@@ -209,12 +215,23 @@ public class SignupFrame extends javax.swing.JFrame {
 
     private void signupBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_signupBtnActionPerformed
         // TODO add your handling code here:
-        String regex = "^[A-Za-z0-9][A-Za-z0-9+_.-]*[A-Za-z0-9]@[A-Za-z0-9.-]+\\.[A-Za-z]{2,}$";
         String id=idField.getText();
         String username=usernameField.getText().trim();
         String email=emailField.getText().trim();
-        char[] password=passwordField.getPassword();
         String role=roleBox.getSelectedItem().toString();
+        char[] password=passwordField.getPassword();
+        SecureRandom random=new SecureRandom();
+        byte[] salt=new byte[16];
+        random.nextBytes(salt);
+        MessageDigest md = null;
+        try {
+            md = MessageDigest.getInstance("SHA-512");
+        } catch (NoSuchAlgorithmException ex) {
+            Logger.getLogger(SignupFrame.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        md.update(salt);
+        byte[] hashedPassword=md.digest(new String(password).getBytes(StandardCharsets.UTF_8));
+        String regex = "^[A-Za-z0-9][A-Za-z0-9+_.-]*[A-Za-z0-9]@[A-Za-z0-9.-]+\\.[A-Za-z]{2,}$";
         if(password.length==0||id.isEmpty()||username.isEmpty()||email.isEmpty()){
             JOptionPane.showMessageDialog(this, "Empty field, please enter both email and password.", "Error", JOptionPane.ERROR_MESSAGE);
             return;
@@ -224,15 +241,19 @@ public class SignupFrame extends javax.swing.JFrame {
             return;
         }
         if(role.equals("Instructor")){
-            Instructor ins=new Instructor(username, id, email, new String(password));
+            Instructor ins=new Instructor(username, id, email, hashedPassword);
             jsonFile.addInstructor(ins);
+            JOptionPane.showMessageDialog(this, "Sign-up successful!");
+            new InstructorDashboardFrame(ins).setVisible(true);
+            this.dispose();
         }
         else{
             Student stu=new Student(username, id, email, new String(password));
             jsonFile.addStudent(stu);
+            JOptionPane.showMessageDialog(this, "Sign-up successful!");
+            new StudentDashboardFrame(stu).setVisible(true);
+            this.dispose();
         }
-        JOptionPane.showMessageDialog(this, "Sign-up successful!");
-        this.dispose();
     }//GEN-LAST:event_signupBtnActionPerformed
 
     private void roleBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_roleBoxActionPerformed
