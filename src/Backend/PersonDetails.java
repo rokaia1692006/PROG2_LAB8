@@ -13,6 +13,7 @@ import javax.swing.JOptionPane;
  */
 public abstract class PersonDetails {
      private String id; 
+    
     private String email;
     private String passwordHash;
     private String userName;
@@ -79,6 +80,8 @@ public abstract class PersonDetails {
     
     public void setPasswordHash(String passwordHash) {
         this.passwordHash = passwordHash; }
+
+    public abstract  String getRole() ;
    
 
 }

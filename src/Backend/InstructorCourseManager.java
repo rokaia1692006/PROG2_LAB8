@@ -10,9 +10,9 @@ package Backend;
  */
 public class InstructorCourseManager {
 
-    private JsonDatabaseManager db;
+  private jsonFile db;
 
-    public InstructorCourseManager(JsonDatabaseManager db) {
+    public InstructorCourseManager(jsonFile db) {
         this.db = db;
     }
 
@@ -23,10 +23,10 @@ public class InstructorCourseManager {
         if (description == null || description.trim().isEmpty()) {
             throw new IllegalArgumentException("description can't be empty");
         }
-        String courseId = db.generateCourseId();
-        Course newCourse = new Course(courseId, title, description, instructor.getId());
-        db.saveCourse(newCourse);
-        instructor.addCourse(courseId);
+       
+        Course newCourse = new Course( title, description, instructor);
+        
+        instructor.addCourse(newCourse.getCourseId());
         db.updateInstructor(instructor);
         return newCourse;
     }
@@ -85,7 +85,7 @@ public class InstructorCourseManager {
         Lesson lessonwanted = null;
         for (int i = 0; i < course.getLessons().size(); i++) {
             Lesson l = course.getLessons().get(i);
-            if (l.getLessonId().equals(lessonId)) {
+            if (l.getLessonID().equals(lessonId)) {
                 lessonwanted = l;
                 break;
             }

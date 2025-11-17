@@ -19,7 +19,7 @@ import org.json.JSONArray;
  */
 public class jsonFile {
     private static ArrayList<Course> AllCourses;
-    private static ArrayList<Student> Students;
+    private static ArrayList<Students> Students;
     private static ArrayList<Instructor> instructors;
     private static ArrayList<String> lids;
     private static final String CFile = "courses.json";
@@ -39,13 +39,16 @@ public class jsonFile {
     private static void FinalValidationIns(){
     for(Instructor ins : instructors){
     ArrayList <String> Correct = new ArrayList<>();
-    for(String id  : ins.getCourses()){
+    for(String id  : ins.getCreatedCourse()){
     if(containsCourse(id)!=null){
     Correct.add(id);
     
     }
+    else{
+    ins.removeCourse(id);
     }
-    ins.setCourses(Correct);
+    }
+   
     
     }
     
@@ -72,7 +75,7 @@ public class jsonFile {
           Course c;
           if(course.has("ID")){
           String cid = course.getString("ID");
-          c = new Course(title, dis, ins, cid);
+          c = new Course(cid,title, dis, ins);
           } else {
           c = new Course(title, dis, ins);
           }
@@ -131,6 +134,7 @@ public class jsonFile {
                   String name = s.getString("Name");
                   String email = s.getString("Email");
                   String passwordHash = s.getString("PasswordHash");
+                  float prog = s.getFloat("Progress");
                   ArrayList<String> enrolledCourses = new ArrayList<>();
                   if(s.has("Enrolled_Courses")){
                       JSONArray earr = s.getJSONArray("Enrolled_Courses");
@@ -138,7 +142,7 @@ public class jsonFile {
                           enrolledCourses.add(earr.getString(j));
                       }
                   }
-                  Students.add(new Student(id, name, email, passwordHash, enrolledCourses));
+                  Students.add(new Students(id, name, email, passwordHash, prog ,enrolledCourses));
               }
           }
           if(o.has("Instructors")){
@@ -170,7 +174,7 @@ public class jsonFile {
           e.printStackTrace();
       }
     }
-        public static void addStudent(Student s){
+        public static void addStudent(Students s){
         if(s  == null){
         return;
         }
@@ -226,7 +230,7 @@ public class jsonFile {
              
              }
              
-             ins.deleteCourse(cId);
+             ins.removeCourse(cId);
              AllCourses.remove(c);
              SAVE();
         }
@@ -241,8 +245,8 @@ public class jsonFile {
     
     }
     
-    public static Student containsStudent(String id){
-    for(Student i : Students){
+    public static Students containsStudent(String id){
+    for(Students i : Students){
     if(i.getId().equals(id)){
     return i;
     }
@@ -259,8 +263,8 @@ public class jsonFile {
     return null;
     
     }
-     public static Student studentEmail(String email, String password){
-         for(Student i:Students){
+     public static Students studentEmail(String email, String password){
+         for(Students i:Students){
              if(i.getEmail().equals(email)){
                  if(i.getPasswordHash().equals(password))
                  return i;
@@ -318,23 +322,24 @@ private static void SaveUsers(){
     try{
     JSONObject root = new JSONObject();
     JSONArray stuarr = new JSONArray();
-    for(Student s : Students){
+    for(Students s : Students){
     JSONObject o = new JSONObject();
     o.put("ID", s.getId());
-    o.put("Name", s.getName());
+    o.put("Name", s.getUserName());
     o.put("Email", s.getEmail());
     o.put("PasswordHash", s.getPasswordHash());
-    o.put("Enrolled_Courses", new JSONArray(s.getCourses()));
+    o.put("Progress", s.getProgress());
+    o.put("Enrolled_Courses", new JSONArray(s.getEnrolledCourses()));
     stuarr.put(o);
     }
     JSONArray insarr = new JSONArray();
     for(Instructor i : instructors){
     JSONObject o = new JSONObject();
     o.put("ID", i.getId());
-    o.put("Name", i.getName());
+    o.put("Name", i.getUserName());
     o.put("Email", i.getEmail());
     o.put("PasswordHash", i.getPasswordHash());
-    o.put("CreatedCourses", new JSONArray(i.getCourses()));
+    o.put("CreatedCourses", new JSONArray(i.getCreatedCourse()));
     insarr.put(o);
     }
     root.put("Students", stuarr);

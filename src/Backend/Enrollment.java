@@ -1,13 +1,18 @@
 
 package Backend;
 
+import java.nio.charset.StandardCharsets;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import javax.swing.JOptionPane;
+import org.json.JSONArray;
+import org.json.JSONObject;
 
 /**
  *
  * @author DELL
  */
-public class enrollment {
+public class Enrollment {
     
     public void enrollstudentincourse(int courseID, int studentID)
     {
