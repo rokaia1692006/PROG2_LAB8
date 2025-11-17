@@ -5,6 +5,7 @@
 package Backend;
 
 import java.util.ArrayList;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -19,7 +20,11 @@ public class Instructor extends PersonDetails {
         super(id, email, hashPassword, userName);
         this.createdCourses = new ArrayList<>();
     }
-
+public Instructor(String userName, String id, String email, String hashPassword,ArrayList<String> CreatedCourses) {
+        super(id, email, hashPassword, userName);
+        this.createdCourses =CreatedCourses ;
+    }
+@Override
     public String getRole() {
         return role;
     }

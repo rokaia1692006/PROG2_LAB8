@@ -1,14 +1,19 @@
 
 package Frontend;
 
+import Backend.Course;
 import Backend.Enrollment;
+import Backend.jsonFile;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 import java.util.List;
+import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
 
 /**
  *
@@ -26,7 +31,7 @@ public class BrowseCourses extends javax.swing.JPanel {
     this.add(scrollPane); 
         try {
             
-        List<Course> coursesArray = loadCourses();
+        ArrayList<Course> coursesArray = jsonFile.getAllCourses();
         
         for (int i = 0; i < coursesArray.size(); i++) {
         
@@ -41,7 +46,7 @@ public class BrowseCourses extends javax.swing.JPanel {
            button.addActionListener(new ActionListener() {
                    public void actionPerformed(ActionEvent evt) {
                        
-                       addStudent /////
+                       
               
                    }});
         

@@ -17,14 +17,14 @@ public class Course {
     private String description;
     private String InstructorId;
     private ArrayList<Lesson> lessons;
-    private ArrayList<Student> students;
-    private boolean  checkIfInstructor(Person p){
+    private ArrayList<String> students;
+    private boolean  checkIfInstructor(PersonDetails p){
      if(!p.getRole().equals("instructor")){
        return false;
      }
      return true;
     }
-    public Course(String title, String description, Person Instructor) {
+    public Course(String title, String description, PersonDetails Instructor) {
        if(!checkIfInstructor(Instructor)){
         JOptionPane.showMessageDialog(null, "CANT CREATE COURSE");
         return;
@@ -36,16 +36,35 @@ public class Course {
         this.lessons  = new ArrayList<>();
         this.students  = new ArrayList<>(); 
     }
-    public void addLessons(ArrayList<Lesson> l , Person I){
+    public Course(String id ,String title, String description, PersonDetails Instructor) {
+       if(!checkIfInstructor(Instructor)){
+        JOptionPane.showMessageDialog(null, "CANT CREATE COURSE");
+        return;
+       }
+        this.courseId = id;
+        this.title = title;
+        this.description = description;
+        this.InstructorId = Instructor.getId();
+        this.lessons  = new ArrayList<>();
+        this.students  = new ArrayList<>(); 
+    }
+        public void addLesson(Lesson l , PersonDetails I){
+    if(!checkIfInstructor(I)){
+        JOptionPane.showMessageDialog(null, "CANT CREATE COURSE");
+        return;
+       }
+       this.lessons.add(l);
+    }
+    public void addLessons(ArrayList<Lesson> l , PersonDetails I){
     if(!checkIfInstructor(I)){
         JOptionPane.showMessageDialog(null, "CANT CREATE COURSE");
         return;
        }
        this.lessons.addAll(l);
     }
-    public void enrollInCourse(Student s ){
+    public void enrollInCourse(Students s ){
     if(!students.contains(s)){
-    students.add(s);
+    students.add(s.getId());
     }
     }
 
