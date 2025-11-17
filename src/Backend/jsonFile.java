@@ -226,18 +226,20 @@ i.remove();
         
         }
         
-         public static void CreateCourse (String insID, String title, String description){
+         public static Course  CreateCourse (String insID, String title, String description){
              Instructor ins = containsInstructor(insID);
              if(ins  == null){
              JOptionPane.showMessageDialog(null, "NO INSTRUCTOR");
-             return;
+             return null;
              
              
              }
              Course c = new Course(title,description,ins);
              ins.addCourse(c.getCourseId());
              AllCourses.add(c);
+             
              SAVE();
+             return c;
         
         }
 public static void updatecourse (String insID, String CId , String title, String description){

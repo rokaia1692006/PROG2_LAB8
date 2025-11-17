@@ -30,29 +30,17 @@ private Instructor currentInstructor;
         super(parent, modal);
         this.currentInstructor = instructor;
         initComponents();
-        addCreateButton();
+        AddLessons.setVisible(false);
+        CreateBtn.setVisible(true);
+//        addCreateButton();
         
     }
-    private void addCreateButton() {
-        JButton createBtn = new JButton("Create Course");
-        jPanel1.add(createBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 200, 150, 30));
-
-        createBtn.addActionListener(e -> {
-        String title = titleTxt.getText().trim();
-        String description = DesTxt.getText().trim();
-      
-        if (title.isEmpty() || description.isEmpty()) {
-        JOptionPane.showMessageDialog(this, "Title and description cannot be empty", "Error", JOptionPane.ERROR_MESSAGE);
-        return;
-            }
-   
-            jsonFile.CreateCourse(currentInstructor.getId(), title, description);
- 
-            JOptionPane.showMessageDialog(this, "Course created successfully!");
-            this.dispose(); 
-        });
-    
-    }
+//    private void addCreateButton() {
+//        JButton createBtn = new JButton("Create Course");
+//        jPanel1.add(createBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 200, 150, 30));
+//
+//    
+//    }
     
     public void StudentDashboardFrame(Students currentStudent) {
         
@@ -88,6 +76,7 @@ private Instructor currentInstructor;
         titleTxt = new javax.swing.JTextField();
         DesTxt = new javax.swing.JTextField();
         jLabel4 = new javax.swing.JLabel();
+        CreateBtn = new javax.swing.JButton();
         AddLessons = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
@@ -113,8 +102,16 @@ private Instructor currentInstructor;
         jLabel4.setText("Course Description");
         jPanel1.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 50, 120, -1));
 
+        CreateBtn.setText("CREATE COURSE");
+        CreateBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                CreateBtnActionPerformed(evt);
+            }
+        });
+        jPanel1.add(CreateBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 100, 170, -1));
+
         AddLessons.setText("ADD LESSONS");
-        jPanel1.add(AddLessons, new org.netbeans.lib.awtextra.AbsoluteConstraints(292, 100, 170, -1));
+        jPanel1.add(AddLessons, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 100, 170, -1));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -122,7 +119,8 @@ private Instructor currentInstructor;
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(layout.createSequentialGroup()
-                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap()
+                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 741, Short.MAX_VALUE)
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -131,8 +129,8 @@ private Instructor currentInstructor;
                 .addContainerGap()
                 .addComponent(jLabel1)
                 .addGap(28, 28, 28)
-                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addContainerGap())
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 149, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(153, Short.MAX_VALUE))
         );
 
         pack();
@@ -142,47 +140,68 @@ private Instructor currentInstructor;
         // TODO add your handling code here:
     }//GEN-LAST:event_titleTxtActionPerformed
 
+    private void CreateBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CreateBtnActionPerformed
+        // TODO add your handling code here:
+         String title = titleTxt.getText().trim();
+        String description = DesTxt.getText().trim();
+        if (title.isEmpty() || description.isEmpty()) {
+        JOptionPane.showMessageDialog(this, "Title and description cannot be empty", "Error", JOptionPane.ERROR_MESSAGE);
+        return;
+        }
+        Course newCourse = jsonFile.CreateCourse(currentInstructor.getId(), title, description);
+        if (newCourse != null) {
+            JOptionPane.showMessageDialog(this, "Course created successfully!");
+            AddLessons.setVisible(true);
+            CreateBtn.setVisible(false);
+            AddLessons.addActionListener(ev -> {
+            Edit_Addlesson addLessonDialog = new Edit_Addlesson(null, true, currentInstructor, newCourse, null, false);
+            addLessonDialog.setVisible(true);
+            
+            });
+    }//GEN-LAST:event_CreateBtnActionPerformed
+    }
     /**
      * @param args the command line arguments
      */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ReflectiveOperationException | javax.swing.UnsupportedLookAndFeelException ex) {
-            logger.log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
-
-        /* Create and display the dialog */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            @Override
-            public void run() {
-                CreateCourseDialog dialog = new CreateCourseDialog(new javax.swing.JFrame(), true);
-                dialog.addWindowListener(new java.awt.event.WindowAdapter() {
-                    @Override
-                    public void windowClosing(java.awt.event.WindowEvent e) {
-                        System.exit(0);
-                    }
-                });
-                dialog.setVisible(true);
-            }
-        });
-    }
+//    public static void main(String args[]) {
+//        /* Set the Nimbus look and feel */
+//        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
+//        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
+//         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
+//         */
+//        try {
+//            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
+//                if ("Nimbus".equals(info.getName())) {
+//                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
+//                    break;
+//                }
+//            }
+//        } catch (ReflectiveOperationException | javax.swing.UnsupportedLookAndFeelException ex) {
+//            logger.log(java.util.logging.Level.SEVERE, null, ex);
+//        }
+//        //</editor-fold>
+//
+//        /* Create and display the dialog */
+//        java.awt.EventQueue.invokeLater(new Runnable() {
+//            @Override
+//            public void run() {
+//                CreateCourseDialog dialog = new CreateCourseDialog(new javax.swing.JFrame(), true);
+//                dialog.addWindowListener(new java.awt.event.WindowAdapter() {
+//                    @Override
+//                    public void windowClosing(java.awt.event.WindowEvent e) {
+//                        System.exit(0);
+//                    }
+//                });
+//                dialog.setVisible(true);
+//            }
+//        });
+//    }
 
     
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton AddLessons;
+    private javax.swing.JButton CreateBtn;
     private javax.swing.JTextField DesTxt;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;

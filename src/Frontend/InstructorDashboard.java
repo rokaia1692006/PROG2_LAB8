@@ -236,7 +236,7 @@ private Instructor ins;
     private void CreateCourseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CreateCourseActionPerformed
         // TODO add your handling code here:
  
-        CreateCourseDialog dialog = new CreateCourseDialog(InstructorDashboard.this, true);
+        CreateCourseDialog dialog = new CreateCourseDialog(InstructorDashboard.this, true,ins);
         dialog.setLocationRelativeTo(InstructorDashboard.this);
         dialog.setVisible(true);
         LOADTable();

@@ -17,7 +17,12 @@
             "Name": "InstructorOne"
         },
         {
-            "CreatedCourses": ["C001"],
+            "CreatedCourses": [
+                "C001",
+                "C_OTDvMTNaab",
+                "C_daL8FAfKgm",
+                "C_7iibhMszkz"
+            ],
             "Salt": "dGdIjhPHrnzUvEun4XGp4Q==",
             "Email": "aaa@gmail.com",
             "ID": "I_6os1zXdkdE",

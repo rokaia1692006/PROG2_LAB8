@@ -1,7 +1,52 @@
-{"Courses": [{
-    "Description": "Intro to Java",
-    "Lessons": [],
-    "Title": "JavaBasics",
-    "InstructorID": "I_6os1zXdkdE",
-    "ID": "C001"
-}]}
+{"Courses": [
+    {
+        "Description": "Intro to Java",
+        "Lessons": [],
+        "Title": "JavaBasics",
+        "InstructorID": "I_6os1zXdkdE",
+        "ID": "C001"
+    },
+    {
+        "Description": "hagat keter mohema",
+        "Lessons": [
+            {
+                "Content": "meow",
+                "Title": "lesson 1",
+                "Resources": ["meow.important"]
+            },
+            {
+                "Content": "ssdsd",
+                "Title": "fffff",
+                "Resources": ["asasa"]
+            }
+        ],
+        "Title": "hehhehe",
+        "InstructorID": "I_6os1zXdkdE",
+        "ID": "C_OTDvMTNaab"
+    },
+    {
+        "Description": "fghh l k k k",
+        "Lessons": [],
+        "Title": "jjjjj",
+        "InstructorID": "I_6os1zXdkdE",
+        "ID": "C_daL8FAfKgm"
+    },
+    {
+        "Description": "dddd",
+        "Lessons": [
+            {
+                "Content": "wewewqwe",
+                "Title": "ddd",
+                "Resources": ["qwewqe"]
+            },
+            {
+                "Content": "jskjfkja",
+                "Title": "aasssa sss",
+                "Resources": ["xkjsdkc"]
+            }
+        ],
+        "Title": "ssss",
+        "InstructorID": "I_6os1zXdkdE",
+        "ID": "C_7iibhMszkz"
+    }
+]}
