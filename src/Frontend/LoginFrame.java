@@ -139,8 +139,8 @@ public class LoginFrame extends javax.swing.JFrame {
         if(password.length==0||email.isEmpty()){
             JOptionPane.showMessageDialog(this, "Empty field, please enter both email and password.", "Error", JOptionPane.ERROR_MESSAGE);
         }
-        Students stu=jsonFile.studentEmail(email,new String(password));
-        Instructor ins=jsonFile.instructorEmail(email,new String(password));
+        Students stu=jsonFile.studentEmail(email,password);
+        Instructor ins=jsonFile.instructorEmail(email,password);
         if(stu!=null){
             JOptionPane.showMessageDialog(this, "Login successful!");
             new StudentDashboardFrame(stu).setVisible(true);
@@ -148,7 +148,7 @@ public class LoginFrame extends javax.swing.JFrame {
         }
         else if(ins!=null){
             JOptionPane.showMessageDialog(this, "Login successful!");
-            new InstructorDashboardFrame(ins).setVisible(true);
+            new InstructorDashboard(ins).setVisible(true);
             this.dispose();
         }
         else
