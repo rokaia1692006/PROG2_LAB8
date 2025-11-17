@@ -38,8 +38,12 @@ public class StudentProgressInCourse {
         this.overallProgress = 0f;
     }
 public void markAsDone(String LessonID){
-      lessonsDone.putIfAbsent(LessonID.trim(), Boolean.TRUE);
-
+      if (lessonsDone.containsKey(LessonID)) {
+        lessonsDone.put(LessonID, Boolean.TRUE);
+        updateAll();
+    } else {
+        System.out.println("YE5REBET EL HABALLLLLLLL YA RABBB");
+    }
 }
 public void addlesson(String lessonId,String courseID){
 if(CourseId.equals(courseID)){

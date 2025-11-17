@@ -22,7 +22,12 @@ public class Lesson {
         this.content = content;
         this.resources = resources;
     }
-
+public Lesson(String ID,String title, String content, ArrayList resources) {
+        this.lessonID  = ID;
+        this.title = title;
+        this.content = content;
+        this.resources = resources;
+    }
     public String getLessonID() {
         return lessonID;
     }

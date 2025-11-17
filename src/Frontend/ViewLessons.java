@@ -14,6 +14,7 @@ import java.util.ArrayList;
 import javax.swing.DefaultListModel;
 import javax.swing.JButton;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 
@@ -46,6 +47,10 @@ public class ViewLessons extends javax.swing.JPanel {
           if(this.studetProgressInCourse  == null){
           ArrayList<String> lessonIDs = new ArrayList<>();
           for (Lesson l : course.getLessons()) {
+            
+    System.out.println("LessonID: '" + l.getLessonID() + "'");
+
+
           lessonIDs.add(l.getLessonID());
           }
           currentStudent.newEnrollCourses(course.getCourseId(), lessonIDs);
@@ -173,14 +178,15 @@ public class ViewLessons extends javax.swing.JPanel {
            {
             ArrayList<Lesson> lessons = course.getLessons();
             Lesson lesson = lessons.get(index);
-            
+               JOptionPane.showMessageDialog(null, lessons.get(index).getLessonID());
+                       
             float prog =  currentStudent.UpdateLesson(course.getCourseId(),lesson.getLessonID()); //n3mlha mark enaha done
             
             DefaultListModel<String> listModel = (DefaultListModel<String>) lessonsList.getModel();
             listModel.set(index, lesson.getTitle() + " ✅"); //nktb gmbha enaha done
             
            // float prog = currentStudent.UpdateLesson(TOOL_TIP_TEXT_KEY, TOOL_TIP_TEXT_KEY);
-            int progress = (int) (prog*100);
+            int progress = (int) (prog);
             
              progressBar.setValue(progress); 
                

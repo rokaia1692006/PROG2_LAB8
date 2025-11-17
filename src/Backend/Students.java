@@ -65,7 +65,14 @@ this.setId(generate.StudentID());
     }
     
     public float UpdateLesson(String CourseId, String LessonID){
-    StudentProgressInCourse course = SearchINEnrolled(CourseId);
+    LessonID = LessonID.trim();
+StudentProgressInCourse course = SearchINEnrolled(CourseId.trim());
+if(course != null && course.getLessonsDone().containsKey(LessonID)){
+    course.markAsDone(LessonID);
+} else {
+    System.out.println("ha3yt + "  + LessonID);
+}
+
     if(course  == null){
     Course c = jsonFile.containsCourse(CourseId);
     if(c != null){
@@ -83,6 +90,7 @@ this.setId(generate.StudentID());
     }
     }
     course.markAsDone(LessonID);
+        jsonFile.SAVE();
      return course.getOverallProgress();
    
     

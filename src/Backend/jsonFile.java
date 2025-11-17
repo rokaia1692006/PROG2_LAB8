@@ -100,6 +100,7 @@ i.remove();
           JSONArray larr = course.getJSONArray("Lessons");
           for(int k = 0 ; k <larr.length();k++){
               JSONObject l = larr.getJSONObject(k);
+              String lid = l.getString("IDS");
               String lTitle = l.getString("Title");
               String lContent = l.getString("Content");
               ArrayList<String> resources = new ArrayList<>();
@@ -109,7 +110,7 @@ i.remove();
               resources.add(rarr.getString(j));
           }
           }
-              Lesson ltenp = new Lesson(lTitle, lContent, resources);
+              Lesson ltenp = new Lesson(lid,lTitle, lContent, resources);
               lids.add(ltenp.getLessonID());
             ls.add(ltenp);
               
@@ -366,6 +367,7 @@ public static void updatecourse (String insID, String CId , String title, String
         
         for(Lesson l : c.getLessons()){
         JSONObject lo = new JSONObject();
+        lo.put("IDS", l.getLessonID());
         lo.put("Title", l.getTitle());
         lo.put("Content", l.getContent());
         lo.put("Resources", new JSONArray(l.getResources()));

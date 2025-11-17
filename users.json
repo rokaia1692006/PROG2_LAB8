@@ -1,137 +1,48 @@
 {
-    "Students": [
-        {
-            "Salt": "c2FsdDEyMw==",
-            "Enrolled_Courses": [],
-            "Email": "student1@example.com",
-            "ID": "S001",
-            "PasswordHash": "c2VjdXJlcDEyMw==",
-            "Name": "StudentOne"
-        },
-        {
-            "Salt": "CjvUpDgJ0wX6ItY8+qA7Bg==",
-            "Enrolled_Courses": [],
-            "Email": "aa@gmail.com",
-            "ID": "S_2Ekn7GUesh",
-            "PasswordHash": "lTog57CyHaldOxeSjG90eN8T6PSiVW9Ud07TyEHQiagOxRep0Urz8mD/pkoi4pcOyxG9ynK5i47uuKvLau+LMA==",
-            "Name": "ffjfk"
-        },
-        {
-            "Salt": "dupAg01UI3jurInt3yBmWQ==",
-            "Enrolled_Courses": [],
-            "Email": "aa@gmail.com",
-            "ID": "S_U03MtU5L58",
-            "PasswordHash": "7rIHqjqn6mRodEJJvklAmEhm06698kCU1ctRYwvfKQ1iSDIRlmyc+LdZkssUdfLQKOtL93VJ1+2Kt+w0ueGwQA==",
-            "Name": "ffjfk"
-        },
-        {
-            "Salt": "8kbnvKnHZBzAX47UVhIw4A==",
-            "Enrolled_Courses": [],
-            "Email": "aa@gmail.com",
-            "ID": "S_d57lk2mTtC",
-            "PasswordHash": "AjIba6E4JDegOCvWlLCCyh1J+gSkgn7GplLL6vvJLoROaPJUVC2plRK0ysDgAzhJ9GFFUE5NvMFrPngpZdlJhw==",
-            "Name": "aaa"
-        },
-        {
-            "Salt": "2oj5bEcxP/Bm2IOIFunA8g==",
-            "Enrolled_Courses": [
-                {
-                    "CourseID": "C001",
-                    "CourseProgress": 0,
-                    "AllLessons": 0,
-                    "LessonsDone": {}
-                },
-                {
-                    "CourseID": "C_OTDvMTNaab",
-                    "CourseProgress": 0,
-                    "AllLessons": 2,
-                    "LessonsDone": {
-                        "L_9LiH25A4XV": false,
-                        "L_LvMZ7KupBE": false
-                    }
-                },
-                {
-                    "CourseID": "C_daL8FAfKgm",
-                    "CourseProgress": 0,
-                    "AllLessons": 0,
-                    "LessonsDone": {}
-                },
-                {
-                    "CourseID": "C_7iibhMszkz",
-                    "CourseProgress": 0,
-                    "AllLessons": 2,
-                    "LessonsDone": {
-                        "L_7qaaUPg7zc": false,
-                        "L_PZzTUylQZ1": false
-                    }
+    "Students": [{
+        "Salt": "9o81JPA0VaWH4LArl7Vh9g==",
+        "Enrolled_Courses": [
+            {
+                "CourseID": "C_o9yN46NFC8",
+                "CourseProgress": 50,
+                "AllLessons": 2,
+                "LessonsDone": {
+                    "L_1MDSKlLI1e": false,
+                    "L_ttO8bG2GyX": true
                 }
-            ],
-            "Email": "timi@gmail.com",
-            "ID": "S_GSNJr6olv6",
-            "PasswordHash": "WXEqpaaf/3DFidDsZxBlSBm7hRQLszdYH3tLlEgzWDBAFt9URq1NnUsyMxKyGG6l5t0KwbONRW8WLUA9XcoiKQ==",
-            "Name": "timi"
-        },
-        {
-            "Salt": "BAUG",
-            "Enrolled_Courses": [
-                {
-                    "CourseID": "C001",
-                    "CourseProgress": 0,
-                    "AllLessons": 0,
-                    "LessonsDone": {}
-                },
-                {
-                    "CourseID": "C_OTDvMTNaab",
-                    "CourseProgress": 0,
-                    "AllLessons": 2,
-                    "LessonsDone": {
-                        "L_HElK7IRQtB": false,
-                        "L_I7o64679yD": false
-                    }
-                },
-                {
-                    "CourseID": "C_daL8FAfKgm",
-                    "CourseProgress": 0,
-                    "AllLessons": 0,
-                    "LessonsDone": {}
-                },
-                {
-                    "CourseID": "C_7iibhMszkz",
-                    "CourseProgress": 0,
-                    "AllLessons": 2,
-                    "LessonsDone": {
-                        "L_ADuOzeZiei": false,
-                        "L_fEh5ebheJC": false
-                    }
-                }
-            ],
-            "Email": "test@mail.com",
-            "ID": "S_8K0F0t25WA",
-            "PasswordHash": "AQID",
-            "Name": "testuser"
-        }
-    ],
+            },
+            {
+                "CourseID": "C_IEDYu4thF5",
+                "CourseProgress": 100,
+                "AllLessons": 1,
+                "LessonsDone": {"L_MzDTvUZMJ7": true}
+            }
+        ],
+        "Email": "sss@gmail.com",
+        "ID": "S_I4ROeo5lRa",
+        "PasswordHash": "emPJKg9Yq2o95pYEqU7OlXgiZ+5oDCo4J4szlSYWqHGElA4MaiJ/17OX1Qkot0lZR6SUQc8iAh+R7F9rdALxDg==",
+        "Name": "ssss"
+    }],
     "Instructors": [
         {
-            "CreatedCourses": [],
-            "Salt": "c2FsdDEyMw==",
-            "Email": "instructor1@example.com",
-            "ID": "I001",
-            "PasswordHash": "c2VjdXJlcDEyMw==",
-            "Name": "InstructorOne"
+            "CreatedCourses": ["C_o9yN46NFC8"],
+            "Salt": "yWDkLulH1IhVc2oBi752fg==",
+            "Email": "ddd@gmail.com",
+            "ID": "I_jKkYEJVOLq",
+            "PasswordHash": "PqiBg4Ai1ilV7StV9HLfNWlJvIDhzxXfN/IFxdWWGFMdat2JEYbw9z594rigrtvDapNdNDeshxmreqHERz88Uw==",
+            "Name": "ddd"
         },
         {
             "CreatedCourses": [
-                "C001",
-                "C_OTDvMTNaab",
-                "C_daL8FAfKgm",
-                "C_7iibhMszkz"
+                "C_tHcgaslcfd",
+                "C_IEDYu4thF5",
+                "C_W9NYHsPTQ7"
             ],
-            "Salt": "dGdIjhPHrnzUvEun4XGp4Q==",
-            "Email": "aaa@gmail.com",
-            "ID": "I_6os1zXdkdE",
-            "PasswordHash": "Rc+fYMRt6MU0FmYE5DDg4sMQhC28dNTTvtByslkBnchpi0T0VIyoREPTiv8wu9OUa9+TenhYbFjHnBVXLAvZ2w==",
-            "Name": "aaaa"
+            "Salt": "BBysFWngChcvpq3LH8o1Pw==",
+            "Email": "abdo@gmail.com",
+            "ID": "I_tERiMntxO9",
+            "PasswordHash": "Mk2lFzvzpdFvWoZCdHu3aSpqullpEZaW40CaHPJeN+MzNNrxXCuYn0qcooD808z6/QNJcSy0M5SMI0f2a+Uwfw==",
+            "Name": "abdo"
         }
     ]
 }

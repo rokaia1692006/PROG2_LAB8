@@ -39,7 +39,14 @@ private Students s;
        
         tabbedDIS.addTab("BROWSE COURSES", jPanel1);
         tabbedDIS.addTab("ENROLLED COURSES", jPanel2);
+        tabbedDIS.addChangeListener(e->{
+            int index = tabbedDIS.getSelectedIndex();   
+            String title = tabbedDIS.getTitleAt(index);
+            if(title.equals("ENROLLED COURSES")){
+                ((ViewEnrolledCourses)jPanel2).Refrresh(s);
+            }
 
+        });
         getContentPane().add(tabbedDIS, java.awt.BorderLayout.CENTER);
 
         pack();
