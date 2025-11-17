@@ -39,6 +39,45 @@
             "ID": "S_GSNJr6olv6",
             "PasswordHash": "WXEqpaaf/3DFidDsZxBlSBm7hRQLszdYH3tLlEgzWDBAFt9URq1NnUsyMxKyGG6l5t0KwbONRW8WLUA9XcoiKQ==",
             "Name": "timi"
+        },
+        {
+            "Salt": "BAUG",
+            "Enrolled_Courses": [
+                {
+                    "CourseID": "C001",
+                    "CourseProgress": 0,
+                    "AllLessons": 0,
+                    "LessonsDone": {}
+                },
+                {
+                    "CourseID": "C_OTDvMTNaab",
+                    "CourseProgress": 0,
+                    "AllLessons": 2,
+                    "LessonsDone": {
+                        "L_HElK7IRQtB": false,
+                        "L_I7o64679yD": false
+                    }
+                },
+                {
+                    "CourseID": "C_daL8FAfKgm",
+                    "CourseProgress": 0,
+                    "AllLessons": 0,
+                    "LessonsDone": {}
+                },
+                {
+                    "CourseID": "C_7iibhMszkz",
+                    "CourseProgress": 0,
+                    "AllLessons": 2,
+                    "LessonsDone": {
+                        "L_ADuOzeZiei": false,
+                        "L_fEh5ebheJC": false
+                    }
+                }
+            ],
+            "Email": "test@mail.com",
+            "ID": "S_8K0F0t25WA",
+            "PasswordHash": "AQID",
+            "Name": "testuser"
         }
     ],
     "Instructors": [

@@ -3,6 +3,8 @@ package Frontend;
 import Backend.Students;
 import Backend.Course;
 import Backend.jsonFile;
+import java.awt.BorderLayout;
+import java.awt.Component;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
@@ -23,22 +25,34 @@ public class BrowseCourses extends javax.swing.JPanel {
    private Students currentStudent;
    private JPanel createCourseBox(String title, String desc, Course course){
    JPanel panel = new JPanel();
-   panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
-   panel.setAlignmentX(java.awt.Component.LEFT_ALIGNMENT);
+   panel.setLayout(new BorderLayout());
+   panel.setMaximumSize(new java.awt.Dimension(Integer.MAX_VALUE, 80));
    panel.setBorder(javax.swing.BorderFactory.createLineBorder(java.awt.Color.BLACK));
+   JPanel textPanel = new JPanel();
+   textPanel.setLayout(new BoxLayout(textPanel, BoxLayout.Y_AXIS));
    JLabel name = new JLabel(title);
    JLabel description = new JLabel(desc);
+   textPanel.add(name);
+   textPanel.add(description);
+   panel.add(textPanel, BorderLayout.CENTER);
+   JPanel buttonPanel = new JPanel(new BorderLayout());
+   
    JButton enroll = new JButton("Enroll");
-   enroll.setAlignmentX(java.awt.Component.RIGHT_ALIGNMENT);
+//   enroll.setAlignmentX(java.awt.Component.RIGHT_ALIGNMENT);
 
    enroll.addActionListener(new java.awt.event.ActionListener() {
    public void actionPerformed(java.awt.event.ActionEvent evt) {
    course.enrollInCourse(currentStudent);
+   jsonFile.SAVE();
+   enroll.setEnabled(false);
     }
     });
-   panel.add(name);
-   panel.add(description);
-   panel.add(enroll);
+   if(!currentStudent.checkifEnrolled(course.getCourseId())){{
+       enroll.setEnabled(false);
+   }}
+   buttonPanel.add(enroll, BorderLayout.NORTH);
+   panel.add(buttonPanel, BorderLayout.EAST);
+   panel.setBorder(javax.swing.BorderFactory.createEmptyBorder(10,10,10,10));
    return panel;
 }
 
@@ -56,14 +70,11 @@ public class BrowseCourses extends javax.swing.JPanel {
    JPanel coursesCONT = new JPanel();
    coursesCONT.setLayout(new BoxLayout(coursesCONT,BoxLayout.Y_AXIS));
    for(Course c : coursesArray){
-   JPanel card = createCourseBox(c.getTitle(), c.getDescription(), c);
-card.setMaximumSize(new java.awt.Dimension(Integer.MAX_VALUE, card.getPreferredSize().height));
-card.setAlignmentX(java.awt.Component.LEFT_ALIGNMENT);
-card.setBorder(javax.swing.BorderFactory.createEmptyBorder(10, 10, 10, 10));
-coursesCONT.add(javax.swing.Box.createVerticalStrut(10));
-   
-coursesCONT.add(card);
-   
+    JPanel card = createCourseBox(c.getTitle(), c.getDescription(), c);
+    card.setAlignmentX(Component.LEFT_ALIGNMENT);
+    card.setBorder(javax.swing.BorderFactory.createEmptyBorder(5, 5, 5, 5));
+    coursesCONT.add(card);
+    coursesCONT.add(javax.swing.Box.createVerticalStrut(10));
    }
    JScrollPane scroll = new JScrollPane(coursesCONT);
    scroll.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
@@ -161,4 +172,22 @@ coursesCONT.add(card);
     private javax.swing.JButton enrollbutton;
     private javax.swing.JLabel viewcourses;
     // End of variables declaration//GEN-END:variables
+}
+class TestBrowseCourses {
+public static void main(String[] args){
+javax.swing.SwingUtilities.invokeLater(new Runnable(){
+public void run(){
+    jsonFile j = new jsonFile();
+byte[] ph = new byte[]{1,2,3};
+byte[] sa = new byte[]{4,5,6};
+Backend.Students s = new Backend.Students("testuser","test@mail.com",ph,sa);
+
+javax.swing.JFrame f = new javax.swing.JFrame("Test Browse Courses");
+f.setDefaultCloseOperation(javax.swing.JFrame.EXIT_ON_CLOSE);
+f.setSize(900,600);
+f.add(new Frontend.BrowseCourses(s));
+f.setVisible(true);
+}
+});
+}
 }
