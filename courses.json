@@ -1,1 +1,7 @@
-{"Courses": []}
+{"Courses": [{
+    "Description": "Intro to Java",
+    "Lessons": [],
+    "Title": "JavaBasics",
+    "InstructorID": "I_6os1zXdkdE",
+    "ID": "C001"
+}]}

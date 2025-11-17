@@ -5,6 +5,7 @@
 package Frontend;
 
 import Backend.Students;
+import java.awt.BorderLayout;
 
 /**
  *
@@ -18,7 +19,13 @@ private Students s;
     public StudentDashboardFrame(Students s) {
         this.s = s;
         initComponents();
-    }
+        BrowseCourses browsePanel = new BrowseCourses(s);
+        this.setLayout(new BorderLayout());
+        this.add(browsePanel, BorderLayout.CENTER);
+        this.setSize(900, 600);    
+        this.setLocationRelativeTo(null);
+        this.setVisible(true);
+       }
 
     /**
      * This method is called from within the constructor to initialize the form.
