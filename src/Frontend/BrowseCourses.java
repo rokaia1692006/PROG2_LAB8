@@ -174,20 +174,20 @@ public class BrowseCourses extends javax.swing.JPanel {
     // End of variables declaration//GEN-END:variables
 }
 class TestBrowseCourses {
-public static void main(String[] args){
-javax.swing.SwingUtilities.invokeLater(new Runnable(){
-public void run(){
-    jsonFile j = new jsonFile();
-byte[] ph = new byte[]{1,2,3};
-byte[] sa = new byte[]{4,5,6};
-Backend.Students s = new Backend.Students("testuser","test@mail.com",ph,sa);
-
-javax.swing.JFrame f = new javax.swing.JFrame("Test Browse Courses");
-f.setDefaultCloseOperation(javax.swing.JFrame.EXIT_ON_CLOSE);
-f.setSize(900,600);
-f.add(new Frontend.BrowseCourses(s));
-f.setVisible(true);
-}
-});
-}
+//public static void main(String[] args){
+//javax.swing.SwingUtilities.invokeLater(new Runnable(){
+//public void run(){
+//    jsonFile j = new jsonFile();
+//byte[] ph = new byte[]{1,2,3};
+//byte[] sa = new byte[]{4,5,6};
+//Backend.Students s = new Backend.Students("testuser","test@mail.com",ph,sa);
+//
+//javax.swing.JFrame f = new javax.swing.JFrame("Test Browse Courses");
+//f.setDefaultCloseOperation(javax.swing.JFrame.EXIT_ON_CLOSE);
+//f.setSize(900,600);
+//f.add(new Frontend.BrowseCourses(s));
+//f.setVisible(true);
+//}
+//});
+//}
 }
