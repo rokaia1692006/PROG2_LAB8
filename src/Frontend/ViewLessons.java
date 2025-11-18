@@ -14,6 +14,7 @@ import java.util.ArrayList;
 import javax.swing.DefaultListModel;
 import javax.swing.JButton;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 
@@ -29,25 +30,31 @@ public class ViewLessons extends javax.swing.JPanel {
     private   Course course;
     private Students currentStudent;
     private JButton backButton;
+    private StudentDashboardFrame MainFrame;
 
     
      private StudentProgressInCourse studetProgressInCourse;
      
     
-    public ViewLessons(Course course, Students currentStudent) {
+    public ViewLessons(Course course, Students currentStudent,StudentDashboardFrame MainFrame) {
         
           initComponents();
           this.course = course;
           this.currentStudent=currentStudent;
-          
+          this.MainFrame = MainFrame;
           this.studetProgressInCourse = currentStudent.SearchINEnrolled(course.getCourseId());
+          progressBar.setValue((int) studetProgressInCourse.getOverallProgress());
           if(this.studetProgressInCourse  == null){
           ArrayList<String> lessonIDs = new ArrayList<>();
           for (Lesson l : course.getLessons()) {
+            
+    System.out.println("LessonID: '" + l.getLessonID() + "'");
+
+
           lessonIDs.add(l.getLessonID());
           }
           currentStudent.newEnrollCourses(course.getCourseId(), lessonIDs);
-          
+          this.studetProgressInCourse = currentStudent.SearchINEnrolled(course.getCourseId());
           }
          
 
@@ -55,6 +62,7 @@ public class ViewLessons extends javax.swing.JPanel {
     }
     
     private void loadLessons(){
+         //removeAll();
          ArrayList<Lesson> lessons = course.getLessons();
        
        DefaultListModel<String> listmodel = new DefaultListModel<>();
@@ -71,31 +79,20 @@ public class ViewLessons extends javax.swing.JPanel {
                 int index = lessonsList.getSelectedIndex();
                 if (index != -1) {
                     Lesson selected = lessons.get(index);
+                   javax.swing.JDialog lDialog = new javax.swing.JDialog(MainFrame, selected.getTitle(), true);
+                lDialog.setSize(600, 400);
+                lDialog.setLocationRelativeTo(MainFrame);
+
+                LessonView l = new LessonView(selected,MainFrame);
+                lDialog.add(l);
+
+                lDialog.setVisible(true);
+                   
                     
-                    removeAll();
-                    
-                    backButton = new JButton("Back");
-                     backButton.addActionListener(ae -> {
-                                   removeAll();
-                     initComponents(); 
-                     loadLessons();
-                     revalidate();
-                       repaint();
-                     });
+                 
                      
                     
-                    setLayout(new BorderLayout());
-
-                    JLabel titleLabel = new JLabel(selected.getTitle());
-                    JTextArea contentArea = new JTextArea(selected.getContent());
-                    contentArea.setEditable(false);
                     
-                    add(titleLabel, BorderLayout.NORTH);
-                    add(new JScrollPane(contentArea), BorderLayout.CENTER);
-                    add(backButton, BorderLayout.SOUTH);
-
-                    revalidate();
-                    repaint();
             }
             }
                      }
@@ -119,6 +116,9 @@ public class ViewLessons extends javax.swing.JPanel {
         lessonstxt = new javax.swing.JLabel();
         markdoneButton = new javax.swing.JButton();
         progressBar = new javax.swing.JProgressBar();
+        progressBar.setMaximum(100);
+        
+
 
         lessonsList.setFont(new java.awt.Font("Dutch801 Rm BT", 0, 18)); // NOI18N
         lessonsList.setModel(new javax.swing.AbstractListModel<String>() {
@@ -178,14 +178,15 @@ public class ViewLessons extends javax.swing.JPanel {
            {
             ArrayList<Lesson> lessons = course.getLessons();
             Lesson lesson = lessons.get(index);
-            
+               JOptionPane.showMessageDialog(null, lessons.get(index).getLessonID());
+                       
             float prog =  currentStudent.UpdateLesson(course.getCourseId(),lesson.getLessonID()); //n3mlha mark enaha done
             
             DefaultListModel<String> listModel = (DefaultListModel<String>) lessonsList.getModel();
             listModel.set(index, lesson.getTitle() + " ✅"); //nktb gmbha enaha done
             
            // float prog = currentStudent.UpdateLesson(TOOL_TIP_TEXT_KEY, TOOL_TIP_TEXT_KEY);
-            int progress = (int) (prog * 100);
+            int progress = (int) (prog);
             
              progressBar.setValue(progress); 
                

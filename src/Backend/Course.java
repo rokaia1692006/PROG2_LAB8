@@ -62,8 +62,18 @@ public class Course {
        }
        this.lessons.addAll(l);
     }
+    private ArrayList<String> getALLLEssonIDS(){
+    ArrayList<String> lessonIDs = new ArrayList<>();
+      for (Lesson l : this.getLessons()) {  
+     lessonIDs.add(l.getLessonID());
+    }
+    return lessonIDs;
+    }
     public void enrollInCourse(Students s ){
     if(!students.contains(s)){
+    if (!s.checkifEnrolled(this.getCourseId())) { 
+        s.newEnrollCourses(this.getCourseId(), this.getALLLEssonIDS());
+    }
     students.add(s.getId());
     }
     }

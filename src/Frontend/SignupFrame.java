@@ -5,6 +5,7 @@
 package Frontend;
 
 import Backend.*;
+import Backend.jsonFile;
 import java.nio.charset.StandardCharsets;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
@@ -208,7 +209,7 @@ public class SignupFrame extends javax.swing.JFrame {
             Students stu=new Students(username, email, hashedPassword,salt);
             jsonFile.addStudent(stu);
             JOptionPane.showMessageDialog(this, "Sign-up successful!");
-            new BrowseCourses(stu).setVisible(true);
+            new StudentDashboardFrame(stu).setVisible(true);
             this.dispose();
         }
     }//GEN-LAST:event_signupBtnActionPerformed

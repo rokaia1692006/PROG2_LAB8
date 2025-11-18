@@ -13,6 +13,7 @@ import java.security.MessageDigest;
 import java.util.ArrayList;
 import java.util.Base64;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.Map;
 import javax.swing.JOptionPane;
 import org.json.JSONObject;
@@ -44,20 +45,28 @@ public class jsonFile {
     private static void FinalValidationIns(){
     for(Instructor ins : instructors){
     ArrayList <String> Correct = new ArrayList<>();
-    for(String id  : ins.getCreatedCourse()){
-    if(containsCourse(id)!=null){
-    Correct.add(id);
-    
-    }
-    else{
-    ins.removeCourse(id);
-    }
+//    for(String id  : ins.getCreatedCourse()){
+//    if(containsCourse(id)!=null){
+//    Correct.add(id);
+//    
+//    }
+//    else{
+//    ins.removeCourse(id);
+//    }
+Iterator<String> i = ins.getCreatedCourse().iterator();
+while(i.hasNext()){
+String id = i.next();
+if(containsCourse(id) == null){
+i.remove();
+
+}
+}
     }
    
     
     }
     
-    }
+    
    
     private static ArrayList <Course> loadCourses(){
       try{
@@ -70,11 +79,12 @@ public class jsonFile {
           JSONArray a = o.getJSONArray("Courses");
           for(int i = 0 ; i < a.length() ; i++){
           JSONObject course = a.getJSONObject(i);
-          String title = course.getString("Title");
-          String dis = course.getString("Description");
-          String InstructorID = course.getString("InstructorID");
+          String title = course.getString("Title").trim();
+          String dis = course.getString("Description").trim();
+          String InstructorID = course.getString("InstructorID").trim();
           Instructor ins = containsInstructor(InstructorID);
           if(ins == null){
+              JOptionPane.showMessageDialog(null, InstructorID);
               JOptionPane.showMessageDialog(null, "FILE ERROR");
               return null;
           }
@@ -90,6 +100,7 @@ public class jsonFile {
           JSONArray larr = course.getJSONArray("Lessons");
           for(int k = 0 ; k <larr.length();k++){
               JSONObject l = larr.getJSONObject(k);
+              String lid = l.getString("IDS");
               String lTitle = l.getString("Title");
               String lContent = l.getString("Content");
               ArrayList<String> resources = new ArrayList<>();
@@ -99,7 +110,7 @@ public class jsonFile {
               resources.add(rarr.getString(j));
           }
           }
-              Lesson ltenp = new Lesson(lTitle, lContent, resources);
+              Lesson ltenp = new Lesson(lid,lTitle, lContent, resources);
               lids.add(ltenp.getLessonID());
             ls.add(ltenp);
               
@@ -136,12 +147,12 @@ public class jsonFile {
               JSONArray stuarr = o.getJSONArray("Students");
               for(int i = 0; i < stuarr.length(); i++){
                   JSONObject s = stuarr.getJSONObject(i);
-                  String id = s.getString("ID");
-                  String name = s.getString("Name");
-                  String email = s.getString("Email");
-                 String password = s.getString("PasswordHash");
+                  String id = s.getString("ID").trim();
+                  String name = s.getString("Name").trim();
+                  String email = s.getString("Email").trim();
+                 String password = s.getString("PasswordHash").trim();
                   byte[] passwordHash = Base64.getDecoder().decode(password);
-                  String saltStr = s.getString("Salt");
+                  String saltStr = s.getString("Salt").trim();
                   byte[] salt = Base64.getDecoder().decode(saltStr);
           
                    ArrayList<StudentProgressInCourse> enrolledCourses = new ArrayList<>();
@@ -151,7 +162,7 @@ public class jsonFile {
                     
                       for(int j = 0; j < earr.length(); j++){
                           JSONObject ClassObj = earr.getJSONObject(j);
-                          String ID = ClassObj.getString("CourseID");
+                          String ID = ClassObj.getString("CourseID").trim();
                           int AllLessons = ClassObj.getInt("AllLessons");
                           JSONObject Done = ClassObj.getJSONObject("LessonsDone");
                           HashMap<String, Boolean> LMap = new HashMap<>();
@@ -170,12 +181,12 @@ public class jsonFile {
               JSONArray insarr = o.getJSONArray("Instructors");
               for(int i = 0; i < insarr.length(); i++){
                   JSONObject ins = insarr.getJSONObject(i);
-                  String id = ins.getString("ID");
-                  String name = ins.getString("Name");
-                  String email = ins.getString("Email");
-                  String password = ins.getString("PasswordHash");
+                  String id = ins.getString("ID").trim();
+                  String name = ins.getString("Name").trim();
+                  String email = ins.getString("Email").trim();
+                  String password = ins.getString("PasswordHash").trim();
                   byte[] passwordHash = Base64.getDecoder().decode(password);
-                  String saltStr = ins.getString("Salt");
+                  String saltStr = ins.getString("Salt").trim();
                   byte[] salt = Base64.getDecoder().decode(saltStr);
                   ArrayList<String> createdCourses = new ArrayList<>();
                   if(ins.has("CreatedCourses")){
@@ -184,7 +195,7 @@ public class jsonFile {
                           createdCourses.add(carr.getString(j));
                       }
                   }
-                  instructors.add(new Instructor(id, name, email, passwordHash, salt ,createdCourses));
+                  instructors.add(new Instructor(name, id, email, passwordHash, salt ,createdCourses));
               }
           }
       }
@@ -216,18 +227,20 @@ public class jsonFile {
         
         }
         
-         public static void CreateCourse (String insID, String title, String description){
+         public static Course  CreateCourse (String insID, String title, String description){
              Instructor ins = containsInstructor(insID);
              if(ins  == null){
              JOptionPane.showMessageDialog(null, "NO INSTRUCTOR");
-             return;
+             return null;
              
              
              }
              Course c = new Course(title,description,ins);
              ins.addCourse(c.getCourseId());
              AllCourses.add(c);
+             
              SAVE();
+             return c;
         
         }
 public static void updatecourse (String insID, String CId , String title, String description){
@@ -260,11 +273,15 @@ public static void updatecourse (String insID, String CId , String title, String
         }
                                           
     public static Instructor containsInstructor(String id){
+        id=id.trim();
+        
     for(Instructor i : instructors){
-    if(i.getId().equals(id)){
+        System.err.println(i.getId().trim());
+    if(i.getId().trim().equals(id)){
     return i;
     }
     }
+    
     return null;
     
     }
@@ -280,6 +297,7 @@ public static void updatecourse (String insID, String CId , String title, String
      }
     
     public static Students containsStudent(String id){
+        id=id.trim();
     for(Students i : Students){
     if(i.getId().equals(id)){
     return i;
@@ -289,6 +307,7 @@ public static void updatecourse (String insID, String CId , String title, String
     
     }
      public static Course containsCourse(String id){
+         id=id.trim();
     for(Course i : AllCourses){
     if(i.getCourseId().equals(id)){
     return i;
@@ -348,6 +367,7 @@ public static void updatecourse (String insID, String CId , String title, String
         
         for(Lesson l : c.getLessons()){
         JSONObject lo = new JSONObject();
+        lo.put("IDS", l.getLessonID());
         lo.put("Title", l.getTitle());
         lo.put("Content", l.getContent());
         lo.put("Resources", new JSONArray(l.getResources()));

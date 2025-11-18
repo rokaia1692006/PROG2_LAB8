@@ -1,18 +1,48 @@
 {
     "Students": [{
-        "Salt": "d1NGRq5W2uHglcbvYws25g==",
-        "Enrolled_Courses": [],
-        "Email": "aaa@gmail.com",
-        "ID": "S_ynOf22fl4r",
-        "PasswordHash": "M+aTbdHHCobsIdh1XBq4QhC3xal+1wCG71DHbZM5vvRUu9dLQ44u01oX2pwrJHrLbRe2xOfewo7HMQgOYjbnWQ==",
-        "Name": "aaa"
+        "Salt": "9o81JPA0VaWH4LArl7Vh9g==",
+        "Enrolled_Courses": [
+            {
+                "CourseID": "C_o9yN46NFC8",
+                "CourseProgress": 50,
+                "AllLessons": 2,
+                "LessonsDone": {
+                    "L_1MDSKlLI1e": false,
+                    "L_ttO8bG2GyX": true
+                }
+            },
+            {
+                "CourseID": "C_IEDYu4thF5",
+                "CourseProgress": 100,
+                "AllLessons": 1,
+                "LessonsDone": {"L_MzDTvUZMJ7": true}
+            }
+        ],
+        "Email": "sss@gmail.com",
+        "ID": "S_I4ROeo5lRa",
+        "PasswordHash": "emPJKg9Yq2o95pYEqU7OlXgiZ+5oDCo4J4szlSYWqHGElA4MaiJ/17OX1Qkot0lZR6SUQc8iAh+R7F9rdALxDg==",
+        "Name": "ssss"
     }],
-    "Instructors": [{
-        "CreatedCourses": [],
-        "Salt": "4YKGhEsFHOd9+rRX+WZLuQ==",
-        "Email": "aa@gmail.com",
-        "ID": "aaa",
-        "PasswordHash": "4Spzv0F4HRIMe5bYuEMUvEDnUcnbCEq46ibEJ4NsSY7vCcnLBFhEKiu3/IDbzBCVoQk/mlpw8X0cXHEogfjOWg==",
-        "Name": "I_rmNOGXFqYL"
-    }]
+    "Instructors": [
+        {
+            "CreatedCourses": ["C_o9yN46NFC8"],
+            "Salt": "yWDkLulH1IhVc2oBi752fg==",
+            "Email": "ddd@gmail.com",
+            "ID": "I_jKkYEJVOLq",
+            "PasswordHash": "PqiBg4Ai1ilV7StV9HLfNWlJvIDhzxXfN/IFxdWWGFMdat2JEYbw9z594rigrtvDapNdNDeshxmreqHERz88Uw==",
+            "Name": "ddd"
+        },
+        {
+            "CreatedCourses": [
+                "C_tHcgaslcfd",
+                "C_IEDYu4thF5",
+                "C_W9NYHsPTQ7"
+            ],
+            "Salt": "BBysFWngChcvpq3LH8o1Pw==",
+            "Email": "abdo@gmail.com",
+            "ID": "I_tERiMntxO9",
+            "PasswordHash": "Mk2lFzvzpdFvWoZCdHu3aSpqullpEZaW40CaHPJeN+MzNNrxXCuYn0qcooD808z6/QNJcSy0M5SMI0f2a+Uwfw==",
+            "Name": "abdo"
+        }
+    ]
 }
