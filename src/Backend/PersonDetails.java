@@ -49,22 +49,7 @@ public abstract void settRandomId();
     }
 
     public void setUserName(String userName) {
-       if (userName == null || userName.trim().isEmpty()) {
-     JOptionPane.showMessageDialog(null, "USERNAME CAN'T BE EMPTY!", "Error", JOptionPane.ERROR_MESSAGE);
-    }
-
-    if (userName.length() < 3) {
-        JOptionPane.showMessageDialog(null, "MUST INCLUDE ATLEAST 3 LETTERS!", "Error", JOptionPane.ERROR_MESSAGE);
-    }
-
-    if (userName.length() > 20) {
-      JOptionPane.showMessageDialog(null, "USERNAME TOO LONG!", "Error", JOptionPane.ERROR_MESSAGE);
-    }
-
-    if (userName.contains(" ")) {
-        JOptionPane.showMessageDialog(null, "CAN'T CONTAIN SPACES", "Error", JOptionPane.ERROR_MESSAGE);
-    }
-
+       
     this.userName = userName;
    
     }

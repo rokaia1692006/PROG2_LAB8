@@ -14,6 +14,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 
+
 /**
  *
  * @author malak
@@ -189,10 +190,21 @@ public class SignupFrame extends javax.swing.JFrame {
         md.update(salt);
         byte[] hashedPassword=md.digest(new String(password).getBytes(StandardCharsets.UTF_8));
         String regex = "^[A-Za-z0-9][A-Za-z0-9+_.-]*[A-Za-z0-9]@[A-Za-z0-9.-]+\\.[A-Za-z]{2,}$";
-        if(password.length==0||username.isEmpty()||email.isEmpty()){
+        if(password.length==0||username.isEmpty()|| username == null || email.isEmpty()){
             JOptionPane.showMessageDialog(this, "Empty field, please enter both email and password.", "Error", JOptionPane.ERROR_MESSAGE);
             return;
         }
+        if(username.length() < 2)
+        {
+            JOptionPane.showMessageDialog(this, "Username too short!! Must be at least 2 characters!", "Error", JOptionPane.ERROR_MESSAGE);
+        }
+        if (username.length() > 20)
+        {
+            JOptionPane.showMessageDialog(this, "Username too long!! Must be less than 20 characters!", "Error", JOptionPane.ERROR_MESSAGE);
+        }
+        if (username.contains(" ")) {
+        JOptionPane.showMessageDialog(null, "CAN'T CONTAIN SPACES", "Error", JOptionPane.ERROR_MESSAGE);
+    }
         if(!email.matches(regex)){
             JOptionPane.showMessageDialog(this, "Invalid email.", "Error", JOptionPane.ERROR_MESSAGE);
             return;
