@@ -6,6 +6,7 @@ package Frontend;
 import Backend.Course;
 import Backend.Instructor;
 import Backend.InstructorCourseManager;
+import Backend.StudentProgressInCourse;
 import java.util.ArrayList;
 import Backend.Students;
 import Backend.jsonFile;
@@ -236,7 +237,24 @@ private Instructor ins;
             jsonFile.DeleteCourse(courseId,ins.getId());
           
             ((DefaultTableModel)courseTable.getModel()).removeRow(selectedRow);
+            ArrayList<Students> students = jsonFile.getAllStudentinCourse(courseId); 
+            for (int i = 0 ; i < students.size() ; i++)
+            {
+            ArrayList<StudentProgressInCourse> enrolledCourses = students.get(i).getEnrolledCourses();
+            
+                for (int j = 0; j < enrolledCourses.size(); j++)
+            {
+            if (enrolledCourses.get(j).getCourseId().equals(courseId))
+            {
+                enrolledCourses.remove(j);
+                break; // done
+            }
+        }
+  
+            }
+    
             actionpanel.setVisible(false);
+            jsonFile.SAVE();
         }
     }
     }//GEN-LAST:event_deleteCourseActionPerformed
