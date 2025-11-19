@@ -4,10 +4,10 @@
         "Enrolled_Courses": [
             {
                 "CourseID": "C_o9yN46NFC8",
-                "CourseProgress": 50,
+                "CourseProgress": 100,
                 "AllLessons": 2,
                 "LessonsDone": {
-                    "L_1MDSKlLI1e": false,
+                    "L_1MDSKlLI1e": true,
                     "L_ttO8bG2GyX": true
                 }
             },
@@ -16,6 +16,16 @@
                 "CourseProgress": 100,
                 "AllLessons": 1,
                 "LessonsDone": {"L_MzDTvUZMJ7": true}
+            },
+            {
+                "CourseID": "C_tHcgaslcfd",
+                "CourseProgress": 0,
+                "AllLessons": 3,
+                "LessonsDone": {
+                    "L_YnmO3Awtxf": false,
+                    "L_vdiATW6qFt": false,
+                    "L_hag6M9yexu": false
+                }
             }
         ],
         "Email": "sss@gmail.com",

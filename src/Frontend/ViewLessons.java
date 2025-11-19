@@ -68,6 +68,7 @@ public class ViewLessons extends javax.swing.JPanel {
        DefaultListModel<String> listmodel = new DefaultListModel<>();
            for (int i = 0; i < lessons.size(); i++) {
            Lesson l = lessons.get(i);
+           studetProgressInCourse.getLessonsDone();
            listmodel.addElement(l.getTitle());
            }
             lessonsList.setModel(listmodel);
