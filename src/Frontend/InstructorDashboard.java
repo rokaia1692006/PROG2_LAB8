@@ -87,7 +87,7 @@ private Instructor ins;
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        CreateCourse.setText("create course");
+        CreateCourse.setText("Create course");
         CreateCourse.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 CreateCourseActionPerformed(evt);
@@ -118,7 +118,7 @@ private Instructor ins;
                 {null, null, null}
             },
             new String [] {
-                "title", "id", "describtion"
+                "Title", "ID", "Description"
             }
         ));
         jScrollPane1.setViewportView(courseTable);
@@ -134,21 +134,21 @@ private Instructor ins;
             .addGap(0, 25, Short.MAX_VALUE)
         );
 
-        editCourse.setText("edit course");
+        editCourse.setText("Edit course");
         editCourse.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 editCourseActionPerformed(evt);
             }
         });
 
-        deleteCourse.setText("delete course");
+        deleteCourse.setText("Delete course");
         deleteCourse.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 deleteCourseActionPerformed(evt);
             }
         });
 
-        viewStudent.setText("view students");
+        viewStudent.setText("View students");
         viewStudent.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 viewStudentActionPerformed(evt);
