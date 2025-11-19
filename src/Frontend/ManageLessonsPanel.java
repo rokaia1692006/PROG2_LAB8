@@ -146,40 +146,26 @@ public class ManageLessonsPanel extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void addLessonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addLessonActionPerformed
-        int selectedRow = lessonsTable.getSelectedRow();
-        if (selectedRow != -1) {
-            String lessonId = lessonsTable.getValueAt(selectedRow, 1).toString();
-            String currentTitle = lessonsTable.getValueAt(selectedRow, 0).toString();
-            String currentDesc = lessonsTable.getValueAt(selectedRow, 2).toString();
-
-            String newTitle = JOptionPane.showInputDialog(this, "Edit Title:", currentTitle);
-            String newDesc = JOptionPane.showInputDialog(this, "Edit Description:", currentDesc);
-
-            if (newTitle != null && newDesc != null) {
-                instructorManager.addLesson(lessonId, newTitle, courseId, resourcesOptional, ins);
-                lessonsTable.setValueAt(newTitle, selectedRow, 0);
-                lessonsTable.setValueAt(newDesc, selectedRow, 2);
-            }
-        }
+        
     }//GEN-LAST:event_addLessonActionPerformed
 
     private void editLessonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editLessonActionPerformed
 
-        int selectedRow = lessonsTable.getSelectedRow();
-        if (selectedRow != -1) {
-            String lessonId = lessonsTable.getValueAt(selectedRow, 1).toString();
-            String currentTitle = lessonsTable.getValueAt(selectedRow, 0).toString();
-            String currentContent = lessonsTable.getValueAt(selectedRow, 2).toString();
-
-            String newTitle = JOptionPane.showInputDialog(this, "Edit Title:", currentTitle);
-            String newContent = JOptionPane.showInputDialog(this, "Edit Content:", currentContent);
-
-            if (newTitle != null && newContent != null) {
-                instructorManager.editLesson(courseId, lessonId, newTitle, newContent, ins);
-                lessonsTable.setValueAt(newTitle, selectedRow, 0);
-                lessonsTable.setValueAt(newContent, selectedRow, 2);
-            }
-        }
+//        int selectedRow = lessonsTable.getSelectedRow();
+//        if (selectedRow != -1) {
+//            String lessonId = lessonsTable.getValueAt(selectedRow, 1).toString();
+//            String currentTitle = lessonsTable.getValueAt(selectedRow, 0).toString();
+//            String currentContent = lessonsTable.getValueAt(selectedRow, 2).toString();
+//
+//            String newTitle = JOptionPane.showInputDialog(this, "Edit Title:", currentTitle);
+//            String newContent = JOptionPane.showInputDialog(this, "Edit Content:", currentContent);
+//
+//            if (newTitle != null && newContent != null) {
+//                instructorManager.editLesson(courseId, lessonId, newTitle, newContent, ins);
+//                lessonsTable.setValueAt(newTitle, selectedRow, 0);
+//                lessonsTable.setValueAt(newContent, selectedRow, 2);
+//            }
+//        }
     }//GEN-LAST:event_editLessonActionPerformed
 
     private void deleteLessonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deleteLessonActionPerformed
@@ -194,35 +180,10 @@ public class ManageLessonsPanel extends javax.swing.JPanel {
                 instructorManager.deleteLesson(courseId, lessonId, ins);
 
                 ((DefaultTableModel)lessonsTable.getModel()).removeRow(selectedRow);
-//                ArrayList<Students> students = jsonFile.getAllStudentinCourse(courseId);
-//                for (int i = 0 ; i < students.size() ; i++)
-//                {
-//                    ArrayList<StudentProgressInCourse> enrolledCourses = students.get(i).getEnrolledCourses();
-//
-//                    for (int j = 0; j < enrolledCourses.size(); j++)
-//                    {
-//                        if (enrolledCourses.get(j).getCourseId().equals(courseId))
-//                        {
-//                            enrolledCourses.remove(j);
-//                            break; // done
-//                        }
-//                    }
-//
-//                }
-
                 actionpanel.setVisible(false);
                 jsonFile.SAVE();
             }
         }
-//        int selectedRow = lessonsTable.getSelectedRow();
-//        if (selectedRow != -1) {
-//            String courseId = lessonsTable.getValueAt(selectedRow, 1).toString();
-//            ArrayList<Students> students = jsonFile.getAllStudentinCourse(courseId);
-//
-//            StudentListDialog dlg = new StudentListDialog(this, true);
-//            dlg.setStudents(students);
-//            dlg.setVisible(true);
-//        }
     }//GEN-LAST:event_deleteLessonActionPerformed
 
 
