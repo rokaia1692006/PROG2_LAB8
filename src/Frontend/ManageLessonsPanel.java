@@ -4,16 +4,31 @@
  */
 package Frontend;
 
+import Backend.Instructor;
+import Backend.InstructorCourseManager;
+import Backend.StudentProgressInCourse;
+import Backend.Students;
+import Backend.jsonFile;
+import java.util.ArrayList;
+import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
+
 /**
  *
  * @author malak
  */
 public class ManageLessonsPanel extends javax.swing.JPanel {
-
+    private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(InstructorDashboard.class.getName());
+    private Instructor ins;
+    private InstructorCourseManager instructorManager;
+    private String courseId;
     /**
      * Creates new form ManageLessonsPanel
      */
-    public ManageLessonsPanel() {
+    public ManageLessonsPanel(String courseId, Instructor ins, jsonFile db) {
+        this.courseId=courseId;
+        this.ins=ins;
+        this.instructorManager=new InstructorCourseManager(db);
         initComponents();
     }
 
@@ -27,14 +42,14 @@ public class ManageLessonsPanel extends javax.swing.JPanel {
     private void initComponents() {
 
         jScrollPane1 = new javax.swing.JScrollPane();
-        courseTable = new javax.swing.JTable();
+        lessonsTable = new javax.swing.JTable();
         actionpanel = new javax.swing.JPanel();
         addLesson = new javax.swing.JButton();
         editLesson = new javax.swing.JButton();
         deleteLesson = new javax.swing.JButton();
         jPanel1 = new javax.swing.JPanel();
 
-        courseTable.setModel(new javax.swing.table.DefaultTableModel(
+        lessonsTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null},
                 {null, null, null},
@@ -42,10 +57,10 @@ public class ManageLessonsPanel extends javax.swing.JPanel {
                 {null, null, null}
             },
             new String [] {
-                "Title", "ID", "Description"
+                "Title", "ID", "Content"
             }
         ));
-        jScrollPane1.setViewportView(courseTable);
+        jScrollPane1.setViewportView(lessonsTable);
 
         javax.swing.GroupLayout actionpanelLayout = new javax.swing.GroupLayout(actionpanel);
         actionpanel.setLayout(actionpanelLayout);
@@ -131,62 +146,77 @@ public class ManageLessonsPanel extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void addLessonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addLessonActionPerformed
-        int selectedRow = courseTable.getSelectedRow();
+        int selectedRow = lessonsTable.getSelectedRow();
         if (selectedRow != -1) {
-            String courseId = courseTable.getValueAt(selectedRow, 1).toString();
-            String currentTitle = courseTable.getValueAt(selectedRow, 0).toString();
-            String currentDesc = courseTable.getValueAt(selectedRow, 2).toString();
+            String lessonId = lessonsTable.getValueAt(selectedRow, 1).toString();
+            String currentTitle = lessonsTable.getValueAt(selectedRow, 0).toString();
+            String currentDesc = lessonsTable.getValueAt(selectedRow, 2).toString();
 
             String newTitle = JOptionPane.showInputDialog(this, "Edit Title:", currentTitle);
             String newDesc = JOptionPane.showInputDialog(this, "Edit Description:", currentDesc);
 
             if (newTitle != null && newDesc != null) {
-                jsonFile.updatecourse(ins.getId(), courseId, newTitle, newDesc);
-                courseTable.setValueAt(newTitle, selectedRow, 0);
-                courseTable.setValueAt(newDesc, selectedRow, 2);
+                instructorManager.addLesson(lessonId, newTitle, courseId, resourcesOptional, ins);
+                lessonsTable.setValueAt(newTitle, selectedRow, 0);
+                lessonsTable.setValueAt(newDesc, selectedRow, 2);
             }
         }
     }//GEN-LAST:event_addLessonActionPerformed
 
     private void editLessonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editLessonActionPerformed
-        int selectedRow = courseTable.getSelectedRow();
+//        int selectedRow = courseTable.getSelectedRow();
+//        if (selectedRow != -1) {
+//            String courseId = courseTable.getValueAt(selectedRow, 1).toString(); // ID column
+//            int confirm = JOptionPane.showConfirmDialog(this,
+//                "Are you sure you want to delete this course?",
+//                "Confirm Delete",
+//                JOptionPane.YES_NO_OPTION);
+//            if (confirm == JOptionPane.YES_OPTION) {
+//                jsonFile.DeleteCourse(courseId,ins.getId());
+//
+//                ((DefaultTableModel)courseTable.getModel()).removeRow(selectedRow);
+//                ArrayList<Students> students = jsonFile.getAllStudentinCourse(courseId);
+//                for (int i = 0 ; i < students.size() ; i++)
+//                {
+//                    ArrayList<StudentProgressInCourse> enrolledCourses = students.get(i).getEnrolledCourses();
+//
+//                    for (int j = 0; j < enrolledCourses.size(); j++)
+//                    {
+//                        if (enrolledCourses.get(j).getCourseId().equals(courseId))
+//                        {
+//                            enrolledCourses.remove(j);
+//                            break; // done
+//                        }
+//                    }
+//
+//                }
+//
+//                actionpanel.setVisible(false);
+//                jsonFile.SAVE();
+//            }
+//        }
+        int selectedRow = lessonsTable.getSelectedRow();
         if (selectedRow != -1) {
-            String courseId = courseTable.getValueAt(selectedRow, 1).toString(); // ID column
-            int confirm = JOptionPane.showConfirmDialog(this,
-                "Are you sure you want to delete this course?",
-                "Confirm Delete",
-                JOptionPane.YES_NO_OPTION);
-            if (confirm == JOptionPane.YES_OPTION) {
-                jsonFile.DeleteCourse(courseId,ins.getId());
+            String lessonId = lessonsTable.getValueAt(selectedRow, 1).toString();
+            String currentTitle = lessonsTable.getValueAt(selectedRow, 0).toString();
+            String currentContent = lessonsTable.getValueAt(selectedRow, 2).toString();
 
-                ((DefaultTableModel)courseTable.getModel()).removeRow(selectedRow);
-                ArrayList<Students> students = jsonFile.getAllStudentinCourse(courseId);
-                for (int i = 0 ; i < students.size() ; i++)
-                {
-                    ArrayList<StudentProgressInCourse> enrolledCourses = students.get(i).getEnrolledCourses();
+            String newTitle = JOptionPane.showInputDialog(this, "Edit Title:", currentTitle);
+            String newContent = JOptionPane.showInputDialog(this, "Edit Content:", currentContent);
 
-                    for (int j = 0; j < enrolledCourses.size(); j++)
-                    {
-                        if (enrolledCourses.get(j).getCourseId().equals(courseId))
-                        {
-                            enrolledCourses.remove(j);
-                            break; // done
-                        }
-                    }
-
-                }
-
-                actionpanel.setVisible(false);
-                jsonFile.SAVE();
+            if (newTitle != null && newContent != null) {
+                instructorManager.editLesson(courseId, lessonId, newTitle, newContent, ins);
+                lessonsTable.setValueAt(newTitle, selectedRow, 0);
+                lessonsTable.setValueAt(newContent, selectedRow, 2);
             }
         }
     }//GEN-LAST:event_editLessonActionPerformed
 
     private void deleteLessonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deleteLessonActionPerformed
 
-        int selectedRow = courseTable.getSelectedRow();
+        int selectedRow = lessonsTable.getSelectedRow();
         if (selectedRow != -1) {
-            String courseId = courseTable.getValueAt(selectedRow, 1).toString();
+            String courseId = lessonsTable.getValueAt(selectedRow, 1).toString();
             ArrayList<Students> students = jsonFile.getAllStudentinCourse(courseId);
 
             StudentListDialog dlg = new StudentListDialog(this, true);
@@ -199,10 +229,10 @@ public class ManageLessonsPanel extends javax.swing.JPanel {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel actionpanel;
     private javax.swing.JButton addLesson;
-    private javax.swing.JTable courseTable;
     private javax.swing.JButton deleteLesson;
     private javax.swing.JButton editLesson;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JTable lessonsTable;
     // End of variables declaration//GEN-END:variables
 }
