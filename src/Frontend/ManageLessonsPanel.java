@@ -164,37 +164,7 @@ public class ManageLessonsPanel extends javax.swing.JPanel {
     }//GEN-LAST:event_addLessonActionPerformed
 
     private void editLessonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editLessonActionPerformed
-//        int selectedRow = courseTable.getSelectedRow();
-//        if (selectedRow != -1) {
-//            String courseId = courseTable.getValueAt(selectedRow, 1).toString(); // ID column
-//            int confirm = JOptionPane.showConfirmDialog(this,
-//                "Are you sure you want to delete this course?",
-//                "Confirm Delete",
-//                JOptionPane.YES_NO_OPTION);
-//            if (confirm == JOptionPane.YES_OPTION) {
-//                jsonFile.DeleteCourse(courseId,ins.getId());
-//
-//                ((DefaultTableModel)courseTable.getModel()).removeRow(selectedRow);
-//                ArrayList<Students> students = jsonFile.getAllStudentinCourse(courseId);
-//                for (int i = 0 ; i < students.size() ; i++)
-//                {
-//                    ArrayList<StudentProgressInCourse> enrolledCourses = students.get(i).getEnrolledCourses();
-//
-//                    for (int j = 0; j < enrolledCourses.size(); j++)
-//                    {
-//                        if (enrolledCourses.get(j).getCourseId().equals(courseId))
-//                        {
-//                            enrolledCourses.remove(j);
-//                            break; // done
-//                        }
-//                    }
-//
-//                }
-//
-//                actionpanel.setVisible(false);
-//                jsonFile.SAVE();
-//            }
-//        }
+
         int selectedRow = lessonsTable.getSelectedRow();
         if (selectedRow != -1) {
             String lessonId = lessonsTable.getValueAt(selectedRow, 1).toString();
@@ -213,16 +183,46 @@ public class ManageLessonsPanel extends javax.swing.JPanel {
     }//GEN-LAST:event_editLessonActionPerformed
 
     private void deleteLessonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deleteLessonActionPerformed
-
         int selectedRow = lessonsTable.getSelectedRow();
         if (selectedRow != -1) {
-            String courseId = lessonsTable.getValueAt(selectedRow, 1).toString();
-            ArrayList<Students> students = jsonFile.getAllStudentinCourse(courseId);
+            String lessonId = lessonsTable.getValueAt(selectedRow, 1).toString(); // ID column
+            int confirm = JOptionPane.showConfirmDialog(this,
+                "Are you sure you want to delete this lesson?",
+                "Confirm Delete",
+                JOptionPane.YES_NO_OPTION);
+            if (confirm == JOptionPane.YES_OPTION) {
+                instructorManager.deleteLesson(courseId, lessonId, ins);
 
-            StudentListDialog dlg = new StudentListDialog(this, true);
-            dlg.setStudents(students);
-            dlg.setVisible(true);
+                ((DefaultTableModel)lessonsTable.getModel()).removeRow(selectedRow);
+//                ArrayList<Students> students = jsonFile.getAllStudentinCourse(courseId);
+//                for (int i = 0 ; i < students.size() ; i++)
+//                {
+//                    ArrayList<StudentProgressInCourse> enrolledCourses = students.get(i).getEnrolledCourses();
+//
+//                    for (int j = 0; j < enrolledCourses.size(); j++)
+//                    {
+//                        if (enrolledCourses.get(j).getCourseId().equals(courseId))
+//                        {
+//                            enrolledCourses.remove(j);
+//                            break; // done
+//                        }
+//                    }
+//
+//                }
+
+                actionpanel.setVisible(false);
+                jsonFile.SAVE();
+            }
         }
+//        int selectedRow = lessonsTable.getSelectedRow();
+//        if (selectedRow != -1) {
+//            String courseId = lessonsTable.getValueAt(selectedRow, 1).toString();
+//            ArrayList<Students> students = jsonFile.getAllStudentinCourse(courseId);
+//
+//            StudentListDialog dlg = new StudentListDialog(this, true);
+//            dlg.setStudents(students);
+//            dlg.setVisible(true);
+//        }
     }//GEN-LAST:event_deleteLessonActionPerformed
 
 
