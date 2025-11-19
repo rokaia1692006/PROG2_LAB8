@@ -42,7 +42,7 @@ public void markAsDone(String LessonID){
         lessonsDone.put(LessonID, Boolean.TRUE);
         updateAll();
     } else {
-        System.out.println("YE5REBET EL HABALLLLLLLL YA RABBB");
+        System.out.println("Couldn't mark as done");
     }
 }
 public void addlesson(String lessonId,String courseID){

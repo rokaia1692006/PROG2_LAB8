@@ -184,7 +184,7 @@ public class ViewLessons extends javax.swing.JPanel {
             float prog =  currentStudent.UpdateLesson(course.getCourseId(),lesson.getLessonID()); //n3mlha mark enaha done
             
             DefaultListModel<String> listModel = (DefaultListModel<String>) lessonsList.getModel();
-            listModel.set(index, lesson.getTitle() + " ✅"); //nktb gmbha enaha done
+            listModel.set(index, lesson.getTitle() + " DONE!!"); //nktb gmbha enaha done
             
            // float prog = currentStudent.UpdateLesson(TOOL_TIP_TEXT_KEY, TOOL_TIP_TEXT_KEY);
             int progress = (int) (prog);
