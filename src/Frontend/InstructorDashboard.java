@@ -26,6 +26,7 @@ public class InstructorDashboard extends javax.swing.JFrame {
     
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(InstructorDashboard.class.getName());
 private Instructor ins;
+jsonFile coursesDb=new jsonFile();
     /**
      * Creates new form InstructorDashboard
      */
@@ -83,11 +84,11 @@ private Instructor ins;
         editCourse = new javax.swing.JButton();
         deleteCourse = new javax.swing.JButton();
         viewStudent = new javax.swing.JButton();
-        jButton1 = new javax.swing.JButton();
+        manageLessonsBtn = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        CreateCourse.setText("create course");
+        CreateCourse.setText("Create course");
         CreateCourse.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 CreateCourseActionPerformed(evt);
@@ -118,7 +119,7 @@ private Instructor ins;
                 {null, null, null}
             },
             new String [] {
-                "title", "id", "describtion"
+                "Title", "ID", "Description"
             }
         ));
         jScrollPane1.setViewportView(courseTable);
@@ -134,31 +135,31 @@ private Instructor ins;
             .addGap(0, 25, Short.MAX_VALUE)
         );
 
-        editCourse.setText("edit course");
+        editCourse.setText("Edit course");
         editCourse.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 editCourseActionPerformed(evt);
             }
         });
 
-        deleteCourse.setText("delete course");
+        deleteCourse.setText("Delete course");
         deleteCourse.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 deleteCourseActionPerformed(evt);
             }
         });
 
-        viewStudent.setText("view students");
+        viewStudent.setText("View students");
         viewStudent.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 viewStudentActionPerformed(evt);
             }
         });
 
-        jButton1.setText("Manage lessons");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        manageLessonsBtn.setText("Manage lessons");
+        manageLessonsBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                manageLessonsBtnActionPerformed(evt);
             }
         });
 
@@ -183,7 +184,7 @@ private Instructor ins;
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(viewStudent, javax.swing.GroupLayout.PREFERRED_SIZE, 171, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 134, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(manageLessonsBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 134, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -194,7 +195,7 @@ private Instructor ins;
                     .addComponent(editCourse, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(deleteCourse, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(viewStudent)
-                    .addComponent(jButton1))
+                    .addComponent(manageLessonsBtn))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -283,14 +284,18 @@ private Instructor ins;
     
     }//GEN-LAST:event_CreateCourseActionPerformed
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        
-        JPanel newPanel = new JPanel();
-        newPanel.add(new JLabel("View lessons"));
-        actionpanel.setLayout(new BorderLayout());
-        actionpanel.add(newPanel, BorderLayout.CENTER);
-        
-    }//GEN-LAST:event_jButton1ActionPerformed
+    private void manageLessonsBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_manageLessonsBtnActionPerformed
+        int selectedRow=courseTable.getSelectedRow();
+        if(selectedRow!=-1){
+            String courseId=courseTable.getValueAt(selectedRow, 1).toString();
+            JPanel newPanel = new ManageLessonsPanel(courseId,ins,coursesDb);
+            actionpanel.setLayout(new BorderLayout());
+            actionpanel.add(newPanel, BorderLayout.CENTER);
+        }
+//        newPanel.add(new JLabel("View lessons"));
+        else
+            manageLessonsBtn.setEnabled(false);
+    }//GEN-LAST:event_manageLessonsBtnActionPerformed
 
     /**
      * @param args the command line arguments
@@ -323,9 +328,9 @@ private Instructor ins;
     private javax.swing.JTable courseTable;
     private javax.swing.JButton deleteCourse;
     private javax.swing.JButton editCourse;
-    private javax.swing.JButton jButton1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JButton manageLessonsBtn;
     private javax.swing.JButton viewStudent;
     // End of variables declaration//GEN-END:variables
 }
