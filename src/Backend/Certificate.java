@@ -4,6 +4,7 @@
  */
 package Backend;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import javax.swing.JOptionPane;
 
@@ -16,16 +17,17 @@ public class Certificate {
     String studentId;
     String courseId;
     int certificateId;
-    //Date issueDate;
+    LocalDate issuedate;
 
-    public Certificate(String studentId, String courseId, int certificateId) {
+    public Certificate(String studentId, String courseId) {
         this.studentId = studentId;
-        this.courseId = courseId;
+        //generate the certificate random INTEGER id
         this.certificateId = certificateId;
-        //and the date to be added
+         this.issuedate = LocalDate.now(); //mesh hantlobo mn user, el certificate btt3ml hsb el date bt3 enhrda
+         //3yzyn n save fel json
     }
     
-    public boolean allQuizzesPassed(Students s)
+    public boolean allQuizzesPassed(Students s) //mtkns hena, han7otaha fel quiz class, bs hena 3shan a check fe certificate aslan wala la 3shan front
     {
         ArrayList<Course> courses = jsonFile.getAllCourses();
        for(Course c : courses)
@@ -47,6 +49,7 @@ public class Certificate {
        return true; //kolo passed!!
         
     }
+    
     
     
     

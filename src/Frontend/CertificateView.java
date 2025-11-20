@@ -4,6 +4,9 @@
  */
 package Frontend;
 import Backend.*;
+import java.util.ArrayList;
+import javax.swing.DefaultListModel;
+import javax.swing.JOptionPane;
 
 
 /**
@@ -15,9 +18,42 @@ public class CertificateView extends javax.swing.JPanel {
     /**
      * Creates new form CertificateView
      */
-    public CertificateView() {
+    public CertificateView(Students currentStudent) {
         initComponents();
-    }
+       
+        
+        
+        DefaultListModel<String> model = new DefaultListModel<>();
+        for (StudentProgressInCourse c : currentStudent.getEnrolledCourses()) {
+            
+            model.addElement(c.getCourseId());
+        }
+        listOfCertificates.setModel(model);
+        
+        
+        listOfCertificates.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                 if (evt.getClickCount() == 2) {
+                   int index = listOfCertificates.locationToIndex(evt.getPoint());
+                   String courseID = listOfCertificates.getModel().getElementAt(index);
+           
+                   
+                   ArrayList < Certificate >  certificates = jsonFile.getAllCertificates(); //assumption enaha m3ana
+                   //hanlef w ndwr 3ala el certificate bt3t el course da bt3t el student da
+                   
+                   
+                   CertificateReport dialog = new CertificateReport(null, true);
+                   dialog.setLocationRelativeTo(null);
+                   dialog.setVisible(true);
+                  }
+                }
+              });
+        
+        
+        
+        }
+    
+    
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -91,7 +127,9 @@ public class CertificateView extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        // TODO add your handling code here:
+        
+        //to download
+        
     }//GEN-LAST:event_jButton1ActionPerformed
 
 
