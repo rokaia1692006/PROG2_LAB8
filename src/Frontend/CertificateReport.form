@@ -25,25 +25,95 @@
       <Group type="103" groupAlignment="0" attributes="0">
           <Group type="102" alignment="0" attributes="0">
               <EmptySpace min="-2" pref="36" max="-2" attributes="0"/>
-              <Component id="jLabel1" min="-2" pref="260" max="-2" attributes="0"/>
-              <EmptySpace pref="369" max="32767" attributes="0"/>
+              <Group type="103" groupAlignment="0" attributes="0">
+                  <Group type="103" alignment="0" groupAlignment="1" max="-2" attributes="0">
+                      <Component id="studentIdLABEL" alignment="0" max="32767" attributes="0"/>
+                      <Component id="courseIdLABEL" alignment="0" max="32767" attributes="0"/>
+                  </Group>
+                  <Component id="issueDateLABEL" alignment="0" min="-2" pref="68" max="-2" attributes="0"/>
+                  <Component id="certificateIdLABEL" alignment="0" min="-2" pref="83" max="-2" attributes="0"/>
+              </Group>
+              <EmptySpace min="-2" pref="35" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="0" attributes="0">
+                  <Component id="courseIdTXT" min="-2" pref="215" max="-2" attributes="0"/>
+                  <Component id="studentIdTXT" min="-2" pref="197" max="-2" attributes="0"/>
+                  <Component id="issueDateTXT" alignment="0" min="-2" pref="187" max="-2" attributes="0"/>
+                  <Component id="certificateIdTXT" min="-2" pref="164" max="-2" attributes="0"/>
+              </Group>
+              <EmptySpace pref="296" max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
     <DimensionLayout dim="1">
       <Group type="103" groupAlignment="0" attributes="0">
           <Group type="102" alignment="0" attributes="0">
-              <EmptySpace min="-2" pref="24" max="-2" attributes="0"/>
-              <Component id="jLabel1" min="-2" pref="41" max="-2" attributes="0"/>
-              <EmptySpace pref="404" max="32767" attributes="0"/>
+              <EmptySpace min="-2" pref="44" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                  <Component id="courseIdLABEL" min="-2" pref="41" max="-2" attributes="0"/>
+                  <Group type="102" attributes="0">
+                      <EmptySpace min="13" pref="13" max="-2" attributes="0"/>
+                      <Component id="courseIdTXT" max="32767" attributes="0"/>
+                  </Group>
+              </Group>
+              <EmptySpace type="unrelated" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="3" attributes="0">
+                  <Component id="studentIdLABEL" alignment="3" min="-2" pref="45" max="-2" attributes="0"/>
+                  <Component id="studentIdTXT" alignment="3" min="-2" pref="45" max="-2" attributes="0"/>
+              </Group>
+              <EmptySpace max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="3" attributes="0">
+                  <Component id="issueDateLABEL" alignment="3" min="-2" pref="35" max="-2" attributes="0"/>
+                  <Component id="issueDateTXT" alignment="3" min="-2" pref="35" max="-2" attributes="0"/>
+              </Group>
+              <EmptySpace type="separate" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="3" attributes="0">
+                  <Component id="certificateIdLABEL" alignment="3" min="-2" pref="31" max="-2" attributes="0"/>
+                  <Component id="certificateIdTXT" alignment="3" min="-2" pref="31" max="-2" attributes="0"/>
+              </Group>
+              <EmptySpace pref="237" max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
   </Layout>
   <SubComponents>
-    <Component class="javax.swing.JLabel" name="jLabel1">
+    <Component class="javax.swing.JLabel" name="courseIdLABEL">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Course Name"/>
+        <Property name="text" type="java.lang.String" value="Course ID:"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JLabel" name="studentIdLABEL">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Student ID"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JLabel" name="issueDateLABEL">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Issue Date:"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JLabel" name="certificateIdLABEL">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Certificate ID: "/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JLabel" name="courseIdTXT">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="jLabel4"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JLabel" name="studentIdTXT">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="jLabel5"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JLabel" name="issueDateTXT">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="jLabel6"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JLabel" name="certificateIdTXT">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="jLabel7"/>
       </Properties>
     </Component>
   </SubComponents>

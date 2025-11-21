@@ -17,7 +17,7 @@ public class StudentProgressInCourse {
     private int AllLessonsInCourse;
     private HashMap<String ,Boolean > lessonsDone;
     private float overallProgress;
-    private ArrayList<Certificate> certificates;
+    
 
     public StudentProgressInCourse(String CourseId, int AllLessonsInCourse, HashMap<String, Boolean>lessonsDone, float overallProgress) {
         this.CourseId = CourseId;
@@ -100,14 +100,11 @@ private void updateAll(){
         if(allQuizzesPassed(s, courseId))
         {
             Certificate certificate = new Certificate(s.getId(),courseId);
-            certificates.add(certificate);
-            
+            s.certificatesEarned.add(certificate);
+         
         }
     }
 
-    public ArrayList<Certificate> getCertificates() {
-        return certificates;
-    }
    
     public float getOverallProgress() {
         return overallProgress;

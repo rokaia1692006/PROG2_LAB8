@@ -36,15 +36,27 @@ public class CertificateView extends javax.swing.JPanel {
                  if (evt.getClickCount() == 2) {
                    int index = listOfCertificates.locationToIndex(evt.getPoint());
                    String courseID = listOfCertificates.getModel().getElementAt(index);
-           
+  
+                   ArrayList < Certificate >  certificates = currentStudent.getCertificatesEarned();
                    
-                   ArrayList < Certificate >  certificates = jsonFile.getAllCertificates(); //assumption enaha m3ana
-                   //hanlef w ndwr 3ala el certificate bt3t el course da bt3t el student da
-                   
-                   
-                   CertificateReport dialog = new CertificateReport(null, true);
+                   StudentProgressInCourse selectedCourse = null;
+                     for (StudentProgressInCourse c : currentStudent.getEnrolledCourses()) {
+                       if (c.getCourseId().equals(courseID)) {
+                          selectedCourse = c;
+                          break;
+                          }
+                      }
+                   if(selectedCourse!=null)
+                {
+                    
+                   CertificateReport dialog = new CertificateReport(null, true,currentStudent,selectedCourse);
                    dialog.setLocationRelativeTo(null);
                    dialog.setVisible(true);
+                }
+                   else
+                {
+                    JOptionPane.showMessageDialog(null, "ERROR!!");
+                }
                   }
                 }
               });

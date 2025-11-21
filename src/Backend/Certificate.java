@@ -16,42 +16,22 @@ public class Certificate {
     
     String studentId;
     String courseId;
-    int certificateId;
+    String certificateId;
     LocalDate issuedate;
 
     public Certificate(String studentId, String courseId) {
         this.studentId = studentId;
+        this.courseId = courseId;
         //generate the certificate random INTEGER id
-        this.certificateId = certificateId;
          this.issuedate = LocalDate.now(); //mesh hantlobo mn user, el certificate btt3ml hsb el date bt3 enhrda
          //3yzyn n save fel json
     }
-    
-    public boolean allQuizzesPassed(Students s) //mtkns hena, han7otaha fel quiz class, bs hena 3shan a check fe certificate aslan wala la 3shan front
-    {
-        ArrayList<Course> courses = jsonFile.getAllCourses();
-       for(Course c : courses)
-       {
-           if(c.getCourseId().equals(courseId))
-           {
-               ArrayList<Quizzes> quizzes = jsonFile.getAllQuizzes(); //han-assume en el function de m3ana
-               break;
-           }
-       }
-       for ( Quiz q : quizzes)
-       {
-           if(!q.isPassed())
-           {
-              JOptionPane.showMessageDialog(null,"One or more quizzes is not passed yet, cannot create certificate!"); //lw l2ena quiz mesh passed, cannot create
-           return false;
-           }
-       }
-       return true; //kolo passed!!
-        
+
+    public LocalDate getIssuedate() {
+        return issuedate;
     }
     
-    
-    
+   
     
     public void setStudentId(String studentId) {
         this.studentId = studentId;
@@ -61,7 +41,7 @@ public class Certificate {
         this.courseId = courseId;
     }
 
-    public void setCertificateId(int certificateId) {
+    public void setCertificateId(String certificateId) {
         this.certificateId = certificateId;
     }
 
@@ -73,7 +53,7 @@ public class Certificate {
         return courseId;
     }
 
-    public int getCertificateId() {
+    public String getCertificateId() {
         return certificateId;
     }
     

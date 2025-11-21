@@ -17,6 +17,7 @@ public class Students extends PersonDetails{
   
     private final static String role = "Student";
     private ArrayList<StudentProgressInCourse> enrolledCourses;
+    protected ArrayList<Certificate> certificatesEarned;
     
   
     
@@ -25,6 +26,7 @@ public class Students extends PersonDetails{
         super( email, passwordHash, salt,username);
         
         this.enrolledCourses  = new ArrayList<>();
+        this.certificatesEarned = new ArrayList<>();
         
     }
     public Students(String userId, String username, String email, byte[] passwordHash,byte[]salt,ArrayList<StudentProgressInCourse>enrolledData) {
@@ -129,6 +131,10 @@ return false;
 }
     public ArrayList<StudentProgressInCourse> getEnrolledCourses() {
         return enrolledCourses;
+    }
+
+    public ArrayList<Certificate> getCertificatesEarned() {
+        return certificatesEarned;
     }
 
     

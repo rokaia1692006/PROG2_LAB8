@@ -77,6 +77,8 @@ public class Course {
     students.add(s.getId());
     }
     }
+    
+   
 
     public String getTitle() {
         return title;
