@@ -23,7 +23,7 @@ import org.json.JSONArray;
  *
  * @author it
  */
-public class jsonFile {
+public abstract class jsonFile {
     private static ArrayList<Course> AllCourses;
     private static ArrayList<Students> Students;
     private static ArrayList<Instructor> instructors;
