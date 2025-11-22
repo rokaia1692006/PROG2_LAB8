@@ -4,53 +4,43 @@
  */
 package Backend;
 
+import java.util.ArrayList;
+
 /**
  *
  * @author malak
  */
 public class StudentQuizAttempt {
-    private String studentId;
-    private String lessonId;
+    private final String studentId;
+    private final String lessonId;
     private int score;
     private boolean passed;
-
-    public StudentQuizAttempt(String studentId, String lessonId, int score, boolean passed) {
+    private ArrayList<Integer> answers;
+    private Quiz quiz;
+    
+    public StudentQuizAttempt(String studentId, String lessonId, Quiz quiz, ArrayList<Integer> answers) {
         this.studentId = studentId;
         this.lessonId = lessonId;
-        this.score = score;
-        this.passed = passed;
+        this.quiz = quiz;
+        this.answers = answers;
+        this.score = quiz.calculateScore(answers);
+        this.passed = quiz.hasPassed(this.score);
     }
 
     public String getStudentId() {
         return studentId;
     }
 
-    public void setStudentId(String studentId) {
-        this.studentId = studentId;
-    }
-
     public String getLessonId() {
         return lessonId;
-    }
-
-    public void setLessonId(String lessonId) {
-        this.lessonId = lessonId;
     }
 
     public int getScore() {
         return score;
     }
 
-    public void setScore(int score) {
-        this.score = score;
-    }
-
     public boolean isPassed() {
         return passed;
-    }
-
-    public void setPassed(boolean passed) {
-        this.passed = passed;
     }
     
 }
