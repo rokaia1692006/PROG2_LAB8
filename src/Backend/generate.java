@@ -68,6 +68,17 @@ public class generate {
     
     
     }
+       
+       public static String CertificateID()
+       {
+           StringBuilder s = new StringBuilder();
+        s.append("CRT_");
+        String id  = RandomString(s);
+        if(jsonFile.containsCertificate(id)!=null){
+          id  = RandomString(s);
+        }
+        return id;
+       }
         public  static String AdminID(){
        
         StringBuilder s = new StringBuilder();
