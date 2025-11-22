@@ -6,6 +6,7 @@ package Frontend;
 
 import Backend.Instructor;
 import Backend.InstructorCourseManager;
+import Backend.InstructorLessonManager;
 import Backend.StudentProgressInCourse;
 import Backend.Students;
 import Backend.jsonFile;
@@ -20,15 +21,15 @@ import javax.swing.table.DefaultTableModel;
 public class ManageLessonsPanel extends javax.swing.JPanel {
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(InstructorDashboard.class.getName());
     private Instructor ins;
-    private InstructorCourseManager instructorManager;
     private String courseId;
+     private InstructorLessonManager instructorLessonManager;
     /**
      * Creates new form ManageLessonsPanel
      */
     public ManageLessonsPanel(String courseId, Instructor ins, jsonFile db) {
         this.courseId=courseId;
         this.ins=ins;
-        this.instructorManager=new InstructorCourseManager(db);
+        this.instructorLessonManager=new InstructorLessonManager(db);
         initComponents();
     }
 
@@ -161,7 +162,7 @@ public class ManageLessonsPanel extends javax.swing.JPanel {
 //            String newContent = JOptionPane.showInputDialog(this, "Edit Content:", currentContent);
 //
 //            if (newTitle != null && newContent != null) {
-//                instructorManager.editLesson(courseId, lessonId, newTitle, newContent, ins);
+//                instructorCourseManager.editLesson(courseId, lessonId, newTitle, newContent, ins);
 //                lessonsTable.setValueAt(newTitle, selectedRow, 0);
 //                lessonsTable.setValueAt(newContent, selectedRow, 2);
 //            }
@@ -177,7 +178,7 @@ public class ManageLessonsPanel extends javax.swing.JPanel {
                 "Confirm Delete",
                 JOptionPane.YES_NO_OPTION);
             if (confirm == JOptionPane.YES_OPTION) {
-                instructorManager.deleteLesson(courseId, lessonId, ins);
+                instructorLessonManager.deleteLesson(courseId, lessonId, ins);
 
                 ((DefaultTableModel)lessonsTable.getModel()).removeRow(selectedRow);
                 actionpanel.setVisible(false);
