@@ -85,7 +85,7 @@ private void updateAll(){
        }
        for ( Quiz q : quizzes)
        {
-           if(!q.isPassed())
+           if(!q.hasPassed())
            {
               JOptionPane.showMessageDialog(null,"One or more quizzes is not passed yet, cannot create certificate!"); //lw l2ena quiz mesh passed, cannot create
            return false;

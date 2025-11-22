@@ -8,12 +8,12 @@ package Backend;
  *
  * @author DELL
  */
-import com.itextpdf.kernel.pdf.PdfWriter;
-import com.itextpdf.kernel.pdf.PdfDocument;
-import com.itextpdf.layout.element.Paragraph;
-import com.itextpdf.layout.Document;
+import com.itextpdf.text.Paragraph;
+import com.itextpdf.text.pdf.PdfWriter;
+import java.io.FileOutputStream;
 import javax.swing.JOptionPane;
-import javax.swing.text.Document;
+import com.itextpdf.text.Document;
+
 
 public class CertificatePDF {
     
@@ -33,9 +33,10 @@ public class CertificatePDF {
     public void generatePDF(String filePath)
     {
         try {
-            PdfWriter writer = new PdfWriter(filePath);
-            PdfDocument pdf = new PdfDocument(writer); 
-            Document document = new Document(pdf);
+            Document document = new Document() {}; 
+            PdfWriter.getInstance(document, new FileOutputStream(filePath));
+           
+           document.open();
 
             document.add(new Paragraph("Certificate Id: " + certificateId));
             document.add(new Paragraph("Issue Date: " + issueDate)); //ka string mesh date
