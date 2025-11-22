@@ -36,6 +36,9 @@ public class Quiz {
     public boolean hasPassed(int score){
         return score>=passScore;
     }
+    public boolean isPassed(){
+        return this.hasPassed(passScore);
+    }
     public ArrayList<Question> getQuestions() {
         return questions;
     }

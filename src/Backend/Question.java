@@ -12,7 +12,7 @@ import java.util.ArrayList;
  */
 public class Question {
         private String question;
-        private ArrayList<String> options;
+        private String[] options;
         private int correct;
 
         public String getQuestion() {
@@ -23,11 +23,11 @@ public class Question {
             this.question = question;
         }
 
-        public ArrayList<String> getOptions() {
+        public String[] getOptions() {
             return options;
         }
 
-        public void setOptions(ArrayList<String> options) {
+        public void setOptions(String[] options) {
             this.options = options;
         }
 
@@ -41,7 +41,7 @@ public class Question {
         public boolean isCorrect(int select){
             return select==correct;
         }
-        public Question(String question, ArrayList<String> options, int correct) {
+        public Question(String question, String[] options, int correct) {
             this.question = question;
             this.options = options;
             this.correct = correct;

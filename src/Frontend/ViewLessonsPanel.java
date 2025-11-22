@@ -22,7 +22,7 @@ import javax.swing.JTextArea;
  *
  * @author DELL
  */
-public class ViewLessons extends javax.swing.JPanel {
+public class ViewLessonsPanel extends javax.swing.JPanel {
 
     /**
      * Creates new form ViewLessons
@@ -35,8 +35,11 @@ public class ViewLessons extends javax.swing.JPanel {
     
      private StudentProgressInCourse studetProgressInCourse;
      
-    
-    public ViewLessons(Course course, Students currentStudent,StudentDashboardFrame MainFrame) {
+    public ViewLessonsPanel() {
+    initComponents(); 
+}
+
+    public ViewLessonsPanel(Course course, Students currentStudent,StudentDashboardFrame MainFrame) {
         
           initComponents();
           this.course = course;
@@ -77,14 +80,16 @@ public class ViewLessons extends javax.swing.JPanel {
         @Override
         public void mouseClicked(MouseEvent e) {
             if (e.getClickCount() == 2) {
-                int index = lessonsList.locationToIndex(e.getPoint());
+                int index = lessonsList.getSelectedIndex();
                 if (index != -1) {
                     Lesson selected = lessons.get(index);
-                   
-
-                LessonViewDialog lDialog = new LessonViewDialog(MainFrame, selected);
+                   javax.swing.JDialog lDialog = new javax.swing.JDialog(MainFrame, selected.getTitle(), true);
                 lDialog.setSize(600, 400);
                 lDialog.setLocationRelativeTo(MainFrame);
+
+                LessonView l = new LessonView(selected,MainFrame);
+                lDialog.add(l);
+
                 lDialog.setVisible(true);
                    
                     
