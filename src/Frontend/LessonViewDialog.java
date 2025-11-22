@@ -90,6 +90,7 @@ public class LessonViewDialog extends javax.swing.JDialog {
         quiz = new QuizPage((java.awt.Frame) javax.swing.SwingUtilities.getWindowAncestor(this),
                 true,l);
         quiz.setVisible(true);
+        quiz.quizStart();
         this.dispose();
     }//GEN-LAST:event_takeQuizBtnActionPerformed
 

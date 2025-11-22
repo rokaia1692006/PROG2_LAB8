@@ -6,25 +6,38 @@ package Frontend;
 
 import java.awt.Frame;
 import Backend.Lesson;
-
+import java.util.ArrayList;
+import Backend.Quiz;
+import javax.swing.JOptionPane;
 /**
  *
  * @author malak
  */
 public class QuizPage extends javax.swing.JDialog {
 
-    private Lesson l;
+    private Quiz quiz;
+    private ArrayList<Integer> answers;
     /**
      * Creates new form QuizPage
      */
-    public QuizPage(Frame parent, boolean modal, Lesson l) {
+    public QuizPage(Frame parent, boolean modal, Quiz quiz) {
         super(parent, modal);
-        this.l=l;
+        this.quiz=quiz;
+        this.answers=new ArrayList<>();
         initComponents();
-        jLabel1.setText("Question "+ l);
-        
     }
-
+    public void quizStart(){
+        for(int i=0; i<quiz.getQuestions().size();i++){
+            QuestionDialog q=new QuestionDialog((Frame) this.getParent(), quiz.getQuestions().get(i));
+            q.setLocationRelativeTo(this.getParent());
+            q.setVisible(true);
+            answers.add(q.selected());
+        }
+        int score=quiz.calculateScore(answers);
+        boolean passed=quiz.hasPassed(score);
+        JOptionPane.showMessageDialog(this, "Done!\nScore: "+score+"/"+quiz.getQuestions().size()+"\nPassed: "+(passed?"Yes":"No"));
+        this.dispose();
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -34,74 +47,31 @@ public class QuizPage extends javax.swing.JDialog {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        optionTwo = new javax.swing.JRadioButton();
         jLabel1 = new javax.swing.JLabel();
-        optionThree = new javax.swing.JRadioButton();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        question = new javax.swing.JTextArea();
-        optionFour = new javax.swing.JRadioButton();
-        optionOne = new javax.swing.JRadioButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
-        optionTwo.setText("jRadioButton2");
-
-        jLabel1.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
+        jLabel1.setFont(new java.awt.Font("Segoe UI", 0, 36)); // NOI18N
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel1.setText("Quiz");
-
-        optionThree.setText("jRadioButton3");
-
-        question.setColumns(20);
-        question.setRows(5);
-        jScrollPane1.setViewportView(question);
-
-        optionFour.setText("jRadioButton4");
-
-        optionOne.setText("jRadioButton1");
+        jLabel1.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        jLabel1.setOpaque(true);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(175, 175, 175)
-                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 289, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(optionOne))
-                    .addGroup(layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(optionTwo))
-                    .addGroup(layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(optionThree))
-                    .addGroup(layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(optionFour)))
-                .addContainerGap(105, Short.MAX_VALUE))
+                .addGap(171, 171, 171)
+                .addComponent(jLabel1)
+                .addContainerGap(160, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(27, 27, 27)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 74, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(optionOne)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(optionTwo)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(optionThree)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(optionFour)
-                .addContainerGap(56, Short.MAX_VALUE))
+                .addGap(46, 46, 46)
+                .addComponent(jLabel1)
+                .addContainerGap(34, Short.MAX_VALUE))
         );
 
         pack();
@@ -151,11 +121,5 @@ public class QuizPage extends javax.swing.JDialog {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JRadioButton optionFour;
-    private javax.swing.JRadioButton optionOne;
-    private javax.swing.JRadioButton optionThree;
-    private javax.swing.JRadioButton optionTwo;
-    private javax.swing.JTextArea question;
     // End of variables declaration//GEN-END:variables
 }
