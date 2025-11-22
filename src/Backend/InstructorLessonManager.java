@@ -22,13 +22,13 @@ public class InstructorLessonManager {
 
         Course course = db.containsCourse(courseId);
         if (!course.getInstructorId().equals(instructor.getId())) {
-            throw new IllegalArgumentException("can't add lessons to this course!!");
+            throw new IllegalArgumentException("Can't add lessons to this course!!");
         }
         if (title == null || title.trim().isEmpty()) {
-            throw new IllegalArgumentException("title can't be empty!");
+            throw new IllegalArgumentException("Title can't be empty!");
         }
         if (content == null || content.trim().isEmpty()) {
-            throw new IllegalArgumentException("content can't be empty!");
+            throw new IllegalArgumentException("Content can't be empty!");
         }
        if(resourcesOptional  == null){
        resourcesOptional = new ArrayList<>();
