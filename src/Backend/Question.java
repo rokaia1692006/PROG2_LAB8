@@ -38,7 +38,9 @@ public class Question {
         public void setCorrect(int correct) {
             this.correct = correct;
         }
-
+        public boolean isCorrect(int select){
+            return select==correct;
+        }
         public Question(String question, ArrayList<String> options, int correct) {
             this.question = question;
             this.options = options;
