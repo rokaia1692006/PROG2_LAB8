@@ -71,7 +71,7 @@ public class BrowseCourses extends javax.swing.JPanel {
 
         try {
 
-   ArrayList <Course>coursesArray = jsonFile.getAllCourses();
+   ArrayList <Course>coursesArray = jsonFile.getAllApprovedCourses();
    JPanel coursesCONT = new JPanel();
    coursesCONT.setLayout(new BoxLayout(coursesCONT,BoxLayout.Y_AXIS));
    for(Course c : coursesArray){
