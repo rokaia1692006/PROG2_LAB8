@@ -39,3 +39,4 @@ public class LessonView  extends javax.swing.JPanel {
         add(new JScrollPane(contentArea), BorderLayout.CENTER);
         add(closeButton, BorderLayout.SOUTH);}
 }
+

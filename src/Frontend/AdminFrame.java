@@ -10,13 +10,19 @@ import Backend.jsonFile;
 import java.util.ArrayList;
 import javax.swing.JButton;
 import javax.swing.table.DefaultTableModel;
+import Frontend.CustomdesignClasses.*;
+import java.awt.Color;
+import javax.swing.JTable;
+import javax.swing.SwingUtilities;
+import javax.swing.table.DefaultTableCellRenderer;
+import javax.swing.table.TableCellEditor;
 
 /**
  *
  * @author it
  */
 public class AdminFrame extends javax.swing.JFrame {
-    
+
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(AdminFrame.class.getName());
 
     adminRole admin = new adminRole("ADMIN", "admin@sys.com", new byte[1], new byte[1]);
@@ -62,17 +68,20 @@ public class AdminFrame extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(Title, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 400, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                .addContainerGap())
+            .addComponent(Title, javax.swing.GroupLayout.DEFAULT_SIZE, 400, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(Title)
-                .addGap(38, 38, 38)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 243, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 44, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 306, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(16, 16, 16))
         );
 
         pack();
@@ -89,48 +98,22 @@ public class AdminFrame extends javax.swing.JFrame {
         m.addRow(new Object[]{
         c.getTitle(),
         c.getLessons().size(),
-        "review"
+        ""
         });
         }
-        addActionButtons();
+       JTable table = new JTable(m);
+       aproveRejectRederer renderer = new aproveRejectRederer("APPROVE" , "REJECT" , Color.BLUE,Color.RED);
+       table.getColumnModel().getColumn(3).setCellRenderer(renderer);
+        table.getColumnModel().getColumn(3).setCellEditor(new btncolEditor("APPROVE" , "REJECT" , Color.BLUE,Color.RED));
+        table.setRowHeight(renderer.getTableCellRendererComponent(table, null, true, true, 0, 0).getPreferredSize().height);
     
     }
-    private void addActionButtons(){
-     JButton approve = new JButton("APPROVE");
-     JButton reject = new JButton("REJECT");
-    jTable1.getColumn("Action").setCellRenderer(new ButtonRenderer());
-     jTable1.getColumn("Action").setCellEditor(new ButtonEditor(new javax.swing.JTextField(), (row) -> {
 
-            String courseTitle = jTable1.getValueAt(row, 0).toString();
-            Course c = findCourseByTitle(courseTitle);
 
-            if(c != null){
-                cdb.approveCourse(c.getCourseId(), admin);
-                cdb.SAVE();
-                loadPendingCourses();
-            }
-        }, (row) -> {
+    
 
-            String courseTitle = jTable1.getValueAt(row, 0).toString();
-            Course c = findCourseByTitle(courseTitle);
 
-            if(c != null){
-                cdb.rejectCourse(c.getCourseId(), admin);
-                cdb.SAVE();
-                loadPendingCourses();
-            }
-        }));
-    }
-
-    private Course findCourseByTitle(String title){
-        for(Course c : cdb.getAllCourses()){
-            if(c.getTitle().equals(title)){
-                return c;
-            }
-        }
-        return null;
-    }
-
+   
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
