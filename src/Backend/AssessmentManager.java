@@ -11,7 +11,10 @@ import java.util.ArrayList;
  * @author malak
  */
 public class AssessmentManager {
-    
+    QuizManager manager = new QuizManager();
+    public AssessmentManager(QuizManager manager){
+        this.manager=manager;
+    }
     public Quiz createQuiz(ArrayList<Question> questions, int passScore){
         if(questions==null)
             throw new IllegalArgumentException("No questions entered.");
@@ -23,5 +26,15 @@ public class AssessmentManager {
             throw new IllegalArgumentException("No passing score entered.");
         Quiz newQuiz=new Quiz(questions, passScore);
         return newQuiz;
+    }
+    public StudentQuizAttempt submitQuiz(String studentId, String lessonId, Quiz quiz, ArrayList<Integer> answers){
+        StudentQuizAttempt attempt=new StudentQuizAttempt(studentId, lessonId, quiz, answers);
+        if(attempt.isPassed()){
+            manager.studentCompleteQuiz(studentId, lessonId, attempt.getScore());
+        }
+        return attempt;
+    }
+    public boolean canAccessNextLesson(String studenId, String lessonId){
+        
     }
 }
