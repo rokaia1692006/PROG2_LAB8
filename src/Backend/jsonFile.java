@@ -86,8 +86,12 @@ public class jsonFile {
        return UsersDB.getAllStudentinCourse(id);
        
        }
-       public static ArrayList<Course> getAllCourses(){
-       return cdb.getAllCourses();
+       public static ArrayList<Course> getAllCourses() {
+           return cdb.getAllCourses();
+        
+    }
+       public static ArrayList<Course> getAllApprovedCourses(){
+       return cdb.getAllApprovedCourses();
        }
       public static Course CreateCourse(String insId, String title, String description){
       return cdb.CreateCourse(udB, cdb, insId, title, description);

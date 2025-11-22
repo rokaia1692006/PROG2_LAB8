@@ -3,17 +3,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
 package Backend;
-import static Backend.CoursesDB.containsCourse;
-import java.awt.FileDialog;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
-import java.security.MessageDigest;
-import java.util.ArrayList;
-import java.util.Iterator;
-import javax.swing.JOptionPane;
-import org.json.JSONArray;
-import org.json.JSONObject;
+
 /**
  *
  * @author it

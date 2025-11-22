@@ -68,4 +68,16 @@ public class generate {
     
     
     }
+        public  static String AdminID(){
+       
+        StringBuilder s = new StringBuilder();
+        s.append("A_");
+        String id  = RandomString(s);
+        if(jsonFile.containsStudent(id)!=null){
+          id  = RandomString(s);
+        }
+        return id;
+    
+    
+    }
 }

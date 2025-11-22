@@ -41,10 +41,11 @@ public class CoursesDB extends DBMANAGER{
               JOptionPane.showMessageDialog(null, "FILE ERROR");
               return ;
           }
+          String Status = course.getString("STATUS").trim();
           Course c;
           if(course.has("ID")){
           String cid = course.getString("ID");
-          c = new Course(cid,title, dis, ins);
+          c = new Course(cid,title, dis, ins,Status);
           } else {
           c = new Course(title, dis, ins);
           }
@@ -149,8 +150,14 @@ public class CoursesDB extends DBMANAGER{
          
         }
 
-    public  ArrayList<Course> getAllCourses() {
-        return AllCourses;
+    public  ArrayList<Course> getAllApprovedCourses() {
+        ArrayList<Course> a = new ArrayList<>();
+        for(Course c : AllCourses){
+            if(c.getStatus().equalsIgnoreCase("approved")){
+            a.add(c);
+            }
+        }
+        return a;
     }
          
          
@@ -194,6 +201,7 @@ public class CoursesDB extends DBMANAGER{
         o.put("Title", c.getTitle());
         o.put("Description", c.getDescription());
         o.put("InstructorID", c.getInstructorId());
+        o.put("STATUS", c.getStatus());
         JSONArray ls = new JSONArray();
         
         
@@ -216,6 +224,19 @@ public class CoursesDB extends DBMANAGER{
         e.printStackTrace();
         }
         }
+     public ArrayList<Course> getPendingCourses(){
+         ArrayList <Course> p = new ArrayList<>();
+         for(Course c : AllCourses){
+         if(c.getStatus().equalsIgnoreCase("pending")){
+         p.add(c);
+         }
+         }
+         return p;
      
+     }
+
+    public static ArrayList<Course> getAllCourses() {
+        return AllCourses;
+    }
                        
 }
