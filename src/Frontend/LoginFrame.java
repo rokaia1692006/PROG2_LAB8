@@ -6,6 +6,7 @@ package Frontend;
 
 import Backend.Instructor;
 import Backend.Students;
+import Backend.adminRole;
 import Backend.jsonFile;
 import javax.swing.JOptionPane;
 
@@ -14,6 +15,7 @@ import javax.swing.JOptionPane;
  * @author malak
  */
 public class LoginFrame extends javax.swing.JFrame {
+    
 
     /**
      * Creates new form LoginFrame
@@ -141,6 +143,13 @@ public class LoginFrame extends javax.swing.JFrame {
         }
         Students stu=jsonFile.studentEmail(email,password);
         Instructor ins=jsonFile.instructorEmail(email,password);
+        adminRole admin = jsonFile.isAdmin(email, password);
+        if(admin!=null){
+            JOptionPane.showMessageDialog(this, "Login successful!");
+            new AdminFrame(admin).setVisible(true);
+            this.dispose();
+            return;
+        }
         if(stu!=null){
             JOptionPane.showMessageDialog(this, "Login successful!");
             new StudentDashboardFrame(stu).setVisible(true);

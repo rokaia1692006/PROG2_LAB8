@@ -1,4 +1,14 @@
 {
-  "Users": []
-    
+    "Students": [],
+    "Instructors": [{
+        "CreatedCourses": [
+            "C_rqcHC1tl15",
+            "C_e35eY1bW4m"
+        ],
+        "Salt": "o3lk1ixhZsFhuhdzYEhFjg==",
+        "Email": "aaa@gmail.com",
+        "ID": "I_27z7HlRLf9",
+        "PasswordHash": "Cvea3gqj3WJAFIS5Wj8mz/lENBoXSebwUvfZux28yO1hK6RwXVIqvgY+B1Uu28F5qoJ6glni3n5obIFL9a3Dvw==",
+        "Name": "aa"
+    }]
 }

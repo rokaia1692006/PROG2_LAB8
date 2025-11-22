@@ -55,8 +55,10 @@ public class jsonFile {
 
         LOAD();
     }
-   
-        public static Course  containsCourse(String id) {
+    public static adminRole isAdmin(String email , char [] pass){
+    return udB.isAdmin(email, pass);
+    }
+       public static Course  containsCourse(String id) {
         
         return CoursesDB.containsCourse(id);
         }

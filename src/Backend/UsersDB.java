@@ -24,9 +24,19 @@ import org.json.JSONObject;
  * @author it
  */
 public class UsersDB extends DBMANAGER{
-     private static ArrayList<Students> Students;
-    private static ArrayList<Instructor> instructors;
-
+     private static ArrayList<Students> Students= new ArrayList<>();
+    private static ArrayList<Instructor> instructors= new ArrayList<>();
+private static adminRole admin = new adminRole("admin", "admin@gm.com", new byte[] {
+        (byte)0x6B, (byte)0x86, (byte)0xB2, (byte)0x73,
+        (byte)0xFF, (byte)0x34, (byte)0xFC, (byte)0xE1,
+        (byte)0x9D, (byte)0x6B, (byte)0x80, (byte)0x4E,
+        (byte)0xFF, (byte)0x5A, (byte)0x3F, (byte)0x57,
+        (byte)0x47, (byte)0xAD, (byte)0xA4, (byte)0xEA,
+        (byte)0xA2, (byte)0x2F, (byte)0x1D, (byte)0x49,
+        (byte)0xC0, (byte)0x1E, (byte)0x52, (byte)0xDD,
+        (byte)0xB7, (byte)0x87, (byte)0x5B, (byte)0x4B
+    },
+    new byte[0]);
     public UsersDB() {
          Students = new ArrayList<>();
 instructors = new ArrayList<>();
@@ -165,7 +175,15 @@ instructors = new ArrayList<>();
     return null;
     
     }
-    
+    public static adminRole  isAdmin(String email , char [] pass){
+        if(admin.getEmail().equals(email)){
+            byte[] hashP = hashPassword(pass, admin.getSalt());
+                 if(MessageDigest.isEqual(hashP, admin.getPasswordHash())){
+                 return admin;
+                 }
+        }
+    return null;
+    }
           public  Students studentEmail(String email, char [] password){
          for(Students i:Students){
              if(i.getEmail().equals(email)){
@@ -197,7 +215,8 @@ instructors = new ArrayList<>();
     e.printStackTrace();
     return null;
     }
-}
+    }
+    
    
      @Override
     public   void SAVE(){
