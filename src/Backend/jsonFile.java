@@ -51,6 +51,8 @@ public class jsonFile {
     }
 
     public jsonFile() {
+     
+
         LOAD();
     }
    
@@ -90,6 +92,9 @@ public class jsonFile {
            return cdb.getAllCourses();
         
     }
+        public static ArrayList<Course> getPendingCourses(){
+        return cdb.getPendingCourses();
+        }
        public static ArrayList<Course> getAllApprovedCourses(){
        return cdb.getAllApprovedCourses();
        }

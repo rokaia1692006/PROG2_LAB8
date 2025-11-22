@@ -19,9 +19,15 @@ import org.json.JSONObject;
 public class CoursesDB extends DBMANAGER{
      private static ArrayList<String> lids;
       private static ArrayList<Course> AllCourses;
+
+    public CoursesDB() {
+        lids=   new ArrayList<>()  ;
+        AllCourses = new ArrayList<>();
+    }
       
       @Override
          public  void LOAD(){
+             
       try{
       Path p =Paths.get(DBMANAGER.CFile);
       if(Files.exists(p) ){
@@ -233,6 +239,12 @@ public class CoursesDB extends DBMANAGER{
          }
          return p;
      
+     }
+     public static void ApproveCourse(String id,adminRole a){
+     Course c = containsCourse(id);
+     if(c!=null){
+     c.setStatus(id,a);
+     }
      }
 
     public static ArrayList<Course> getAllCourses() {

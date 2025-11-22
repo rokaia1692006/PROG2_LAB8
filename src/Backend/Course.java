@@ -105,8 +105,9 @@ public class Course {
         return Status;
     }
 
-    public void setStatus(adminRole a ,String Status) {
-        this.Status = Status;
+    public void setStatus(String Status,PersonDetails a ) {
+        if(a.getRole().equalsIgnoreCase("admin")){
+        this.Status = Status;}
     }
 
     public void UpdateValues(String Title , String description){

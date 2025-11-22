@@ -27,7 +27,12 @@ public class UsersDB extends DBMANAGER{
      private static ArrayList<Students> Students;
     private static ArrayList<Instructor> instructors;
 
+    public UsersDB() {
+         Students = new ArrayList<>();
+instructors = new ArrayList<>();
+    }
 
+  
     public  ArrayList<Students> getStudents() {
         return Students;
     }
