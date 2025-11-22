@@ -12,6 +12,7 @@ import com.itextpdf.kernel.pdf.PdfWriter;
 import com.itextpdf.kernel.pdf.PdfDocument;
 import com.itextpdf.layout.element.Paragraph;
 import com.itextpdf.layout.Document;
+import javax.swing.JOptionPane;
 import javax.swing.text.Document;
 
 public class CertificatePDF {
@@ -44,7 +45,7 @@ public class CertificatePDF {
             document.close();
             
         } catch (Exception e) {
-            e.printStackTrace();
+            JOptionPane.showMessageDialog(null, "ERROR IN GENERATING PDF!!", "Error", JOptionPane.ERROR_MESSAGE);
         }
     }
 

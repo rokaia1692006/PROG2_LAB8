@@ -57,7 +57,7 @@ public class CertificateView extends javax.swing.JPanel {
                 }
                    else
                 {
-                    JOptionPane.showMessageDialog(null, "ERROR!!");
+                    JOptionPane.showMessageDialog(null, "ERROR!!", "Error", JOptionPane.ERROR_MESSAGE);
                 }
                   }
                 }
@@ -145,7 +145,7 @@ public class CertificateView extends javax.swing.JPanel {
         int index = listOfCertificates.getSelectedIndex();
         if (index == -1)
         {
-            JOptionPane.showMessageDialog(this, "Choose a course first to download!");
+            JOptionPane.showMessageDialog(this, "Choose a course first to download!", "Error", JOptionPane.ERROR_MESSAGE);
             return;
         }
         
@@ -165,7 +165,7 @@ public class CertificateView extends javax.swing.JPanel {
         
         if(wanted == null )
         {
-            JOptionPane.showMessageDialog(this, "ERROR! NO CERTIFICATES FOUND FOR THIS COURSE FOR YOU!"); //ll student DAAA
+            JOptionPane.showMessageDialog(this, "NO CERTIFICATES FOUND IN THIS COURSE FOR YOU!!", "Error", JOptionPane.ERROR_MESSAGE); //ll student DAAA
             return;
         }
         CertificatePDF certpdf = new CertificatePDF(wanted.getCertificateId(),wanted.getStudentId(),wanted.getCourseId(),wanted.getIssuedate().toString());
@@ -174,7 +174,7 @@ public class CertificateView extends javax.swing.JPanel {
         certpdf.generatePDF(filename); 
         JOptionPane.showMessageDialog(this, "Downloaded as: " + filename);
           } catch (Exception e) {
-        JOptionPane.showMessageDialog(this, "Error in downloading, try again, ");
+        JOptionPane.showMessageDialog(this, "ERROR IN DOWNLOADING! try again...", "Error", JOptionPane.ERROR_MESSAGE);
          }
         
     }//GEN-LAST:event_jButton1ActionPerformed

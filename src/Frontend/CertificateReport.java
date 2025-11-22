@@ -38,7 +38,7 @@ public class CertificateReport extends javax.swing.JDialog {
         certificateIdTXT.setText(c.getCertificateId());
         }
         else{
-            JOptionPane.showMessageDialog(null, "ERROR! NO CERTIFICATES FOUND!");
+           JOptionPane.showMessageDialog(this, "ERROR NO CERTIFICATES FOUND!!", "Error", JOptionPane.ERROR_MESSAGE);
         }
         
     }
