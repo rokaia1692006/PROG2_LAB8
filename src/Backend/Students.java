@@ -3,6 +3,7 @@ package Backend;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.PropertyResourceBundle;
 import javax.swing.JOptionPane;
 
 
@@ -140,5 +141,14 @@ return false;
     
 
     
+
+    public void removeCourse(String cid){
+    StudentProgressInCourse spic = SearchINEnrolled(cid);
+    if(spic  ==null){
+    JOptionPane.showMessageDialog(null, "STUDENT IS NOT ENROLLED");
+        return;
+    }
+    enrolledCourses.remove(spic);
+    }
     
 }
