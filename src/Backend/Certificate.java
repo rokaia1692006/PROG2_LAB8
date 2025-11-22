@@ -22,7 +22,7 @@ public class Certificate {
     public Certificate(String studentId, String courseId) {
         this.studentId = studentId;
         this.courseId = courseId;
-        //generate the certificate random INTEGER id
+        this.certificateId = generate.CertificateID();
          this.issuedate = LocalDate.now(); //mesh hantlobo mn user, el certificate btt3ml hsb el date bt3 enhrda
          //3yzyn n save fel json
     }

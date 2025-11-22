@@ -18,8 +18,10 @@ public class CertificateView extends javax.swing.JPanel {
     /**
      * Creates new form CertificateView
      */
+    Students currentStudent;
     public CertificateView(Students currentStudent) {
         initComponents();
+        this.currentStudent=currentStudent;
        
         
         
@@ -140,7 +142,40 @@ public class CertificateView extends javax.swing.JPanel {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         
-        //to download
+        int index = listOfCertificates.getSelectedIndex();
+        if (index == -1)
+        {
+            JOptionPane.showMessageDialog(this, "Choose a course first to download!");
+            return;
+        }
+        
+        String courseId = listOfCertificates.getModel().getElementAt(index);
+        
+        ArrayList<Certificate> certificatesAll = currentStudent.getCertificatesEarned();
+        Certificate wanted = null;
+
+        for (Certificate certificate : certificatesAll) 
+        {
+            if(certificate.getCourseId().equals(courseId))
+            {
+                wanted = certificate;
+                break;
+            }
+        }
+        
+        if(wanted == null )
+        {
+            JOptionPane.showMessageDialog(this, "ERROR! NO CERTIFICATES FOUND FOR THIS COURSE FOR YOU!"); //ll student DAAA
+            return;
+        }
+        CertificatePDF certpdf = new CertificatePDF(wanted.getCertificateId(),wanted.getStudentId(),wanted.getCourseId(),wanted.getIssuedate().toString());
+        try {
+        String filename = "Certificates/Certificate_" + courseId + ".pdf";
+        certpdf.generatePDF(filename); 
+        JOptionPane.showMessageDialog(this, "Downloaded as: " + filename);
+          } catch (Exception e) {
+        JOptionPane.showMessageDialog(this, "Error in downloading, try again, ");
+         }
         
     }//GEN-LAST:event_jButton1ActionPerformed
 
