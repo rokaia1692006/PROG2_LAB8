@@ -4,7 +4,7 @@
  */
 package Backend;
 
-import static Backend.jsonFile.UFile;
+import static Backend.DBMANAGER.UFile;
 
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
@@ -23,7 +23,7 @@ import org.json.JSONObject;
  *
  * @author it
  */
-public class UsersDB extends jsonFile{
+public class UsersDB extends DBMANAGER{
      private static ArrayList<Students> Students;
     private static ArrayList<Instructor> instructors;
 
@@ -128,7 +128,7 @@ public class UsersDB extends jsonFile{
         }
          public static ArrayList<Students> getAllStudentinCourse(String courseid){
          ArrayList<Students> st = new ArrayList<>();
-     for(Students s : ALLSTUDENTS){
+     for(Students s : Students){
      if(s.checkifEnrolled(courseid)){
      st.add(s);
      }
@@ -139,7 +139,7 @@ public class UsersDB extends jsonFile{
     
     public static Students containsStudent(String id){
         id=id.trim();
-    for(Students i : ALLSTUDENTS){
+    for(Students i : Students){
     if(i.getId().equals(id)){
     return i;
     }

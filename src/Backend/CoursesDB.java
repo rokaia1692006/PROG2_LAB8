@@ -16,14 +16,14 @@ import org.json.JSONObject;
  *
  * @author it
  */
-public class CoursesDB extends jsonFile{
+public class CoursesDB extends DBMANAGER{
      private static ArrayList<String> lids;
       private static ArrayList<Course> AllCourses;
       
       @Override
          public  void LOAD(){
       try{
-      Path p =Paths.get(jsonFile.CFile);
+      Path p =Paths.get(DBMANAGER.CFile);
       if(Files.exists(p) ){
       
           String data = new String(java.nio.file.Files.readAllBytes(p));
@@ -35,11 +35,11 @@ public class CoursesDB extends jsonFile{
           String title = course.getString("Title").trim();
           String dis = course.getString("Description").trim();
           String InstructorID = course.getString("InstructorID").trim();
-          Instructor ins = containsInstructor(InstructorID);
+          Instructor ins = jsonFile.containsInstructor(InstructorID);
           if(ins == null){
               JOptionPane.showMessageDialog(null, InstructorID);
               JOptionPane.showMessageDialog(null, "FILE ERROR");
-              return null;
+              return ;
           }
           Course c;
           if(course.has("ID")){
@@ -94,6 +94,60 @@ public class CoursesDB extends jsonFile{
     public static ArrayList<String> getLids() {
         return lids;
     }
+     public  Course  CreateCourse (UsersDB udb,CoursesDB cdb,String insID, String title, String description){
+             Instructor ins = udb.containsInstructor(insID);
+             if(ins  == null){
+             JOptionPane.showMessageDialog(null, "NO INSTRUCTOR");
+             return null;
+             
+             
+             }
+             Course c = new Course(title,description,ins);
+             ins.addCourse(c.getCourseId());
+             cdb.AddCourse(c);
+             
+           
+             return c;
+        
+        }
+    
+    public  void updatecourse (UsersDB udb,CoursesDB cdb,String insID, String CId , String title, String description){
+              Instructor ins = udb.containsInstructor(insID);
+              Course c= cdb.containsCourse(CId);
+             if(ins  == null || c == null || !insID.equals(c.getInstructorId())){
+             JOptionPane.showMessageDialog(null, "NO INSTRUCTOR");
+             return;
+             
+             
+             }
+             c.UpdateValues(title, description);
+          
+             
+         }
+         
+        public  static void DeleteCourse(UsersDB udb,CoursesDB cdb,String cId , String insID){
+         Instructor ins = udb.containsInstructor(insID);
+              Course c= cdb.containsCourse(cId);
+              ArrayList<Students> s = jsonFile.getAllStudentinCourse(cId);
+              
+             if(ins  == null || c == null || !insID.equals(c.getInstructorId())){
+             JOptionPane.showMessageDialog(null, "CANNOT DELETE");
+             return;
+             
+             }
+            AllCourses.remove(c);
+             ins.removeCourse(cId);
+             if(s  == null){
+             return;
+             }
+             for(Students student : s ){
+             student.removeCourse(cId);
+             }
+             
+             
+             
+         
+        }
 
     public  ArrayList<Course> getAllCourses() {
         return AllCourses;
@@ -121,6 +175,14 @@ public class CoursesDB extends jsonFile{
     return null;
     
     }
+//          public static void removeCourse(String id){
+//          Course c = containsCourse(id);
+//          if(c==null){
+//              JOptionPane.showMessageDialog(null,"COURSE DOESNT EXIST");
+//              return;
+//          }
+//          AllCourses.remove(c);
+//          }
 
         @Override
         public  void SAVE(){
