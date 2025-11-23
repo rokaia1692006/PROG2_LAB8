@@ -18,6 +18,8 @@ public class Students extends PersonDetails{
   
     private final static String role = "Student";
     private ArrayList<StudentProgressInCourse> enrolledCourses;
+    //dah bas 3shan 23rf 2a print el cirtificat f el course el sa7
+    protected ArrayList <Certificate> certificatesEarned;
     
   
     
@@ -26,13 +28,15 @@ public class Students extends PersonDetails{
         super( email, passwordHash, salt,username);
         
         this.enrolledCourses  = new ArrayList<>();
+        this.certificatesEarned = new ArrayList<>();
         
     }
-    public Students(String userId, String username, String email, byte[] passwordHash,byte[]salt,ArrayList<StudentProgressInCourse>enrolledData) {
+    public Students(String userId, String username, String email, byte[] passwordHash,byte[]salt,ArrayList<StudentProgressInCourse>enrolledData,ArrayList<Certificate> cert) {
         
         super(userId, email, passwordHash, salt,username);
         
         this.enrolledCourses = enrolledData;
+        this.certificatesEarned = cert;
         
     }
 
@@ -99,6 +103,11 @@ if(course != null && course.getLessonsDone().containsKey(LessonID)){
     
     
     }
+    
+    public void addNewCertificate( Certificate c){
+               certificatesEarned.add( c);
+    
+    }
 public void NewLesson(String courseid , String LessonId){
 StudentProgressInCourse course = SearchINEnrolled(courseid);
 if(course  == null){
@@ -131,6 +140,11 @@ return false;
     public ArrayList<StudentProgressInCourse> getEnrolledCourses() {
         return enrolledCourses;
     }
+
+    public ArrayList<Certificate> getCertificatesEarned() {
+        return certificatesEarned;
+    }
+
     
 
     

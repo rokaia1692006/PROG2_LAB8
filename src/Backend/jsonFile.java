@@ -15,9 +15,7 @@ import java.util.ArrayList;
 public class jsonFile {
     private static UsersDB udB = new UsersDB();
     private static CoursesDB cdb = new CoursesDB();
-    
-   
-   
+  
     
     public final void LOAD(){
   udB.LOAD();
@@ -55,8 +53,10 @@ public class jsonFile {
 
         LOAD();
     }
-   
-        public static Course  containsCourse(String id) {
+    public static adminRole isAdmin(String email , char [] pass){
+    return udB.isAdmin(email, pass);
+    }
+       public static Course  containsCourse(String id) {
         
         return CoursesDB.containsCourse(id);
         }
@@ -72,9 +72,11 @@ public class jsonFile {
        }
        public  static void addStudent(Students s){
        udB.addStudent(s);
+           SAVE();
        }
         public  static void addInstructor(Instructor i){
         udB.addInstructor(i);
+        SAVE();
         }
         public  static Instructor containsInstructor(String id){
         return udB.containsInstructor(id);
@@ -83,6 +85,9 @@ public class jsonFile {
        udB.SAVE();
        cdb.SAVE();
        
+       }
+       public static Certificate containsCertificate(String certid){
+       return udB.containsCertificate(certid);
        }
        public static ArrayList<Students> getAllStudentinCourse(String id){
        return UsersDB.getAllStudentinCourse(id);
@@ -99,12 +104,20 @@ public class jsonFile {
        return cdb.getAllApprovedCourses();
        }
       public static Course CreateCourse(String insId, String title, String description){
-      return cdb.CreateCourse(udB, cdb, insId, title, description);
+      Course c =  cdb.CreateCourse(udB, cdb, insId, title, description);
+      SAVE();
+      return c;
       }
        public static  void updatecourse (String insID, String CId , String title, String description){
        cdb.updatecourse(udB, cdb, insID, CId, title, description);
+           SAVE();
        }
        public static void  DeleteCourse(String cId , String insID){
-       cdb.DeleteCourse(udB,cdb,cId,insID );
+           CoursesDB.DeleteCourse(udB,cdb,cId,insID );
+       SAVE();
        }
+        public static void changeCourseStatus(String Status,String cid , adminRole a){
+        CoursesDB.changeCourseStatus( Status,cid ,  a);
+            SAVE();
+        }
      }

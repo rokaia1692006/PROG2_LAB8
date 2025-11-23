@@ -151,7 +151,7 @@ public class CoursesDB extends DBMANAGER{
              student.removeCourse(cId);
              }
              
-             
+           
              
          
         }
@@ -196,6 +196,14 @@ public class CoursesDB extends DBMANAGER{
 //          }
 //          AllCourses.remove(c);
 //          }
+          
+          public static void changeCourseStatus(String Status,String cid , adminRole a){
+         
+          CoursesDB.containsCourse(cid).setStatus(Status, a);
+         
+         
+          
+          }
 
         @Override
         public  void SAVE(){
@@ -240,12 +248,7 @@ public class CoursesDB extends DBMANAGER{
          return p;
      
      }
-     public static void ApproveCourse(String id,adminRole a){
-     Course c = containsCourse(id);
-     if(c!=null){
-     c.setStatus(id,a);
-     }
-     }
+    
 
     public static ArrayList<Course> getAllCourses() {
         return AllCourses;
