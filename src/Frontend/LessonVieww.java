@@ -17,6 +17,7 @@ public class LessonVieww extends javax.swing.JDialog {
      */
     
     private Lesson  l;
+    private StudentDashboardFrame MainFrame;
     
     public LessonVieww(java.awt.Frame parent, boolean modal,Lesson l) {
         super(parent, modal);
@@ -110,7 +111,10 @@ public class LessonVieww extends javax.swing.JDialog {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        // TODO add your handling code here:
+        Quizpage page = new QuizPage(MainFrame,true,l.getQuiz());
+        page.setVisible(true);
+        page.quizStart();
+        this.dispose();
     }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
