@@ -53,6 +53,7 @@ jsonFile coursesDb=new jsonFile();
    DefaultTableModel model = (DefaultTableModel) courseTable.getModel();
    model.setRowCount(0); 
    for(Course c : jsonFile.getAllCourses()){
+       System.err.println(c.getTitle());
    if(c.getInstructorId().equals(ins.getId())){
    model.addRow(new Object[]{
    c.getTitle(),

@@ -33,6 +33,7 @@ private static ArrayList<Certificate> certificates = new ArrayList<>();
     public UsersDB() {
          Students = new ArrayList<>();
 instructors = new ArrayList<>();
+certificates = new ArrayList<>();
     }
 
   
@@ -48,6 +49,9 @@ instructors = new ArrayList<>();
         @Override
       public  void LOAD(){
       try{
+          Students = new ArrayList<>();
+instructors = new ArrayList<>();
+certificates = new ArrayList<>();
       Path p = Paths.get(UFile);
       if(Files.exists(p)){
           String data = new String(Files.readAllBytes(p));

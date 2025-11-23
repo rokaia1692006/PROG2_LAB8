@@ -29,9 +29,12 @@ public class CoursesDB extends DBMANAGER{
          public  void LOAD(){
              
       try{
+          
       Path p =Paths.get(DBMANAGER.CFile);
+        lids=   new ArrayList<>()  ;
+        AllCourses = new ArrayList<>();
       if(Files.exists(p) ){
-      
+    
           String data = new String(java.nio.file.Files.readAllBytes(p));
           JSONObject o = new JSONObject(data);
           if(o.has("Courses")){
