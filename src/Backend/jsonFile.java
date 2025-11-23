@@ -72,9 +72,11 @@ public class jsonFile {
        }
        public  static void addStudent(Students s){
        udB.addStudent(s);
+           SAVE();
        }
         public  static void addInstructor(Instructor i){
         udB.addInstructor(i);
+        SAVE();
         }
         public  static Instructor containsInstructor(String id){
         return udB.containsInstructor(id);
@@ -102,12 +104,20 @@ public class jsonFile {
        return cdb.getAllApprovedCourses();
        }
       public static Course CreateCourse(String insId, String title, String description){
-      return cdb.CreateCourse(udB, cdb, insId, title, description);
+      Course c =  cdb.CreateCourse(udB, cdb, insId, title, description);
+      SAVE();
+      return c;
       }
        public static  void updatecourse (String insID, String CId , String title, String description){
        cdb.updatecourse(udB, cdb, insID, CId, title, description);
+           SAVE();
        }
        public static void  DeleteCourse(String cId , String insID){
-       cdb.DeleteCourse(udB,cdb,cId,insID );
+           CoursesDB.DeleteCourse(udB,cdb,cId,insID );
+       SAVE();
        }
+        public static void changeCourseStatus(String Status,String cid , adminRole a){
+        CoursesDB.changeCourseStatus( Status,cid ,  a);
+            SAVE();
+        }
      }

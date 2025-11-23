@@ -112,7 +112,7 @@ public class AdminFrame extends javax.swing.JFrame {
        aproveRejectRederer renderer = new aproveRejectRederer("APPROVE" , "REJECT" , Color.BLUE,Color.RED);
        jTable1.getColumnModel().getColumn(2).setCellRenderer(renderer);
         jTable1.getColumnModel().getColumn(2).setCellEditor(new btncolEditor("APPROVE" , "REJECT" , Color.BLUE,Color.RED));
-        jTable1.setRowHeight(renderer.getTableCellRendererComponent(jTable1, null, true, true, 0, 0).getPreferredSize().height);
+        jTable1.setRowHeight(40);
     
     }
 

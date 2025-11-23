@@ -83,7 +83,7 @@ instructors = new ArrayList<>();
                           enrolledCourses.add(new StudentProgressInCourse(ID,AllLessons,LMap,ALLPROGRESS));
                       }
                   }
-                  ArrayList <Certificate> certificates = new ArrayList<>();
+                  ArrayList <Certificate> ctemp = new ArrayList<>();
                   if(s.has("Certificates")){
                   JSONArray certs = s.getJSONArray("Certificates");
                    for(int j = 0; j < certs.length(); j++){
@@ -92,11 +92,11 @@ instructors = new ArrayList<>();
                    String CourseId = c.getString("COURSEID");
                        LocalDate date = LocalDate.parse(c.getString("DATEISSUED"));
                        Certificate cer = new Certificate(id ,certid, CourseId, date);
-                       certificates.add(cer);
+                       ctemp.add(cer);
                    
                    }
                   }
-                  this.certificates.addAll(certificates);
+                 this.certificates  = ctemp;
                   Students.add(new Students(id, name, email, passwordHash ,salt,enrolledCourses,certificates));
               }
           }

@@ -58,17 +58,23 @@ public class CustomdesignClasses {
                // Generated from nbfs://nbhost/System/Templates/Classes/Code/GeneratedMethodBody
                 state = e.getActionCommand();
                 JOptionPane.showMessageDialog(null, state);
-                if(table != null && row >= 0){
+               
+              
+                     System.err.println(row);
                     if(state.equals("approve")){
-                        // update course status
-                        AdminFrame.courses.get(row).setStatus("approved", AdminFrame.admin);
+                        String cid = AdminFrame.courses.get(row).getCourseId();
+                        System.err.println(cid  + " "  + "APPROVED");
+                        jsonFile.changeCourseStatus("APPROVED",cid, AdminFrame.admin);
+                       
                         jsonFile.SAVE();
                     } else if(state.equals("Reject")){
-                        AdminFrame.courses.get(row).setStatus("rejected", AdminFrame.admin);
+                       String cid = AdminFrame.courses.get(row).getCourseId();
+                        jsonFile.changeCourseStatus("REJECTED",cid, AdminFrame.admin);
                         jsonFile.SAVE();
                     }
+                     AdminFrame.courses.remove(row);
                     ((DefaultTableModel)table.getModel()).removeRow(row);
-                }
+               
             }
         };
         approveBtn.addActionListener(listen);
@@ -89,7 +95,8 @@ public class CustomdesignClasses {
  }
  public static class aproveRejectRederer extends DefaultTableCellRenderer{
 private ButtonCol btnCol ;
-public aproveRejectRederer(String btn1Text , String btn2Text,Color btncolor1 , Color btncolor2){
+
+public aproveRejectRederer( String btn1Text , String btn2Text,Color btncolor1 , Color btncolor2){
 
 
     btnCol = new ButtonCol(btn1Text, btn2Text, btncolor1, btncolor2);
@@ -98,7 +105,8 @@ public aproveRejectRederer(String btn1Text , String btn2Text,Color btncolor1 , C
         @Override
         public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected, boolean hasFocus, int row, int column) {
           //rated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/OverriddenMethodBody
-        btnCol.setTableAndRow(table, row);
+          btnCol = new ButtonCol("APPROVE", "REJECT", Color.BLUE, Color.red);
+          btnCol.setTableAndRow(table, row);
         if(isSelected){
         btnCol.setBackground(table.getSelectionBackground());
         }
@@ -111,26 +119,17 @@ public aproveRejectRederer(String btn1Text , String btn2Text,Color btncolor1 , C
 
 
  }
- public static class btncolEditor extends AbstractCellEditor implements TableCellEditor{
+  public static class btncolEditor extends AbstractCellEditor implements TableCellEditor{
 private ButtonCol btnCol ;
+private String btn1Text;
+private String btn2Text;
+private Color btncolor1;
+private Color btncolor2;
 public btncolEditor(String btn1Text , String btn2Text,Color btncolor1 , Color btncolor2){
-
-btnCol = new ButtonCol(btn1Text, btn2Text, btncolor1, btncolor2);
-btnCol.AddActionListener(new ActionListener() {
-    @Override
-    public void actionPerformed(ActionEvent e) {
-        SwingUtilities.invokeLater(new Runnable(){
-        @Override
-        public void run(){
-        stopCellEditing();
-        }
-        
-        
-        });
-        
-    }
-});
-
+this.btn1Text = btn1Text;
+this.btn2Text = btn2Text;
+this.btncolor1 = btncolor1;
+this.btncolor2 = btncolor2;
 }
 @Override
 public Object getCellEditorValue(){
@@ -142,16 +141,28 @@ return true;
 
 }
  public Component getTableCellEditorComponent(JTable table, Object value, boolean isSelected, int row, int column) {
-            if (isSelected) {
+     btnCol = new ButtonCol(btn1Text, btn2Text, btncolor1, btncolor2);
+     btnCol.AddActionListener(new ActionListener() {
+    @Override
+    public void actionPerformed(ActionEvent e) {
+        SwingUtilities.invokeLater(new Runnable(){
+        @Override
+        public void run(){
+        stopCellEditing();
+        }
+        });
+    }
+});
+     btnCol.setTableAndRow(table, row);
+     if (isSelected) {
                 btnCol.setBackground(table.getSelectionBackground());
             } else {
                 btnCol.setBackground(table.getBackground());
             }
             return btnCol;
         }
-
- 
  }
+
      
    
      
