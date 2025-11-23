@@ -325,7 +325,7 @@ jsonFile coursesDb=new jsonFile();
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         int choice = JOptionPane.showConfirmDialog(this, "Are you sure you want to log out?","Confirm",JOptionPane.YES_NO_OPTION);
         if (choice == JOptionPane.YES_OPTION) {
-            SwingUtilities.getWindowAncestor(this).dispose();
+            this.dispose();
             LoginFrame login = new LoginFrame();
             login.setVisible(true);
 

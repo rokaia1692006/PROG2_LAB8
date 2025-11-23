@@ -1,13 +1,27 @@
 {"Courses": [{
     "STATUS": "APPROVED",
-    "Description": "asasas",
+    "Description": "sadas",
     "Lessons": [{
+        "Quiz": {
+            "QuizID": "Q_12345",
+            "Questions": [{
+                "Choices": [
+                    "1",
+                    "2",
+                    "3",
+                    "4"
+                ],
+                "QuestionText": "What is 2+2?",
+                "Correct": 3
+            }],
+            "PassScore": 3
+        },
         "Content": "asas",
         "IDS": "L_ybcNgfENym",
         "Title": "assas",
         "Resources": ["sassq"]
     }],
-    "Title": "ssssssasas",
-    "InstructorID": "I_oT1o9azNkv",
-    "ID": "C_ClEJYrKesb"
+    "Title": "sdsdad",
+    "InstructorID": "I_QgUi2TTSOo",
+    "ID": "C_R6dfR9Lo4F"
 }]}
