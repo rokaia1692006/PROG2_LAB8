@@ -53,5 +53,13 @@ public class CourseQuizProgress {
         quizComplete.put(quizId, count + 1);
 
     }
+    public ArrayList<String> getAllQuizIds() // fel frontend bast3mlha 3ashn a load data
+    {
+    return new ArrayList<>(quizScores.keySet());
+}
+    public ArrayList<Integer> getQuizScores(String quizId) {
+    return quizScores.getOrDefault(quizId, new ArrayList<>());
+}
+
 
 }
