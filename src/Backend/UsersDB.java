@@ -11,6 +11,7 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.security.MessageDigest;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Base64;
 import java.util.HashMap;
@@ -24,9 +25,11 @@ import org.json.JSONObject;
  * @author it
  */
 public class UsersDB extends DBMANAGER{
-     private static ArrayList<Students> Students;
-    private static ArrayList<Instructor> instructors;
-
+     private static ArrayList<Students> Students= new ArrayList<>();
+    private static ArrayList<Instructor> instructors= new ArrayList<>();
+private static ArrayList<Certificate> certificates = new ArrayList<>();
+  private static final adminRole admin = new adminRole("admin", "admin@gmail.com", "1");
+   
     public UsersDB() {
          Students = new ArrayList<>();
 instructors = new ArrayList<>();
@@ -80,7 +83,21 @@ instructors = new ArrayList<>();
                           enrolledCourses.add(new StudentProgressInCourse(ID,AllLessons,LMap,ALLPROGRESS));
                       }
                   }
-                  Students.add(new Students(id, name, email, passwordHash ,salt,enrolledCourses));
+                  ArrayList <Certificate> ctemp = new ArrayList<>();
+                  if(s.has("Certificates")){
+                  JSONArray certs = s.getJSONArray("Certificates");
+                   for(int j = 0; j < certs.length(); j++){
+                   JSONObject c = certs.getJSONObject(j);
+                   String certid = c.getString("CertificateID");
+                   String CourseId = c.getString("COURSEID");
+                       LocalDate date = LocalDate.parse(c.getString("DATEISSUED"));
+                       Certificate cer = new Certificate(id ,certid, CourseId, date);
+                       ctemp.add(cer);
+                   
+                   }
+                  }
+                 this.certificates  = ctemp;
+                  Students.add(new Students(id, name, email, passwordHash ,salt,enrolledCourses,certificates));
               }
           }
           if(o.has("Instructors")){
@@ -165,7 +182,15 @@ instructors = new ArrayList<>();
     return null;
     
     }
-    
+    public static adminRole  isAdmin(String email , char [] pass){
+        if(admin.getEmail().equals(email)){
+            byte[] hashP = hashPassword(pass, admin.getSalt());
+                 if(MessageDigest.isEqual(hashP, admin.getPasswordHash())){
+                 return admin;
+                 }
+        }
+    return null;
+    }
           public  Students studentEmail(String email, char [] password){
          for(Students i:Students){
              if(i.getEmail().equals(email)){
@@ -197,7 +222,15 @@ instructors = new ArrayList<>();
     e.printStackTrace();
     return null;
     }
-}
+    }
+    public static Certificate containsCertificate(String certid){
+    for(Certificate c : certificates){
+    if(c.getCertificateId().equals(certid)){
+    return c;
+    }
+    }
+    return null;
+    }
    
      @Override
     public   void SAVE(){
@@ -214,6 +247,7 @@ instructors = new ArrayList<>();
 
     JSONArray Enrolled = new JSONArray();
     for(StudentProgressInCourse spc : s.getEnrolledCourses()){
+        
     JSONObject ClassObj = new JSONObject();
     ClassObj.put("CourseID", spc.getCourseId());
     ClassObj.put("AllLessons", spc.getAllLessonsInCourse());
@@ -227,8 +261,21 @@ instructors = new ArrayList<>();
 
     Enrolled.put(ClassObj);
     }
+    JSONObject quizes = new JSONObject();
+    
 
     o.put("Enrolled_Courses", Enrolled);
+    
+    JSONArray Certificates = new JSONArray();
+    for(Certificate certf : s.getCertificatesEarned()){
+    JSONObject o2 = new JSONObject();
+    o2.put("CertificateID", certf.getCertificateId());
+    o2.put("COURSEID", certf.getCourseId());
+    o2.put("DATEISSUED", certf.getIssuedate().toString());
+    Certificates.put(o2);
+    }
+    o.put("Certificates", Certificates);
+
     stuarr.put(o);
     }
     JSONArray insarr = new JSONArray();

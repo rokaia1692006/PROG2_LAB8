@@ -27,6 +27,14 @@ public class Certificate {
          //3yzyn n save fel json
     }
 
+    public Certificate(String studentId, String courseId, String certificateId, LocalDate issuedate) {
+        this.studentId = studentId;
+        this.courseId = courseId;
+        this.certificateId = certificateId;
+        this.issuedate = issuedate;
+    }
+    
+
     public LocalDate getIssuedate() {
         return issuedate;
     }
