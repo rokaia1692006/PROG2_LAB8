@@ -60,6 +60,17 @@
             "ID": "I_vtU0MEWJzW",
             "PasswordHash": "D7THA9Tpm9rDXeEgIhCt91WJrJDBGQNhfWSUHesGZeoZWo4RbCwKomxSPEmfianfsj5HD3jUU6+qrh/KXkUZ0g==",
             "Name": "aaa"
+        },
+        {
+            "CreatedCourses": [
+                "C_8TDAJepIZj",
+                "C_KsSNJzq0lQ"
+            ],
+            "Salt": "gmZlliaa4NP/LJLX9WsQqw==",
+            "Email": "asas@gm.com",
+            "ID": "I_LyamGrJPiG",
+            "PasswordHash": "ybt/ocm0/KCcNjt97uCEhdOOSx86A4zH3i2SZxs20P4aP2UnF7os7QJkLeFOLt2m4K14uHdVRYA9Dz4PMMSQ1w==",
+            "Name": "aaaasss"
         }
     ]
 }
