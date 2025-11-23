@@ -16,6 +16,7 @@ public class Course {
     private String title;
     private String description;
     private String InstructorId;
+    private String Status;
     private ArrayList<Lesson> lessons;
     private ArrayList<String> students;
     private boolean  checkIfInstructor(PersonDetails p){
@@ -35,8 +36,9 @@ public class Course {
         this.InstructorId = Instructor.getId();
         this.lessons  = new ArrayList<>();
         this.students  = new ArrayList<>(); 
+        this.Status="Pending";
     }
-    public Course(String id ,String title, String description, PersonDetails Instructor) {
+    public Course(String id ,String title, String description, PersonDetails Instructor,String Status) {
        if(!checkIfInstructor(Instructor)){
         JOptionPane.showMessageDialog(null, "CANT CREATE COURSE");
         return;
@@ -47,6 +49,7 @@ public class Course {
         this.InstructorId = Instructor.getId();
         this.lessons  = new ArrayList<>();
         this.students  = new ArrayList<>(); 
+        this.Status =Status;
     }
         public void addLesson(Lesson l , PersonDetails I){
     if(!checkIfInstructor(I)){
@@ -77,6 +80,8 @@ public class Course {
     students.add(s.getId());
     }
     }
+    
+   
 
     public String getTitle() {
         return title;
@@ -96,6 +101,15 @@ public class Course {
 
     public String getInstructorId() {
         return InstructorId;
+    }
+
+    public String getStatus() {
+        return Status;
+    }
+
+    public void setStatus(String Status,PersonDetails a ) {
+        if(a.getRole().equalsIgnoreCase("admin")){
+        this.Status = Status;}
     }
 
     public void UpdateValues(String Title , String description){

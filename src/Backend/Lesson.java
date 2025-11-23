@@ -15,6 +15,7 @@ public class Lesson {
     private String title;
     private String content;
     private ArrayList<String> resources;
+    private Quiz quiz;
 
     public Lesson(String title, String content, ArrayList resources) {
         this.lessonID  = generate.LessonID();
@@ -50,6 +51,14 @@ public Lesson(String ID,String title, String content, ArrayList resources) {
 
     public void setTitle(String title) {
         this.title = title;
+    }
+
+    public Quiz getQuiz() {
+        return quiz;
+    }
+
+    public void setQuiz(Quiz quiz) {
+        this.quiz = quiz;
     }
 
     public void setContent(String content) {

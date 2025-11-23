@@ -17,6 +17,7 @@ public class StudentProgressInCourse {
     private int AllLessonsInCourse;
     private HashMap<String ,Boolean > lessonsDone;
     private float overallProgress;
+    
 
     public StudentProgressInCourse(String CourseId, int AllLessonsInCourse, HashMap<String, Boolean>lessonsDone, float overallProgress) {
         this.CourseId = CourseId;
@@ -53,6 +54,20 @@ updateAll();
 
 }
 }
+
+public boolean isDone(String lessonId)
+{
+    Boolean done = lessonsDone.get(lessonId);
+    if(done==null)
+    {
+        return false;
+    }
+    else
+    {
+        return true;
+    }
+}
+
 private void updateAll(){
     long CountallDone = 0 ;
     for (Boolean done : lessonsDone.values()){
@@ -71,7 +86,41 @@ private void updateAll(){
         overallProgress = 0f ;
     }
 }
+    public boolean allQuizzesPassed(Students s,String courseId)
+    {
+        ArrayList<Course> courses = jsonFile.getAllCourses();
+        ArrayList<Quiz> quizzes = new ArrayList<>();
+       for(Course c : courses)
+       {
+           if(c.getCourseId().equals(courseId))
+           {
+               quizzes = jsonFile.getQuizsinCourse(courseId); //han-assume en el function de m3ana
+               break;
+           }
+       }
+       for ( Quiz q : quizzes)
+       {
+           if(!q.isPassed())
+           {
+              JOptionPane.showMessageDialog(null,"One or more quizzes is not passed yet, cannot create certificate!"); //lw l2ena quiz mesh passed, cannot create
+           return false;
+           }
+       }
+       return true; //kolo passed!!
+        
+    }
+    
+    public void CertificateGeneration(Students s, String courseId)
+    {
+        if(allQuizzesPassed(s, courseId))
+        {
+            Certificate certificate = new Certificate(s.getId(),courseId);
+            s.certificatesEarned.add(certificate);
+         
+        }
+    }
 
+   
     public float getOverallProgress() {
         return overallProgress;
     }

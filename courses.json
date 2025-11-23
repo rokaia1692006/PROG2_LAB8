@@ -1,77 +1,27 @@
-{"Courses": [
-    {
-        "Description": "hante7r",
-        "Lessons": [
-            {
-                "Content": "eeee",
-                "IDS": "L_1MDSKlLI1e",
-                "Title": "eeee",
-                "Resources": ["eeee"]
-            },
-            {
-                "Content": "wewew",
-                "IDS": "L_ttO8bG2GyX",
-                "Title": "errreeee",
-                "Resources": []
-            }
-        ],
-        "Title": "AAA",
-        "InstructorID": "I_jKkYEJVOLq",
-        "ID": "C_o9yN46NFC8"
-    },
-    {
-        "Description": "aaaaaa",
-        "Lessons": [
-            {
-                "Content": "aaaaaaa",
-                "IDS": "L_YnmO3Awtxf",
-                "Title": "aaaa",
-                "Resources": []
-            },
-            {
-                "Content": "dddddddddd",
-                "IDS": "L_vdiATW6qFt",
-                "Title": "ddddd",
-                "Resources": []
-            },
-            {
-                "Content": "jkjdkfj",
-                "IDS": "L_hag6M9yexu",
-                "Title": "fkjfkdjf",
-                "Resources": []
-            }
-        ],
-        "Title": "aaaa",
-        "InstructorID": "I_tERiMntxO9",
-        "ID": "C_tHcgaslcfd"
-    },
-    {
-        "Description": "dlkfmks",
-        "Lessons": [{
-            "Content": "sdsd",
-            "IDS": "L_MzDTvUZMJ7",
-            "Title": "dsd",
-            "Resources": []
-        }],
-        "Title": "sdklskfmks",
-        "InstructorID": "I_tERiMntxO9",
-        "ID": "C_IEDYu4thF5"
-    },
-    {
-        "Description": "dfsfsfdsf",
-        "Lessons": [{
-            "Content": "sddddd",
-            "IDS": "L_SekXgEG7rf",
-            "Title": "sddddddddd",
-            "Resources": [
-                "sdddddd",
-                "fffffff",
-                "lolololol",
-                "dfsf"
-            ]
-        }],
-        "Title": "fdfdfdf",
-        "InstructorID": "I_tERiMntxO9",
-        "ID": "C_W9NYHsPTQ7"
-    }
-]}
+{"Courses": [{
+    "STATUS": "APPROVED",
+    "Description": "sadas",
+    "Lessons": [{
+        "Quiz": {
+            "QuizID": "Q_12345",
+            "Questions": [{
+                "Choices": [
+                    "1",
+                    "2",
+                    "3",
+                    "4"
+                ],
+                "QuestionText": "What is 2+2?",
+                "Correct": 3
+            }],
+            "PassScore": 3
+        },
+        "Content": "asas",
+        "IDS": "L_ybcNgfENym",
+        "Title": "assas",
+        "Resources": ["sassq"]
+    }],
+    "Title": "sdsdad",
+    "InstructorID": "I_QgUi2TTSOo",
+    "ID": "C_R6dfR9Lo4F"
+}]}

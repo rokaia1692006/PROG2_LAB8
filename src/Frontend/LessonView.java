@@ -16,8 +16,8 @@ import javax.swing.JTextArea;
  */
 public class LessonView  extends javax.swing.JPanel {
     private Lesson  l;
-    private StudentDashboardFrame MainFrame;
-    public LessonView(Lesson l, StudentDashboardFrame MainFrame) {
+    private  javax.swing.JFrame MainFrame;
+    public LessonView(Lesson l,  javax.swing.JFrame MainFrame) {
         this.l = l;
         this.MainFrame = MainFrame;
         initComponents();}
@@ -39,3 +39,4 @@ public class LessonView  extends javax.swing.JPanel {
         add(new JScrollPane(contentArea), BorderLayout.CENTER);
         add(closeButton, BorderLayout.SOUTH);}
 }
+

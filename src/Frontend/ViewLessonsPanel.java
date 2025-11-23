@@ -7,36 +7,39 @@ import Backend.Students;
 import Backend.Course;
 import Backend.Lesson;
 import Backend.StudentProgressInCourse;
-
+import java.awt.BorderLayout;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.util.ArrayList;
 import javax.swing.DefaultListModel;
+import javax.swing.JButton;
+import javax.swing.JLabel;
 import javax.swing.JOptionPane;
-
-
-import javax.swing.JOptionPane;
-
+import javax.swing.JScrollPane;
+import javax.swing.JTextArea;
 
 /**
  *
  * @author DELL
  */
-public class ViewLessons extends javax.swing.JPanel {
+public class ViewLessonsPanel extends javax.swing.JPanel {
 
     /**
      * Creates new form ViewLessons
      */
     private   Course course;
     private Students currentStudent;
-    
+    private JButton backButton;
     private StudentDashboardFrame MainFrame;
 
     
      private StudentProgressInCourse studetProgressInCourse;
      
-    
-    public ViewLessons(Course course, Students currentStudent,StudentDashboardFrame MainFrame) {
+    public ViewLessonsPanel() {
+    initComponents(); 
+}
+
+    public ViewLessonsPanel(Course course, Students currentStudent,StudentDashboardFrame MainFrame) {
         
           initComponents();
           this.course = course;
@@ -62,7 +65,7 @@ public class ViewLessons extends javax.swing.JPanel {
     }
     
     private void loadLessons(){
-        
+         //removeAll();
          ArrayList<Lesson> lessons = course.getLessons();
        
        DefaultListModel<String> listmodel = new DefaultListModel<>();
@@ -80,10 +83,20 @@ public class ViewLessons extends javax.swing.JPanel {
                 int index = lessonsList.getSelectedIndex();
                 if (index != -1) {
                     Lesson selected = lessons.get(index);
-                   LessonVieww lDialog = new LessonVieww(null, true, selected);
-                    lDialog.setLocationRelativeTo(null);
-                  lDialog.setVisible(true);
+                   javax.swing.JDialog lDialog = new javax.swing.JDialog(MainFrame, selected.getTitle(), true);
+                lDialog.setSize(600, 400);
+                lDialog.setLocationRelativeTo(MainFrame);
+
+                LessonView l = new LessonView(selected,MainFrame);
+                lDialog.add(l);
+
+                lDialog.setVisible(true);
                    
+                    
+                 
+                     
+                    
+                    
             }
             }
                      }
@@ -159,9 +172,9 @@ public class ViewLessons extends javax.swing.JPanel {
                     .addComponent(progressBar, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(22, Short.MAX_VALUE))
         );
-    }// </editor-fold>
+    }// </editor-fold>//GEN-END:initComponents
 
-    private void markdoneButtonActionPerformed(java.awt.event.ActionEvent evt) {
+    private void markdoneButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_markdoneButtonActionPerformed
         int index = lessonsList.getSelectedIndex();
         
         
@@ -174,38 +187,23 @@ public class ViewLessons extends javax.swing.JPanel {
             float prog =  currentStudent.UpdateLesson(course.getCourseId(),lesson.getLessonID()); //n3mlha mark enaha done
             
             DefaultListModel<String> listModel = (DefaultListModel<String>) lessonsList.getModel();
+            listModel.set(index, lesson.getTitle() + " DONE!!"); //nktb gmbha enaha done
             
-            
-            for (int i = 0; i < lessons.size(); i++) {
-                Lesson l = lessons.get(i);
-                boolean done = studetProgressInCourse.isDone(l.getLessonID());
-                if(done)
-                {
-                    listModel.set(i, l.getTitle() + " DONE!!"); //nktb gmbha enaha done
-                }
-                else
-                {
-                     listModel.set(i, l.getTitle()); 
-                }
-                
-            
-            }
-            
-          
+           // float prog = currentStudent.UpdateLesson(TOOL_TIP_TEXT_KEY, TOOL_TIP_TEXT_KEY);
             int progress = (int) (prog);
             
              progressBar.setValue(progress); 
                
 
             }
-    }
+    }//GEN-LAST:event_markdoneButtonActionPerformed
 
 
-    // Variables declaration - do not modify//
+    // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JList<String> lessonsList;
     private javax.swing.JLabel lessonstxt;
     private javax.swing.JButton markdoneButton;
     private javax.swing.JProgressBar progressBar;
-    // End of variables declaration//
+    // End of variables declaration//GEN-END:variables
 }

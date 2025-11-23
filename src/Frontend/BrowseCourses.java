@@ -17,6 +17,7 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
+import javax.swing.SwingUtilities;
 
 /**
  *
@@ -71,7 +72,7 @@ public class BrowseCourses extends javax.swing.JPanel {
 
         try {
 
-   ArrayList <Course>coursesArray = jsonFile.getAllCourses();
+   ArrayList <Course>coursesArray = jsonFile.getAllApprovedCourses();
    JPanel coursesCONT = new JPanel();
    coursesCONT.setLayout(new BoxLayout(coursesCONT,BoxLayout.Y_AXIS));
    for(Course c : coursesArray){
@@ -106,6 +107,7 @@ public class BrowseCourses extends javax.swing.JPanel {
         courseName = new javax.swing.JLabel();
         courseDescription = new javax.swing.JLabel();
         enrollbutton = new javax.swing.JButton();
+        logOut = new javax.swing.JButton();
 
         setLayout(new java.awt.BorderLayout());
 
@@ -115,7 +117,7 @@ public class BrowseCourses extends javax.swing.JPanel {
         viewcourses.setMaximumSize(new java.awt.Dimension(50, 45));
         viewcourses.setMinimumSize(new java.awt.Dimension(40, 45));
         viewcourses.setPreferredSize(new java.awt.Dimension(50, 45));
-        add(viewcourses, java.awt.BorderLayout.NORTH);
+        add(viewcourses, java.awt.BorderLayout.CENTER);
 
         coursePanelMain.setBorder(new javax.swing.border.MatteBorder(null));
 
@@ -142,32 +144,49 @@ public class BrowseCourses extends javax.swing.JPanel {
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(coursePanelMainLayout.createSequentialGroup()
                         .addComponent(courseDescription)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 630, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 471, Short.MAX_VALUE)
                         .addComponent(enrollbutton)
                         .addGap(39, 39, 39))))
         );
         coursePanelMainLayout.setVerticalGroup(
             coursePanelMainLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(coursePanelMainLayout.createSequentialGroup()
-                .addGap(33, 33, 33)
+                .addGap(44, 44, 44)
                 .addComponent(courseName)
-                .addGroup(coursePanelMainLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(coursePanelMainLayout.createSequentialGroup()
-                        .addGap(29, 29, 29)
-                        .addComponent(courseDescription)
-                        .addContainerGap(42, Short.MAX_VALUE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, coursePanelMainLayout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(enrollbutton)
-                        .addGap(22, 22, 22))))
+                .addGap(18, 18, 18)
+                .addComponent(courseDescription)
+                .addContainerGap(42, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, coursePanelMainLayout.createSequentialGroup()
+                .addContainerGap(87, Short.MAX_VALUE)
+                .addComponent(enrollbutton)
+                .addGap(22, 22, 22))
         );
 
         add(coursePanelMain, java.awt.BorderLayout.PAGE_END);
+
+        logOut.setText("Logout");
+        logOut.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                logOutActionPerformed(evt);
+            }
+        });
+        add(logOut, java.awt.BorderLayout.PAGE_START);
     }//GEN-END:initComponents
 
     private void enrollbuttonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_enrollbuttonActionPerformed
       
     }//GEN-LAST:event_enrollbuttonActionPerformed
+
+    private void logOutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_logOutActionPerformed
+        int choice = JOptionPane.showConfirmDialog(this, "Are you sure you want to log out?","Confirm",JOptionPane.YES_NO_OPTION);
+        if (choice == JOptionPane.YES_OPTION) {
+            SwingUtilities.getWindowAncestor(this).dispose();
+            LoginFrame login = new LoginFrame();
+            login.setVisible(true);
+
+        }
+        else {return;}
+    }//GEN-LAST:event_logOutActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -175,6 +194,7 @@ public class BrowseCourses extends javax.swing.JPanel {
     private javax.swing.JLabel courseName;
     private javax.swing.JPanel coursePanelMain;
     private javax.swing.JButton enrollbutton;
+    private javax.swing.JButton logOut;
     private javax.swing.JLabel viewcourses;
     // End of variables declaration//GEN-END:variables
 //}

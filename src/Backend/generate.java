@@ -56,10 +56,45 @@ public class generate {
     
     
     }
+      public  static String QuizID(){
+       
+        StringBuilder s = new StringBuilder();
+        s.append("Q_");
+        String id  = RandomString(s);
+        if(jsonFile.containsQuiz(id)!=null){
+          id  = RandomString(s);
+        }
+        return id;
+    
+    
+    }
        public  static String StudentID(){
        
         StringBuilder s = new StringBuilder();
         s.append("S_");
+        String id  = RandomString(s);
+        if(jsonFile.containsStudent(id)!=null){
+          id  = RandomString(s);
+        }
+        return id;
+    
+    
+    }
+       
+       public static String CertificateID()
+       {
+           StringBuilder s = new StringBuilder();
+        s.append("CRT_");
+        String id  = RandomString(s);
+        if(jsonFile.containsCertificate(id)!=null){
+          id  = RandomString(s);
+        }
+        return id;
+       }
+        public  static String AdminID(){
+       
+        StringBuilder s = new StringBuilder();
+        s.append("A_");
         String id  = RandomString(s);
         if(jsonFile.containsStudent(id)!=null){
           id  = RandomString(s);
