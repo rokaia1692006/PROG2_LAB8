@@ -34,7 +34,7 @@ public class AssessmentManager {
         }
         return attempt;
     }
-    public boolean canAccessNextLesson(String studenId, String lessonId){
-        
-    }
+//    public boolean canAccessNextLesson(String studenId, String lessonId){
+//        
+//    }
 }

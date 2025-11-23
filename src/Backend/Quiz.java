@@ -21,7 +21,7 @@ public class Quiz {
             return; //returns when question is invalid, stops execution
         }
         if(questions==null){
-            questions=new ArrayList<Question>();
+            questions=new ArrayList<>();
         }
         questions.add(q);
     }
