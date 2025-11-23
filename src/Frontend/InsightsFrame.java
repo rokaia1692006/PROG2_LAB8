@@ -168,7 +168,7 @@ public class InsightsFrame extends javax.swing.JFrame {
          String quizId = (String) quizSelector.getSelectedItem();
     if (quizId == null) return;
 
-    ChartFrame chart = new ChartFrame(courseId, quizId, quizManager);
+    ChartDialog chart = new ChartDialog(courseId, quizId, quizManager);
     chart.setVisible(true);
     }//GEN-LAST:event_chartActionPerformed
 

@@ -17,12 +17,14 @@ import javax.swing.JList;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.table.DefaultTableModel;
+import Backend.QuizManager;
 
 /**
  *
  * @author LapTop
  */
 public class InstructorDashboard extends javax.swing.JFrame {
+    private QuizManager quizManager = new QuizManager();
     
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(InstructorDashboard.class.getName());
 private Instructor ins;
@@ -310,8 +312,16 @@ jsonFile coursesDb=new jsonFile();
     }//GEN-LAST:event_manageLessonsBtnActionPerformed
 
     private void insightsbtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_insightsbtnActionPerformed
-       InsightsFrame insights = new InsightsFrame();
-    insights.setVisible(true);
+       int selectedRow = courseTable.getSelectedRow();
+    if (selectedRow == -1) {
+        JOptionPane.showMessageDialog(this, "Select a course first!");
+        return;
+    }
+    String courseId = courseTable.getValueAt(selectedRow, 1).toString();
+        
+        InsightsFrame frame = new InsightsFrame(quizManager, courseId);
+frame.setVisible(true);
+    
     }//GEN-LAST:event_insightsbtnActionPerformed
 
     /**
