@@ -54,6 +54,20 @@ updateAll();
 
 }
 }
+
+public boolean isDone(String lessonId)
+{
+    Boolean done = lessonsDone.get(lessonId);
+    if(done==null)
+    {
+        return false;
+    }
+    else
+    {
+        return true;
+    }
+}
+
 private void updateAll(){
     long CountallDone = 0 ;
     for (Boolean done : lessonsDone.values()){
