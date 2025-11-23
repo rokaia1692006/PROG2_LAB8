@@ -56,6 +56,18 @@ public class generate {
     
     
     }
+      public  static String QuizID(){
+       
+        StringBuilder s = new StringBuilder();
+        s.append("Q_");
+        String id  = RandomString(s);
+        if(jsonFile.containsQuiz(id)!=null){
+          id  = RandomString(s);
+        }
+        return id;
+    
+    
+    }
        public  static String StudentID(){
        
         StringBuilder s = new StringBuilder();

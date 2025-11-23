@@ -89,11 +89,12 @@ private void updateAll(){
     public boolean allQuizzesPassed(Students s,String courseId)
     {
         ArrayList<Course> courses = jsonFile.getAllCourses();
+        ArrayList<Quiz> quizzes = new ArrayList<>();
        for(Course c : courses)
        {
            if(c.getCourseId().equals(courseId))
            {
-               ArrayList<Quiz> quizzes = jsonFile.getAllQuizzes(); //han-assume en el function de m3ana
+               quizzes = jsonFile.getQuizsinCourse(courseId); //han-assume en el function de m3ana
                break;
            }
        }

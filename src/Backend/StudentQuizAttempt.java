@@ -16,15 +16,24 @@ public class StudentQuizAttempt {
     private int score;
     private boolean passed;
     private ArrayList<Integer> answers;
-    private Quiz quiz;
+    private final String Qid;
     
     public StudentQuizAttempt(String studentId, String lessonId, Quiz quiz, ArrayList<Integer> answers) {
         this.studentId = studentId;
         this.lessonId = lessonId;
-        this.quiz = quiz;
+        this.Qid = quiz.getQuizid();
         this.answers = answers;
         this.score = quiz.calculateScore(answers);
         this.passed = quiz.hasPassed(this.score);
+    }
+
+    public StudentQuizAttempt(String studentId, String lessonId, int score, boolean passed, ArrayList<Integer> answers, String Qid) {
+        this.studentId = studentId;
+        this.lessonId = lessonId;
+        this.score = score;
+        this.passed = passed;
+        this.answers = answers;
+        this.Qid = Qid;
     }
 
     public String getStudentId() {
@@ -41,6 +50,14 @@ public class StudentQuizAttempt {
 
     public boolean isPassed() {
         return passed;
+    }
+
+    public ArrayList<Integer> getAnswers() {
+        return answers;
+    }
+
+    public String getQid() {
+        return Qid;
     }
     
 }

@@ -34,15 +34,15 @@ public class QuizManager {
         courseProgress.putIfAbsent(courseId, new CourseQuizProgress(courseId));
     }
 
-    public void studentCompleteQuiz(String studentId, String quizId, int score) {
-        StudentQuizProgress stprog = studentProgress.get(studentId);
+    public void studentCompleteQuiz(StudentQuizAttempt a) {
+        StudentQuizProgress stprog = studentProgress.get(a.getStudentId());
         if (stprog != null) {
-            stprog.quizDone(quizId, score);
+            stprog.quizDone(a);
             String courseId = stprog.getCourseId();
             CourseQuizProgress courseProg = courseProgress.get(courseId);
             if (courseProg != null) {
-                courseProg.addQuizScore(quizId, score);
-                courseProg.updateCourseCompleteCount(quizId);
+                courseProg.addQuizScore(a.getQid(), a.getScore());
+                courseProg.updateCourseCompleteCount(a.getQid());
             }
         }
     }

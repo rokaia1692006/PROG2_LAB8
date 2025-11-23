@@ -41,10 +41,12 @@ public class StudentQuizProgress {
         return quizCompletionPercentage;
     }
    
-    public void quizDone(String quizId,int score)
+    public void quizDone(StudentQuizAttempt a )
+            
     {
-        quizScores.put(quizId, score);
-        quizCompleted.put(quizId,true);
+        String qid = a.getQid();
+        quizScores.put(qid, a.getScore());
+        quizCompleted.put(qid,a.isPassed());
          updateQuizCompletion();
     
     }

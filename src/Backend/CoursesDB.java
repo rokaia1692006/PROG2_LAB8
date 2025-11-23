@@ -19,10 +19,11 @@ import org.json.JSONObject;
 public class CoursesDB extends DBMANAGER{
      private static ArrayList<String> lids;
       private static ArrayList<Course> AllCourses;
-
+private static ArrayList<Quiz> AllQuizs;
     public CoursesDB() {
         lids=   new ArrayList<>()  ;
         AllCourses = new ArrayList<>();
+        AllQuizs = new ArrayList<>();
     }
       
       @Override
@@ -33,6 +34,7 @@ public class CoursesDB extends DBMANAGER{
       Path p =Paths.get(DBMANAGER.CFile);
         lids=   new ArrayList<>()  ;
         AllCourses = new ArrayList<>();
+        AllQuizs = new ArrayList<>();
       if(Files.exists(p) ){
     
           String data = new String(java.nio.file.Files.readAllBytes(p));
@@ -75,6 +77,30 @@ public class CoursesDB extends DBMANAGER{
           }
               Lesson ltenp = new Lesson(lid,lTitle, lContent, resources);
               lids.add(ltenp.getLessonID());
+
+              if(l.has("Quiz")){
+                  JSONObject qobj = l.getJSONObject("Quiz");
+                  String quizId = qobj.getString("QuizID");
+                  int passScore = qobj.getInt("PassScore");
+                  ArrayList<Question> questions = new ArrayList<>();
+                  JSONArray QeustionsArr = qobj.getJSONArray("Questions");
+                  for(int qsi = 0; qsi < QeustionsArr.length(); qsi++){
+                  JSONObject object = QeustionsArr.getJSONObject(qsi);
+                  String questionText = object.getString("QuestionText");
+                  JSONArray opts = object.getJSONArray("Choices");
+                  ArrayList<String> Choices = new ArrayList<>();
+                  for(int j = 0; j < opts.length(); j++){
+                    Choices.add(opts.getString(j));
+                    }
+                    int correctIndex = object.getInt("Correct");
+                    String[] ch = Choices.toArray(new String[0]);
+                    questions.add(new Question(questionText, ch, correctIndex));
+                  }
+                  Quiz quiz = new Quiz(quizId, questions, passScore);
+                  ltenp.setQuiz(quiz);
+                  AllQuizs.add(quiz);
+              }
+
             ls.add(ltenp);
               
           }
@@ -180,7 +206,42 @@ public class CoursesDB extends DBMANAGER{
          
          
          }
+         public ArrayList<Quiz> getAllQuizzes(){
+         return AllQuizs;
          
+         }
+         public ArrayList<Quiz> getQuizsinCourse(String cid){
+             ArrayList<Quiz>qs = new  ArrayList<>();
+             Course c = containsCourse(cid);
+             ArrayList<Lesson> l = c.getLessons();
+         if(cid!=null){
+             for(Lesson l1 : l ){
+                 String qid = l1.getQuiz().getQuizid();
+            
+         for(Quiz q : AllQuizs){
+             if(qid.equals(q.getQuizid())){
+             qs.add(q);
+             break;
+             }
+         }
+            
+             
+         
+         }
+         
+         }
+         return qs;
+         }
+         public static Quiz containsQuiz(String id){
+         id=id.trim();
+    for(Quiz i : AllQuizs){
+    if(i.getQuizid().equals(id)){
+    return i;
+    }
+    }
+    return null;
+         
+         }
           public static Course containsCourse(String id){
          id=id.trim();
     for(Course i : AllCourses){
@@ -228,6 +289,23 @@ public class CoursesDB extends DBMANAGER{
         lo.put("Title", l.getTitle());
         lo.put("Content", l.getContent());
         lo.put("Resources", new JSONArray(l.getResources()));
+        if(l.getQuiz() != null){
+        Quiz q = l.getQuiz();
+        JSONObject qobject = new JSONObject();
+        qobject.put("QuizID", q.getQuizid());
+        qobject.put("PassScore", q.getPassScore());
+        JSONArray QeustionsArr = new JSONArray();
+        for(Question qs : q.getQuestions()){
+        JSONObject object = new JSONObject();
+        object.put("QuestionText", qs.getQuestion());
+        object.put("Choices", new JSONArray(qs.getOptions()));
+        object.put("Correct", qs.getCorrect());
+            QeustionsArr.put(object);
+            }
+        qobject.put("Questions", QeustionsArr);
+        lo.put("Quiz", qobject);
+        }
+
         ls.put(lo);
         }
         o.put("Lessons", ls);

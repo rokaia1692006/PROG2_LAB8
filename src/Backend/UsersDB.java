@@ -28,6 +28,7 @@ public class UsersDB extends DBMANAGER{
      private static ArrayList<Students> Students= new ArrayList<>();
     private static ArrayList<Instructor> instructors= new ArrayList<>();
 private static ArrayList<Certificate> certificates = new ArrayList<>();
+private static ArrayList<Quiz> quizess = new ArrayList<>();
   private static final adminRole admin = new adminRole("admin", "admin@gmail.com", "1");
    
     public UsersDB() {
@@ -101,8 +102,27 @@ certificates = new ArrayList<>();
                    }
                   }
                  this.certificates  = ctemp;
-                  Students.add(new Students(id, name, email, passwordHash ,salt,enrolledCourses,certificates));
-              }
+                 
+                 
+                 ArrayList<StudentQuizAttempt> attempts = new ArrayList<>();
+                 if(s.has("QuizAttempts")){
+                 JSONArray atemptsArr = s.getJSONArray("QuizAttempts");
+                 for(int j = 0 ; i  < atemptsArr.length(); j ++){
+                 JSONObject object = atemptsArr.getJSONObject(j);
+                 String lid = object.getString("LessonID");
+                 String Qid = object.getString("QuizID");
+                 int score = object.getInt("Score");
+                 boolean passed = object.getBoolean("Passed");
+                 ArrayList<Integer> answers = new ArrayList<>();
+                  JSONArray ansArr = object.getJSONArray("Answers");
+                  for(int k = 0; k < ansArr.length(); k++){
+                  answers.add(ansArr.getInt(k));
+                  }
+                  attempts.add(new StudentQuizAttempt(id, lid, score, passed, answers, Qid));
+                  }
+                  }
+
+                  Students.add(new Students(id, name, email, passwordHash ,salt,enrolledCourses,certificates, attempts));}
           }
           if(o.has("Instructors")){
               JSONArray insarr = o.getJSONArray("Instructors");
@@ -236,7 +256,7 @@ certificates = new ArrayList<>();
     return null;
     }
    
-     @Override
+         @Override
     public   void SAVE(){
     try{
     JSONObject root = new JSONObject();
@@ -279,6 +299,22 @@ certificates = new ArrayList<>();
     Certificates.put(o2);
     }
     o.put("Certificates", Certificates);
+
+    JSONArray QuizAttempts = new JSONArray();
+    for(StudentQuizAttempt attempt : s.getQuizAttempts()){
+    JSONObject a = new JSONObject();
+    a.put("LessonID", attempt.getLessonId());
+    a.put("QuizID", attempt.getQid());
+    a.put("Score", attempt.getScore());
+    a.put("Passed", attempt.isPassed());
+    JSONArray answers = new JSONArray();
+    for(Integer ans : attempt.getAnswers()){
+    answers.put(ans);
+    }
+    a.put("Answers", answers);
+    QuizAttempts.put(a);
+    }
+    o.put("QuizAttempts", QuizAttempts);
 
     stuarr.put(o);
     }
