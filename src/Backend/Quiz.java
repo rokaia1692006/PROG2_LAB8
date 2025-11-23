@@ -12,8 +12,15 @@ import javax.swing.JOptionPane;
  * @author malak
  */
 public class Quiz {
+    private String Quizid;
     private ArrayList<Question> questions;
     private int passScore;
+
+    public Quiz(String Quizid, ArrayList<Question> questions, int passScore) {
+        this.Quizid = Quizid;
+        this.questions = questions;
+        this.passScore = passScore;
+    }
     
     public void addQuestion(Question q){
         if(q.getQuestion()==null||q.getQuestion().isEmpty()){
@@ -33,6 +40,13 @@ public class Quiz {
         }
         return score;
     }
+
+    public String getQuizid() {
+        return Quizid;
+    }
+
+   
+    
     public boolean hasPassed(int score){
         return score>=passScore;
     }
@@ -56,6 +70,7 @@ public class Quiz {
     }
 
     public Quiz(ArrayList<Question> questions, int passScore) {
+        this.Quizid  = generate.QuizID();
         this.questions = questions;
         this.passScore = passScore;
     }

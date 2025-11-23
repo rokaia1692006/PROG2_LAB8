@@ -120,4 +120,13 @@ public class jsonFile {
         CoursesDB.changeCourseStatus( Status,cid ,  a);
             SAVE();
         }
+        public static ArrayList<Quiz> getAllQuizzes(){
+        return cdb.getAllQuizzes();
+        }
+          public static ArrayList<Quiz> getQuizsinCourse(String cid){
+          return cdb.getQuizsinCourse(cid);
+          }
+          public static Quiz containsQuiz(String id){
+          return cdb.containsQuiz(id);
+          }
      }

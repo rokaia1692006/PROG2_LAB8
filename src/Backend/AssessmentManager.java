@@ -30,7 +30,7 @@ public class AssessmentManager {
     public StudentQuizAttempt submitQuiz(String studentId, String lessonId, Quiz quiz, ArrayList<Integer> answers){
         StudentQuizAttempt attempt=new StudentQuizAttempt(studentId, lessonId, quiz, answers);
         if(attempt.isPassed()){
-            manager.studentCompleteQuiz(studentId, lessonId, attempt.getScore());
+            manager.studentCompleteQuiz(attempt);
         }
         return attempt;
     }

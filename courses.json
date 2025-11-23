@@ -1,42 +1,27 @@
-{"Courses": [
-    {
-        "STATUS": "REJECTED",
-        "Description": "w",
-        "Lessons": [],
-        "Title": "approve",
-        "InstructorID": "I_vtU0MEWJzW",
-        "ID": "C_NgjE6JfoSw"
-    },
-    {
-        "STATUS": "APPROVED",
-        "Description": "111",
-        "Lessons": [],
-        "Title": "approve2",
-        "InstructorID": "I_vtU0MEWJzW",
-        "ID": "C_DBtEqzn2cW"
-    },
-    {
-        "STATUS": "REJECTED",
-        "Description": "2222",
-        "Lessons": [],
-        "Title": "reject2",
-        "InstructorID": "I_vtU0MEWJzW",
-        "ID": "C_CMc50Ni8em"
-    },
-    {
-        "STATUS": "APPROVED",
-        "Description": "1111",
-        "Lessons": [],
-        "Title": "reject",
-        "InstructorID": "I_vtU0MEWJzW",
-        "ID": "C_MXOBhn65Y0"
-    },
-    {
-        "STATUS": "Pending",
-        "Description": "qqqq",
-        "Lessons": [],
-        "Title": "leavepending",
-        "InstructorID": "I_vtU0MEWJzW",
-        "ID": "C_2h0TsD0fGA"
-    }
-]}
+{"Courses": [{
+    "STATUS": "APPROVED",
+    "Description": "sadas",
+    "Lessons": [{
+        "Quiz": {
+            "QuizID": "Q_12345",
+            "Questions": [{
+                "Choices": [
+                    "1",
+                    "2",
+                    "3",
+                    "4"
+                ],
+                "QuestionText": "What is 2+2?",
+                "Correct": 3
+            }],
+            "PassScore": 3
+        },
+        "Content": "asas",
+        "IDS": "L_ybcNgfENym",
+        "Title": "assas",
+        "Resources": ["sassq"]
+    }],
+    "Title": "sdsdad",
+    "InstructorID": "I_QgUi2TTSOo",
+    "ID": "C_R6dfR9Lo4F"
+}]}

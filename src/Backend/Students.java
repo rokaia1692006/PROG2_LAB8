@@ -18,7 +18,7 @@ public class Students extends PersonDetails{
   
     private final static String role = "Student";
     private ArrayList<StudentProgressInCourse> enrolledCourses;
-    //dah bas 3shan 23rf 2a print el cirtificat f el course el sa7
+    private ArrayList<StudentQuizAttempt> quizAttempts;
     protected ArrayList <Certificate> certificatesEarned;
     
   
@@ -26,23 +26,32 @@ public class Students extends PersonDetails{
     public Students(String username, String email, byte[] passwordHash,byte[]salt) {
         
         super( email, passwordHash, salt,username);
-        
+        this.quizAttempts  = new ArrayList<>();
         this.enrolledCourses  = new ArrayList<>();
         this.certificatesEarned = new ArrayList<>();
         
     }
-    public Students(String userId, String username, String email, byte[] passwordHash,byte[]salt,ArrayList<StudentProgressInCourse>enrolledData,ArrayList<Certificate> cert) {
+    public Students(String userId, String username, String email, byte[] passwordHash,byte[]salt,ArrayList<StudentProgressInCourse>enrolledData,ArrayList<Certificate> cert,ArrayList<StudentQuizAttempt>attempts) {
         
         super(userId, email, passwordHash, salt,username);
         
         this.enrolledCourses = enrolledData;
         this.certificatesEarned = cert;
+        this.quizAttempts  = attempts;
         
     }
 
+    public ArrayList<StudentQuizAttempt> getQuizAttempts() {
+        return quizAttempts;
+    }
+    
+
+public void ADDattempt(StudentQuizAttempt a){
+    quizAttempts.add(a);
+}
+
 
     public void setProgress(float progress) {
-    
     }
 
 @Override
