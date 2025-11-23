@@ -7,16 +7,15 @@ import Backend.Students;
 import Backend.Course;
 import Backend.Lesson;
 import Backend.StudentProgressInCourse;
-import java.awt.BorderLayout;
+
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.util.ArrayList;
 import javax.swing.DefaultListModel;
 import javax.swing.JButton;
-import javax.swing.JLabel;
+
 import javax.swing.JOptionPane;
-import javax.swing.JScrollPane;
-import javax.swing.JTextArea;
+
 
 /**
  *
@@ -29,7 +28,7 @@ public class ViewLessons extends javax.swing.JPanel {
      */
     private   Course course;
     private Students currentStudent;
-    private JButton backButton;
+    
     private StudentDashboardFrame MainFrame;
 
     
@@ -80,20 +79,10 @@ public class ViewLessons extends javax.swing.JPanel {
                 int index = lessonsList.getSelectedIndex();
                 if (index != -1) {
                     Lesson selected = lessons.get(index);
-                   javax.swing.JDialog lDialog = new javax.swing.JDialog(MainFrame, selected.getTitle(), true);
-                lDialog.setSize(600, 400);
-                lDialog.setLocationRelativeTo(MainFrame);
-
-                LessonView l = new LessonView(selected,MainFrame);
-                lDialog.add(l);
-
-                lDialog.setVisible(true);
+                   LessonVieww lDialog = new LessonVieww(null, true, selected);
+                    lDialog.setLocationRelativeTo(null);
+                  lDialog.setVisible(true);
                    
-                    
-                 
-                     
-                    
-                    
             }
             }
                      }
