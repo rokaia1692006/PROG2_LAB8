@@ -78,6 +78,7 @@ jsonFile coursesDb=new jsonFile();
 
         jPanel1 = new javax.swing.JPanel();
         CreateCourse = new javax.swing.JButton();
+        insightsbtn = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         courseTable = new javax.swing.JTable();
         actionpanel = new javax.swing.JPanel();
@@ -95,19 +96,30 @@ jsonFile coursesDb=new jsonFile();
             }
         });
 
+        insightsbtn.setText("Insights");
+        insightsbtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                insightsbtnActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addGap(0, 371, Short.MAX_VALUE)
+                .addGap(0, 239, Short.MAX_VALUE)
+                .addComponent(insightsbtn, javax.swing.GroupLayout.PREFERRED_SIZE, 127, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(CreateCourse, javax.swing.GroupLayout.PREFERRED_SIZE, 211, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(CreateCourse, javax.swing.GroupLayout.DEFAULT_SIZE, 32, Short.MAX_VALUE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(CreateCourse, javax.swing.GroupLayout.DEFAULT_SIZE, 32, Short.MAX_VALUE)
+                    .addComponent(insightsbtn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
 
@@ -297,6 +309,11 @@ jsonFile coursesDb=new jsonFile();
             manageLessonsBtn.setEnabled(false);
     }//GEN-LAST:event_manageLessonsBtnActionPerformed
 
+    private void insightsbtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_insightsbtnActionPerformed
+       InsightsFrame insights = new InsightsFrame();
+    insights.setVisible(true);
+    }//GEN-LAST:event_insightsbtnActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -328,6 +345,7 @@ jsonFile coursesDb=new jsonFile();
     private javax.swing.JTable courseTable;
     private javax.swing.JButton deleteCourse;
     private javax.swing.JButton editCourse;
+    private javax.swing.JButton insightsbtn;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JButton manageLessonsBtn;
