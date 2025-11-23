@@ -15,13 +15,14 @@ import javax.swing.JOptionPane;
  * @author malak
  */
 public class LoginFrame extends javax.swing.JFrame {
-    
+    private jsonFile j = new jsonFile();
 
     /**
      * Creates new form LoginFrame
      */
     public LoginFrame() {
         initComponents();
+      
     }
 
     /**

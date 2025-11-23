@@ -26,7 +26,7 @@ public class SignupFrame extends javax.swing.JFrame {
      */
     public SignupFrame() {
         initComponents();
-        jsonFile j = new jsonFile();
+       
     }
 
     /**

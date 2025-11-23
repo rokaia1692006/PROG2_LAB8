@@ -24,13 +24,19 @@ import javax.swing.table.TableCellEditor;
 public class AdminFrame extends javax.swing.JFrame {
 
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(AdminFrame.class.getName());
+    public static ArrayList<Course> courses;
+    public static adminRole admin;
 
-    adminRole admin = new adminRole("ADMIN", "admin@sys.com", new byte[1], new byte[1]);
+//   
     /**
      * Creates new form AdminFrame
      */
     public AdminFrame(adminRole admin) {
         initComponents();
+        AdminFrame.admin = admin;
+        AdminFrame.courses = jsonFile.getPendingCourses();
+        ShowPending();
+
     }
 
     /**
@@ -79,7 +85,7 @@ public class AdminFrame extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(Title)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 44, Short.MAX_VALUE)
+                .addGap(44, 44, 44)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 306, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(16, 16, 16))
         );
@@ -92,6 +98,7 @@ public class AdminFrame extends javax.swing.JFrame {
      */
     private void ShowPending(){
     ArrayList<Course> course = jsonFile.getPendingCourses();
+    System.out.println("Pending courses size: " + course.size());
         DefaultTableModel m = (DefaultTableModel) jTable1.getModel();
         m.setRowCount(0);
         for(Course c : course){
@@ -101,11 +108,11 @@ public class AdminFrame extends javax.swing.JFrame {
         ""
         });
         }
-       JTable table = new JTable(m);
+    
        aproveRejectRederer renderer = new aproveRejectRederer("APPROVE" , "REJECT" , Color.BLUE,Color.RED);
-       table.getColumnModel().getColumn(3).setCellRenderer(renderer);
-        table.getColumnModel().getColumn(3).setCellEditor(new btncolEditor("APPROVE" , "REJECT" , Color.BLUE,Color.RED));
-        table.setRowHeight(renderer.getTableCellRendererComponent(table, null, true, true, 0, 0).getPreferredSize().height);
+       jTable1.getColumnModel().getColumn(2).setCellRenderer(renderer);
+        jTable1.getColumnModel().getColumn(2).setCellEditor(new btncolEditor("APPROVE" , "REJECT" , Color.BLUE,Color.RED));
+        jTable1.setRowHeight(renderer.getTableCellRendererComponent(jTable1, null, true, true, 0, 0).getPreferredSize().height);
     
     }
 

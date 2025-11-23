@@ -15,9 +15,7 @@ import java.util.ArrayList;
 public class jsonFile {
     private static UsersDB udB = new UsersDB();
     private static CoursesDB cdb = new CoursesDB();
-    
-   
-   
+  
     
     public final void LOAD(){
   udB.LOAD();
@@ -85,6 +83,9 @@ public class jsonFile {
        udB.SAVE();
        cdb.SAVE();
        
+       }
+       public static Certificate containsCertificate(String certid){
+       return udB.containsCertificate(certid);
        }
        public static ArrayList<Students> getAllStudentinCourse(String id){
        return UsersDB.getAllStudentinCourse(id);

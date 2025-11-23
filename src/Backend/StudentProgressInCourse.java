@@ -79,7 +79,7 @@ private void updateAll(){
        {
            if(c.getCourseId().equals(courseId))
            {
-               ArrayList<Quizzes> quizzes = jsonFile.getAllQuizzes(); //han-assume en el function de m3ana
+               ArrayList<Quiz> quizzes = jsonFile.getAllQuizzes(); //han-assume en el function de m3ana
                break;
            }
        }

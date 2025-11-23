@@ -35,12 +35,12 @@ private Students s;
         tabbedDIS = new javax.swing.JTabbedPane();
         jPanel1 = new BrowseCourses(s);
         jPanel2 = new ViewEnrolledCourses(s,tabbedDIS,this);
-        jPanel3 = new 
+        jPanel3 = new CertificateView(s);
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
        
         tabbedDIS.addTab("BROWSE COURSES", jPanel1);
         tabbedDIS.addTab("ENROLLED COURSES", jPanel2);
-        tabbedDis.addTab("VIEW CERTIFICATE",)
+        tabbedDIS.addTab("VIEW CERTIFICATE",jPanel3);
         tabbedDIS.addChangeListener(e->{
             int index = tabbedDIS.getSelectedIndex();   
             String title = tabbedDIS.getTitleAt(index);

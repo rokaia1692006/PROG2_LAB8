@@ -1,15 +1,11 @@
 {
-
     "Students": [],
     "Instructors": [{
-        "CreatedCourses": [
-            "C_rqcHC1tl15",
-            "C_e35eY1bW4m"
-        ],
-        "Salt": "o3lk1ixhZsFhuhdzYEhFjg==",
-        "Email": "aaa@gmail.com",
-        "ID": "I_27z7HlRLf9",
-        "PasswordHash": "Cvea3gqj3WJAFIS5Wj8mz/lENBoXSebwUvfZux28yO1hK6RwXVIqvgY+B1Uu28F5qoJ6glni3n5obIFL9a3Dvw==",
-        "Name": "aa"
+        "CreatedCourses": ["C_2DIf5NlD9M"],
+        "Salt": "sURBV4649/jMQXN+jF3uLA==",
+        "Email": "sss@gm.com",
+        "ID": "I_UH3kDDhHSI",
+        "PasswordHash": "fs6cem3zkGH3s1GLzLrvYHfRfBC+TA3gxHPoX6Pn/QS8e24pZudAhbmPr2HZT4qTaBWmAH4I+QL69B+dvoOjrA==",
+        "Name": "sss"
     }]
-    }
+}

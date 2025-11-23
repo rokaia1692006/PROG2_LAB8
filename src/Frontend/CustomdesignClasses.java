@@ -1,5 +1,6 @@
 package Frontend;
 
+import Backend.jsonFile;
 import java.awt.Color;
 import java.awt.Component;
 import java.awt.Dimension;
@@ -22,16 +23,25 @@ import javax.swing.JTable;
 import javax.swing.JTextField;
 import javax.swing.SwingUtilities;
 import javax.swing.table.DefaultTableCellRenderer;
+import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableCellEditor;
 
 public class CustomdesignClasses {
     
-    public static class ButtonCol extends JPanel{
+   public static class ButtonCol extends JPanel{
 
 
     private final JButton approveBtn ;
     private final JButton rejectBtn;
     private String state;
+    private JTable table;
+    private int row;
+
+    public void setTableAndRow(JTable table, int row){
+        this.table = table;
+        this.row = row;
+    }
+
     public ButtonCol(String btn1Text , String btn2Text,Color btncolor1 , Color btncolor2){
         approveBtn  =new roundedbtn(btn1Text,15,15);
         approveBtn.setBackground(btncolor1);
@@ -45,15 +55,26 @@ public class CustomdesignClasses {
         ActionListener listen = new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-               // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+               // Generated from nbfs://nbhost/System/Templates/Classes/Code/GeneratedMethodBody
                 state = e.getActionCommand();
                 JOptionPane.showMessageDialog(null, state);
+                if(table != null && row >= 0){
+                    if(state.equals("approve")){
+                        // update course status
+                        AdminFrame.courses.get(row).setStatus("approved", AdminFrame.admin);
+                        jsonFile.SAVE();
+                    } else if(state.equals("Reject")){
+                        AdminFrame.courses.get(row).setStatus("rejected", AdminFrame.admin);
+                        jsonFile.SAVE();
+                    }
+                    ((DefaultTableModel)table.getModel()).removeRow(row);
+                }
             }
         };
         approveBtn.addActionListener(listen);
         rejectBtn.addActionListener(listen);
 
-    
+
     } 
 
     public void AddActionListener(ActionListener listen){
@@ -77,6 +98,7 @@ public aproveRejectRederer(String btn1Text , String btn2Text,Color btncolor1 , C
         @Override
         public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected, boolean hasFocus, int row, int column) {
           //rated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/OverriddenMethodBody
+        btnCol.setTableAndRow(table, row);
         if(isSelected){
         btnCol.setBackground(table.getSelectionBackground());
         }

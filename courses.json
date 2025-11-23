@@ -1,40 +1,13 @@
-{"Courses": [
-    {
-        "STATUS": "Pending",
-        "Description": "aaa",
-        "Lessons": [
-            {
-                "Content": "aaaa\taaaa",
-                "IDS": "L_xHPcPL5GHk",
-                "Title": "aaa",
-                "Resources": [
-                    "eidiejdd",
-                    "dedew",
-                    "ded"
-                ]
-            },
-            {
-                "Content": "weee",
-                "IDS": "L_5AxmQIuZff",
-                "Title": "wew",
-                "Resources": ["ewewe"]
-            }
-        ],
-        "Title": "aaaa",
-        "InstructorID": "I_27z7HlRLf9",
-        "ID": "C_rqcHC1tl15"
-    },
-    {
-        "STATUS": "Pending",
-        "Description": "saksjka",
-        "Lessons": [{
-            "Content": "sasddsad\td\td",
-            "IDS": "L_lx4LQEwX4m",
-            "Title": "asas",
-            "Resources": ["sasdad"]
-        }],
-        "Title": "sasjkasj",
-        "InstructorID": "I_27z7HlRLf9",
-        "ID": "C_e35eY1bW4m"
-    }
-]}
+{"Courses": [{
+    "STATUS": "Pending",
+    "Description": "www",
+    "Lessons": [{
+        "Content": "www",
+        "IDS": "L_4jTXHp2SeP",
+        "Title": "ww",
+        "Resources": ["www"]
+    }],
+    "Title": "www",
+    "InstructorID": "I_UH3kDDhHSI",
+    "ID": "C_2DIf5NlD9M"
+}]}
