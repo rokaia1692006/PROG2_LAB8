@@ -43,7 +43,40 @@ public class ChartDialog extends javax.swing.JDialog {
 
         add(tabs);
     }
-    private JPanel createScoreDistributionPanel() {
+  private JPanel createScoreDistributionPanel() {
+    JPanel panel = new JPanel(new BorderLayout());
+    CourseQuizProgress courseProg = quizManager.getCourseProgress().get(courseId);
+
+    DefaultCategoryDataset dataset = new DefaultCategoryDataset();
+
+    if (courseProg != null) {
+        ArrayList<String> quizIds = courseProg.getAllQuizIds();
+        for (String quizId : quizIds) {
+            ArrayList<Integer> scores = courseProg.getQuizScores(quizId);
+            HashMap<Integer, Integer> scoreCount = new HashMap<>();
+            for (int score : scores) {
+                scoreCount.put(score, scoreCount.getOrDefault(score, 0) + 1);
+            }
+            for (int s : scoreCount.keySet()) {
+                dataset.addValue(scoreCount.get(s), quizId, s );
+            }
+        }
+    }
+
+    JFreeChart chart = ChartFactory.createBarChart(
+            "Score Distribution",
+            "Score",
+            "Number of Students",
+            dataset,
+            PlotOrientation.VERTICAL,
+            true, true, false
+    );
+
+    ChartPanel chartPanel = new ChartPanel(chart);
+    panel.add(chartPanel, BorderLayout.CENTER);
+    return panel;
+}
+ private JPanel createQuizAveragePanel() {
         JPanel panel = new JPanel(new BorderLayout());
         CourseQuizProgress courseProg = quizManager.getCourseProgress().get(courseId);
 
@@ -52,34 +85,51 @@ public class ChartDialog extends javax.swing.JDialog {
         if (courseProg != null) {
             ArrayList<String> quizIds = new ArrayList<>(courseProg.getAllQuizIds());
             for (String quizId : quizIds) {
-                // count scores
-                Map<String, Double> scores; 
-                scores = courseProg.getQuizScores(quizId)instanceof ;
-                HashMap<Integer, Integer> scoreCount = new HashMap<>();
-                for (double score : scores.values()) {
-                    int s = (int) score;
-                    scoreCount.put(s, scoreCount.getOrDefault(s, 0) + 1);
-                }
-                for (int s : scoreCount.keySet()) {
-                    dataset.addValue(scoreCount.get(s), quizId, s + "/10");
-                }
+                double avg = quizManager.getCourseQuizAvrg(courseId, quizId);
+                dataset.addValue(avg, "Average Score", quizId);
             }
         }
 
-        JFreeChart  chart = ChartFactory.createBarChart(
-                "Score Distribution",
-                "Score",
-                "Number of Students",
+        JFreeChart chart = ChartFactory.createLineChart(
+                "Quiz Averages",
+                "Quiz",
+                "Average Score",
                 dataset,
                 PlotOrientation.VERTICAL,
-                true, true, false
+                false, true, false
         );
 
         ChartPanel chartPanel = new ChartPanel(chart);
         panel.add(chartPanel, BorderLayout.CENTER);
         return panel;
     }
+  private JPanel createCompletionPanel() {
+        JPanel panel = new JPanel(new BorderLayout());
+        CourseQuizProgress courseProg = quizManager.getCourseProgress().get(courseId);
 
+        DefaultCategoryDataset dataset = new DefaultCategoryDataset();
+
+        if (courseProg != null) {
+            ArrayList<String> quizIds = new ArrayList<>(courseProg.getAllQuizIds());
+            for (String quizId : quizIds) {
+                int completed = quizManager.getCourseCompleteCount(courseId, quizId);
+                dataset.addValue(completed, "Completed Students", quizId);
+            }
+        }
+
+        JFreeChart chart = ChartFactory.createBarChart(
+                "Completion Percentage",
+                "Quiz",
+                "Number of Students Completed",
+                dataset,
+                PlotOrientation.VERTICAL,
+                false, true, false
+        );
+
+        ChartPanel chartPanel = new ChartPanel(chart);
+        panel.add(chartPanel, BorderLayout.CENTER);
+        return panel;
+    }
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(ChartDialog.class.getName());
 
     /**
