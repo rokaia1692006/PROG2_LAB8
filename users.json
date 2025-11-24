@@ -1,65 +1,13 @@
 {
-    "Students": [
-        {
-            "QuizAttempts": [],
-            "Salt": "Lm+QCJPNHgL10tqH6OO0/Q==",
-            "Enrolled_Courses": [],
-            "Email": "sss@gmail.com",
-            "Certificates": [],
-            "ID": "S_GIpKgEoqE3",
-            "PasswordHash": "h8ijEhcmrMcsdfKpnrhTEn3zzFTCNIZoiq3uxu0lXfV0bRd8L/W7PW+ZLs30dvX4nT8nKqqo89cETh5FQSlqcA==",
-            "Name": "qqq"
-        },
-        {
-            "QuizAttempts": [],
-            "Salt": "3XgjpkeTL1kKTjQS5OQrGQ==",
-            "Enrolled_Courses": [],
-            "Email": "asa@gmail.com",
-            "Certificates": [],
-            "ID": "S_ONEKMEVRSg",
-            "PasswordHash": "OCQJsehrNoqoef9pVFsHHE/o/C65qarpEfr8Q1MxtX4EHuuQaOX0+uvb1CzuzYaeY41UkgBHIE7bvUFYFppxUg==",
-            "Name": "asas"
-        },
-        {
-            "QuizAttempts": [],
-            "Salt": "MGP0mW5r/4AONAxy78e2Yg==",
-            "Enrolled_Courses": [{
-                "CourseID": "C_R6dfR9Lo4F",
-                "CourseProgress": 0,
-                "AllLessons": 2,
-                "LessonsDone": {
-                    "L_3H8rbuJd8K": false,
-                    "L_0EvQWf67m1": false
-                }
-            }],
-            "Email": "sasa@gmail.com",
-            "Certificates": [],
-            "ID": "S_AZpD30VYkQ",
-            "PasswordHash": "gSKx62pw0PnM1Gc9mHBBCIEvoQ44u60Bfn9fmH+Q/TI1Olxsng3YNT8tU51x0MjtCUIjJKWXRg1lQKNl+ntVyw==",
-            "Name": "sasas"
-        },
-        {
-            "QuizAttempts": [],
-            "Salt": "Gh3zq3UCHQQ1+uyCDg7QTw==",
-            "Enrolled_Courses": [{
-                "CourseID": "C_R6dfR9Lo4F",
-                "CourseProgress": 0,
-                "AllLessons": 1,
-                "LessonsDone": {"L_ybcNgfENym": false}
-            }],
-            "Email": "aaa@gm.com",
-            "Certificates": [],
-            "ID": "S_Q1c9dM3CIy",
-            "PasswordHash": "1NrgT8mau2fIKjk/eoi0oOer3uPTtrsVXsZPpIq/cTWyBjOdB9Ku1drMUwz9jS3bbw6Jlm8b0QhlrtGDZqHXBQ==",
-            "Name": "aaa"
-        }
-    ],
-    "Instructors": [{
-        "CreatedCourses": ["C_R6dfR9Lo4F"],
-        "Salt": "Fr5wIYowbmZtChorjH4jDg==",
-        "Email": "aaa@gm.com",
-        "ID": "I_QgUi2TTSOo",
-        "PasswordHash": "qily8HZTKvx1q2kETMR3BKMoPFEnctqxn88Dw3mjX1L8Ig3dqdHdc0XJHwE9zLjVFOzwTTJSEkjzcusIAn26Eg==",
-        "Name": "sdad"
-    }]
+    "Students": [{
+        "QuizAttempts": [],
+        "Salt": "iNVoY5+ZlP9HbvCG6P4EZA==",
+        "Enrolled_Courses": [],
+        "Email": "aaa@gmail.com",
+        "Certificates": [],
+        "ID": "S_SWV2VsPJEb",
+        "PasswordHash": "01Q9YMB0JJFNxa8KEklb7P7dDUSzfUYB0mDhio0BlQSjX3e3w5LABp9QH5vml2XJfKhq6UJ2GAo4HTeMM3gChg==",
+        "Name": "aaa"
+    }],
+    "Instructors": []
 }
