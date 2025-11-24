@@ -34,7 +34,7 @@ public class CertificatePDF {
     public void generatePDF(String filePath)
     {
         try {
-            Document document = new Document() {}; 
+            Document document = new Document(); 
             PdfWriter.getInstance(document, new FileOutputStream(filePath));
            
            document.open();
