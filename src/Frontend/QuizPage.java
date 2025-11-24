@@ -25,8 +25,9 @@ public class QuizPage extends javax.swing.JDialog {
         this.quiz=quiz;
         this.answers=new ArrayList<>();
         initComponents();
+        this.quizStart();
     }
-    public void quizStart(){
+    public final void quizStart(){
         for(int i=0; i<quiz.getQuestions().size();i++){
             QuestionDialog q=new QuestionDialog((Frame) this.getParent(), quiz.getQuestions().get(i));
             q.setLocationRelativeTo(this.getParent());
