@@ -1,42 +1,39 @@
-{"Courses": [
-    {
-        "STATUS": "APPROVED",
-        "Description": "sadas",
-        "Lessons": [{
-            "Quiz": {
-                "QuizID": "Q_12345",
-                "Questions": [{
+{"Courses": [{
+    "STATUS": "APPROVED",
+    "Description": "xxxxxxx",
+    "Lessons": [{
+        "Quiz": {
+            "QuizID": "Q002",
+            "Questions": [
+                {
                     "Choices": [
-                        "1",
-                        "2",
-                        "3",
-                        "4"
+                        "#",
+                        "//",
+                        "/*",
+                        "<!--"
                     ],
-                    "QuestionText": "What is 2+2?",
-                    "Correct": 3
-                }],
-                "PassScore": 3
-            },
-            "Content": "asas",
-            "IDS": "L_ybcNgfENym",
-            "Title": "assas",
-            "Resources": ["sassq"]
-        }],
-        "Title": "sdsdad",
-        "InstructorID": "I_QgUi2TTSOo",
-        "ID": "C_R6dfR9Lo4F"
-    },
-    {
-        "STATUS": "APPROVED",
-        "Description": "qqqqqq",
-        "Lessons": [{
-            "Content": "qqqqqqq",
-            "IDS": "L_bg9nk9pU9z",
-            "Title": "hhhhhhh",
-            "Resources": []
-        }],
-        "Title": "hhhhhhhh",
-        "InstructorID": "I_uY1qBElKdy",
-        "ID": "C_Gi0XV9SRCo"
-    }
-]}
+                    "QuestionText": "Which symbol is used for comments?",
+                    "Correct": 0
+                },
+                {
+                    "Choices": [
+                        "20",
+                        "14",
+                        "24",
+                        "10"
+                    ],
+                    "QuestionText": "What is the output of print(2+3*4)?",
+                    "Correct": 1
+                }
+            ],
+            "PassScore": 75
+        },
+        "Content": "xxxx",
+        "IDS": "L_cleO4no6LV",
+        "Title": "xxxx",
+        "Resources": []
+    }],
+    "Title": "xxxxxx",
+    "InstructorID": "I_9BkJ95Jtvq",
+    "ID": "C_R2vzI08qOL"
+}]}
