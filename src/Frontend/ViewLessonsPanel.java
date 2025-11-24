@@ -91,6 +91,9 @@ public class ViewLessonsPanel extends javax.swing.JPanel {
                 lDialog.add(l);
 
                 lDialog.setVisible(true);
+                if(selected.getQuiz().isPassed()){
+                markdoneButton.setEnabled((true));
+                }
                    
                     
                  
