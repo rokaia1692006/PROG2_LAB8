@@ -31,7 +31,7 @@ public class CertificatePDF {
         this.issueDate = issueDate;
     }
     
-    public void generatePDF(String filePath)
+    public void generatePDF(String filePath) throws Exception
     {
         try {
             Document document = new Document(); 
@@ -48,6 +48,7 @@ public class CertificatePDF {
             
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, "ERROR IN GENERATING PDF!!", "Error", JOptionPane.ERROR_MESSAGE);
+            throw e;
         }
     }
 
