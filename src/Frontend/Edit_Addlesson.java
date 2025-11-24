@@ -12,6 +12,8 @@ import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Set;
 import javax.swing.JOptionPane;
+import Backend.Quiz;
+import java.awt.Frame;
 
 /**
  *
@@ -23,6 +25,7 @@ public class Edit_Addlesson extends javax.swing.JDialog {
 private Instructor ins;
 private Course c;
 private Lesson l;
+private Quiz q;
     /**
      * Creates new form Edit_Addlesson
      */
@@ -37,7 +40,14 @@ private Lesson l;
         Lcontent.setText(l.getContent());
         jTextArea1.setText(String.join("\n", l.getResources()));
         Savebtn.setText("Update");
+        Savebtn.setVisible(false);
+        quizAdd.setVisible(true);
     }
+        
+        else{
+        Savebtn.setVisible(false);
+        quizAdd.setVisible(true);
+        }
         }
     
 
@@ -61,6 +71,7 @@ private Lesson l;
         cancelBtn = new javax.swing.JButton();
         jScrollPane2 = new javax.swing.JScrollPane();
         Lcontent = new javax.swing.JTextArea();
+        quizAdd = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -92,7 +103,7 @@ private Lesson l;
                 SavebtnActionPerformed(evt);
             }
         });
-        jPanel1.add(Savebtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 270, -1, -1));
+        jPanel1.add(Savebtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 310, 90, -1));
 
         cancelBtn.setText("Cancel");
         cancelBtn.addActionListener(new java.awt.event.ActionListener() {
@@ -100,13 +111,21 @@ private Lesson l;
                 cancelBtnActionPerformed(evt);
             }
         });
-        jPanel1.add(cancelBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 270, -1, -1));
+        jPanel1.add(cancelBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 310, -1, -1));
 
         Lcontent.setColumns(20);
         Lcontent.setRows(5);
         jScrollPane2.setViewportView(Lcontent);
 
         jPanel1.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 60, -1, -1));
+
+        quizAdd.setText("ADD QUIZ");
+        quizAdd.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                quizAddActionPerformed(evt);
+            }
+        });
+        jPanel1.add(quizAdd, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 310, -1, -1));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -138,20 +157,26 @@ private Lesson l;
         return;
         }
         if(l == null){
-        Lesson newLesson = new Lesson(Title, lessonContent, R);
-        c.addLesson(newLesson, ins);
-            jsonFile.SAVE();
-        
+        l = new Lesson(Title, lessonContent, R);
+       
+          if(q!=null){
+          
+              l.setQuiz(q);
+          
+          }
+         c.addLesson(l, ins);
         }
         else{
             l.setTitle(Title);
         l.setContent(lessonContent);
         l.setResources(R);
-        jsonFile.SAVE();
+        if (q != null){ 
+            l.setQuiz(q);
+        }
             
         }
      
-
+jsonFile.SAVE();
         JOptionPane.showMessageDialog(this, "Lesson added successfully!");
         this.dispose();
   
@@ -163,6 +188,24 @@ private Lesson l;
         // TODO add your handling code here:
         this.dispose();
     }//GEN-LAST:event_cancelBtnActionPerformed
+
+    private void quizAddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_quizAddActionPerformed
+        // TODO add your handling code here:
+        CreateQuiz D = new CreateQuiz((Frame)this.getOwner(),true);
+        D.setVisible(true);
+        q  = D.getQuiz();
+        if(q!=null){
+        JOptionPane.showMessageDialog(null, "QUIZ CREATED");
+        Savebtn.setVisible(true);
+        quizAdd.setVisible(false);
+        }
+        else{
+        JOptionPane.showMessageDialog(null, "NO QUIZ CREATED");
+        Savebtn.setVisible(false);
+        quizAdd.setVisible(true);
+        }
+        
+    }//GEN-LAST:event_quizAddActionPerformed
 
     /**
      * @param args the command line arguments
@@ -214,5 +257,6 @@ private Lesson l;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTextArea jTextArea1;
+    private javax.swing.JButton quizAdd;
     // End of variables declaration//GEN-END:variables
 }

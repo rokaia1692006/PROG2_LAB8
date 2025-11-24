@@ -58,7 +58,7 @@ public class ChartDialog extends javax.swing.JDialog {
                 scoreCount.put(score, scoreCount.getOrDefault(score, 0) + 1);
             }
             for (int s : scoreCount.keySet()) {
-                dataset.addValue(scoreCount.get(s), quizId, s );
+                dataset.addValue(scoreCount.get(s), quizId, String.valueOf(s) );
             }
         }
     }

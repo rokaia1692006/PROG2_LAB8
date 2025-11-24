@@ -7,6 +7,7 @@ import Backend.Students;
 import Backend.Course;
 import Backend.Lesson;
 import Backend.StudentProgressInCourse;
+import Backend.StudentQuizAttempt;
 
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
@@ -80,9 +81,22 @@ public class ViewLessons extends javax.swing.JPanel {
                 int index = lessonsList.getSelectedIndex();
                 if (index != -1) {
                     Lesson selected = lessons.get(index);
-                   LessonVieww lDialog = new LessonVieww(null, true, selected);
+                   LessonVieww lDialog = new LessonVieww(null, true, selected, currentStudent);
                     lDialog.setLocationRelativeTo(null);
                   lDialog.setVisible(true);
+                   ArrayList<StudentQuizAttempt> d =  currentStudent.getQuizAttempts();
+               boolean ispassed = false;
+               for(StudentQuizAttempt s : d){
+               if(s.getLessonId().equals(selected.getLessonID())){
+                ispassed = s.isPassed();
+               }
+               
+               }
+               if(!ispassed){
+                   markdoneButton.setEnabled(false);
+               }else{
+               markdoneButton.setEnabled(true);
+               }
                    
             }
             }
@@ -106,6 +120,8 @@ public class ViewLessons extends javax.swing.JPanel {
         lessonsList = new javax.swing.JList<>();
         lessonstxt = new javax.swing.JLabel();
         markdoneButton = new javax.swing.JButton();
+        
+        
         progressBar = new javax.swing.JProgressBar();
         progressBar.setMaximum(100);
         
@@ -169,10 +185,11 @@ public class ViewLessons extends javax.swing.JPanel {
            {
             ArrayList<Lesson> lessons = course.getLessons();
             Lesson lesson = lessons.get(index);
-               JOptionPane.showMessageDialog(null, lessons.get(index).getLessonID());
+              // JOptionPane.showMessageDialog(null, lessons.get(index).getLessonID());
                        
-            float prog =  currentStudent.UpdateLesson(course.getCourseId(),lesson.getLessonID()); //n3mlha mark enaha done
-            
+             //n3mlha mark enaha done
+              
+               float prog =  currentStudent.UpdateLesson(course.getCourseId(),lesson.getLessonID());
             DefaultListModel<String> listModel = (DefaultListModel<String>) lessonsList.getModel();
             
             

@@ -40,6 +40,7 @@ public class InstructorDashboard extends javax.swing.JFrame {
         courseTable.setDefaultEditor(Object.class, null);
         LOADTable();
         actionpanel.setVisible(false); // hide the panel until a course is selected
+        manageLessonsBtn.setEnabled(false);
         courseTable.addMouseListener(new java.awt.event.MouseAdapter() {
             @Override
             public void mouseClicked(java.awt.event.MouseEvent e) {
@@ -47,6 +48,7 @@ public class InstructorDashboard extends javax.swing.JFrame {
                     int selectedRow = courseTable.getSelectedRow();
                     if (selectedRow != -1) {
                         actionpanel.setVisible(true); // show panel
+                        manageLessonsBtn.setEnabled(true);
                     }
                 }
             }
@@ -305,11 +307,9 @@ public class InstructorDashboard extends javax.swing.JFrame {
         int selectedRow=courseTable.getSelectedRow();
         if(selectedRow!=-1){
             String courseId=courseTable.getValueAt(selectedRow, 1).toString();
-            JPanel newPanel = new ManageLessonsPanel(courseId, ins, coursesDb);
-            actionpanel.setLayout(new BorderLayout());
-            actionpanel.add(newPanel, BorderLayout.CENTER);
-        } else
-            manageLessonsBtn.setEnabled(false);
+            ManageLessonFrame manageFrame = new ManageLessonFrame(courseId, ins, coursesDb);
+            manageFrame.setVisible(true);
+        } 
     }
 
     private void insightsbtnActionPerformed(java.awt.event.ActionEvent evt) {

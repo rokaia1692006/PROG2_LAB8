@@ -110,13 +110,18 @@ private void updateAll(){
         
     }
     
-    public void CertificateGeneration(Students s, String courseId)
+    public boolean CertificateGeneration(Students s, String courseId)
     {
         if(allQuizzesPassed(s, courseId))
         {
             Certificate certificate = new Certificate(s.getId(),courseId);
             s.certificatesEarned.add(certificate);
+            return true; //3mla generation l certificate
          
+        }
+        else
+        {
+            return false; //NO CERTIFICATES!!
         }
     }
 

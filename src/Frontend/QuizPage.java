@@ -8,6 +8,9 @@ import java.awt.Frame;
 import Backend.Lesson;
 import java.util.ArrayList;
 import Backend.Quiz;
+import Backend.StudentQuizAttempt;
+import Backend.Students;
+import Backend.jsonFile;
 import javax.swing.JOptionPane;
 /**
  *
@@ -17,27 +20,37 @@ public class QuizPage extends javax.swing.JDialog {
 
     private Quiz quiz;
     private ArrayList<Integer> answers;
+    private Students stu;
     /**
      * Creates new form QuizPage
      */
-    public QuizPage(Frame parent, boolean modal, Quiz quiz) {
+    public QuizPage(Frame parent, boolean modal, Quiz quiz, Students stu) {
         super(parent, modal);
         this.quiz=quiz;
         this.answers=new ArrayList<>();
+        this.stu=stu;
         initComponents();
+        this.quizStart();
     }
-    public void quizStart(){
+    public final void quizStart(){
         for(int i=0; i<quiz.getQuestions().size();i++){
             QuestionDialog q=new QuestionDialog((Frame) this.getParent(), quiz.getQuestions().get(i));
             q.setLocationRelativeTo(this.getParent());
             q.setVisible(true);
             answers.add(q.selected());
         }
-        int score=quiz.calculateScore(answers);
-        boolean passed=quiz.hasPassed(score);
-        JOptionPane.showMessageDialog(this, "Done!\nScore: "+score+"/"+quiz.getQuestions().size()+"\nPassed: "+(passed?"Yes":"No"));
+        StudentQuizAttempt attempt=new StudentQuizAttempt(stu.getId(), quiz.getQuizid(), quiz, answers);
+        jsonFile.ADDattemptStudent(stu.getId(), attempt);
+        int score=attempt.getScore();
+        boolean passed=attempt.isPassed();
+        String finalMsg="Done!\nScore: "+score+"/"+quiz.getQuestions().size()+"\nPassed: "+(passed?"Yes":"No")+"\nCorrect answers: ";
+        for(int i=0;i<quiz.getQuestions().size();i++)
+            finalMsg+="Q"+(i+1)+": "+quiz.getQuestions().get(i).getOptions()[quiz.getQuestions().get(i).getCorrect()]+"\n";
+        JOptionPane.showMessageDialog(this, finalMsg);
         this.dispose();
+        
     }
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always

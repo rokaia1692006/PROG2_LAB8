@@ -32,9 +32,17 @@ private static ArrayList<Quiz> quizess = new ArrayList<>();
   private static final adminRole admin = new adminRole("admin", "admin@gmail.com", "1");
    
     public UsersDB() {
-         Students = new ArrayList<>();
-instructors = new ArrayList<>();
-certificates = new ArrayList<>();
+    if (Students == null){ 
+        
+        Students = new ArrayList<>();
+    }
+    if (instructors == null) {
+        
+        instructors = new ArrayList<>();
+    }
+    if (certificates == null){ 
+        certificates = new ArrayList<>();
+    }
     }
 
   
@@ -50,9 +58,17 @@ certificates = new ArrayList<>();
         @Override
       public  void LOAD(){
       try{
-          Students = new ArrayList<>();
-instructors = new ArrayList<>();
-certificates = new ArrayList<>();
+        if (Students == null){ 
+        
+        Students = new ArrayList<>();
+    }
+    if (instructors == null) {
+        
+        instructors = new ArrayList<>();
+    }
+    if (certificates == null){ 
+        certificates = new ArrayList<>();
+    }
       Path p = Paths.get(UFile);
       if(Files.exists(p)){
           String data = new String(Files.readAllBytes(p));
@@ -62,6 +78,7 @@ certificates = new ArrayList<>();
               for(int i = 0; i < stuarr.length(); i++){
                   JSONObject s = stuarr.getJSONObject(i);
                   String id = s.getString("ID").trim();
+                  if(containsStudent(id) != null) continue;
                   String name = s.getString("Name").trim();
                   String email = s.getString("Email").trim();
                  String password = s.getString("PasswordHash").trim();
@@ -101,13 +118,13 @@ certificates = new ArrayList<>();
                    
                    }
                   }
-                 this.certificates  = ctemp;
+                 this.certificates.addAll(ctemp);
                  
                  
                  ArrayList<StudentQuizAttempt> attempts = new ArrayList<>();
                  if(s.has("QuizAttempts")){
                  JSONArray atemptsArr = s.getJSONArray("QuizAttempts");
-                 for(int j = 0 ; i  < atemptsArr.length(); j ++){
+                 for(int j = 0 ; j  < atemptsArr.length(); j ++){
                  JSONObject object = atemptsArr.getJSONObject(j);
                  String lid = object.getString("LessonID");
                  String Qid = object.getString("QuizID");
@@ -129,6 +146,7 @@ certificates = new ArrayList<>();
               for(int i = 0; i < insarr.length(); i++){
                   JSONObject ins = insarr.getJSONObject(i);
                   String id = ins.getString("ID").trim();
+                  if(containsInstructor(id) != null) continue;
                   String name = ins.getString("Name").trim();
                   String email = ins.getString("Email").trim();
                   String password = ins.getString("PasswordHash").trim();
@@ -147,8 +165,13 @@ certificates = new ArrayList<>();
           }
       }
       else{
-      instructors = new ArrayList<>();
-      Students = new ArrayList<>();
+      if(Students == null) {
+          
+          Students = new ArrayList<>();
+      }
+      if(instructors == null) {
+          instructors = new ArrayList<>();
+      }
       
       }
       }

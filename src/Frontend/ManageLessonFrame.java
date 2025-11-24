@@ -1,6 +1,6 @@
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JPanel.java to edit this template
+ * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
 package Frontend;
 
@@ -10,6 +10,7 @@ import Backend.InstructorLessonManager;
 import Backend.StudentProgressInCourse;
 import Backend.Students;
 import Backend.jsonFile;
+import java.awt.Frame;
 import java.util.ArrayList;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
@@ -18,19 +19,30 @@ import javax.swing.table.DefaultTableModel;
  *
  * @author malak
  */
-public class ManageLessonsPanel extends javax.swing.JPanel {
+public class ManageLessonFrame extends javax.swing.JFrame {
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(InstructorDashboard.class.getName());
     private Instructor ins;
     private String courseId;
      private InstructorLessonManager instructorLessonManager;
     /**
-     * Creates new form ManageLessonsPanel
+     * Creates new form ManageLessonFrame
      */
-    public ManageLessonsPanel(String courseId, Instructor ins, jsonFile db) {
+    public ManageLessonFrame(String courseId, Instructor ins, jsonFile db) {
         this.courseId=courseId;
         this.ins=ins;
         this.instructorLessonManager=new InstructorLessonManager(db);
         initComponents();
+        addQuizBtn.setEnabled(false);
+        lessonsTable.addMouseListener(new java.awt.event.MouseAdapter() {
+            @Override
+            public void mouseClicked(java.awt.event.MouseEvent e) {
+                if (e.getClickCount() == 2) { // double click
+                    int selectedRow = lessonsTable.getSelectedRow();
+                    if (selectedRow != -1) 
+                        addQuizBtn.setEnabled(true);
+                }
+            }
+        });
     }
 
     /**
@@ -42,6 +54,7 @@ public class ManageLessonsPanel extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        addQuizBtn = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         lessonsTable = new javax.swing.JTable();
         actionpanel = new javax.swing.JPanel();
@@ -49,6 +62,15 @@ public class ManageLessonsPanel extends javax.swing.JPanel {
         editLesson = new javax.swing.JButton();
         deleteLesson = new javax.swing.JButton();
         jPanel1 = new javax.swing.JPanel();
+
+        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+
+        addQuizBtn.setText("Add quiz");
+        addQuizBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                addQuizBtnActionPerformed(evt);
+            }
+        });
 
         lessonsTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -106,8 +128,8 @@ public class ManageLessonsPanel extends javax.swing.JPanel {
             .addGap(0, 44, Short.MAX_VALUE)
         );
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
-        this.setLayout(layout);
+        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
+        getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
@@ -125,7 +147,9 @@ public class ManageLessonsPanel extends javax.swing.JPanel {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(editLesson, javax.swing.GroupLayout.PREFERRED_SIZE, 154, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(deleteLesson, javax.swing.GroupLayout.PREFERRED_SIZE, 171, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(deleteLesson, javax.swing.GroupLayout.PREFERRED_SIZE, 171, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(addQuizBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 171, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -135,7 +159,8 @@ public class ManageLessonsPanel extends javax.swing.JPanel {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(addLesson, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(editLesson, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(deleteLesson))
+                    .addComponent(deleteLesson)
+                    .addComponent(addQuizBtn))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -144,29 +169,38 @@ public class ManageLessonsPanel extends javax.swing.JPanel {
                 .addComponent(actionpanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
+
+        pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void addQuizBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addQuizBtnActionPerformed
+        // TODO add your handling code here:
+        CreateQuiz dialog = new CreateQuiz((Frame) this.getParent(), true);
+        dialog.setLocationRelativeTo((Frame) this.getParent());
+        dialog.setVisible(true);
+    }//GEN-LAST:event_addQuizBtnActionPerformed
+
     private void addLessonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addLessonActionPerformed
-        
+
     }//GEN-LAST:event_addLessonActionPerformed
 
     private void editLessonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editLessonActionPerformed
 
-//        int selectedRow = lessonsTable.getSelectedRow();
-//        if (selectedRow != -1) {
-//            String lessonId = lessonsTable.getValueAt(selectedRow, 1).toString();
-//            String currentTitle = lessonsTable.getValueAt(selectedRow, 0).toString();
-//            String currentContent = lessonsTable.getValueAt(selectedRow, 2).toString();
-//
-//            String newTitle = JOptionPane.showInputDialog(this, "Edit Title:", currentTitle);
-//            String newContent = JOptionPane.showInputDialog(this, "Edit Content:", currentContent);
-//
-//            if (newTitle != null && newContent != null) {
-//                instructorCourseManager.editLesson(courseId, lessonId, newTitle, newContent, ins);
-//                lessonsTable.setValueAt(newTitle, selectedRow, 0);
-//                lessonsTable.setValueAt(newContent, selectedRow, 2);
-//            }
-//        }
+        //        int selectedRow = lessonsTable.getSelectedRow();
+        //        if (selectedRow != -1) {
+            //            String lessonId = lessonsTable.getValueAt(selectedRow, 1).toString();
+            //            String currentTitle = lessonsTable.getValueAt(selectedRow, 0).toString();
+            //            String currentContent = lessonsTable.getValueAt(selectedRow, 2).toString();
+            //
+            //            String newTitle = JOptionPane.showInputDialog(this, "Edit Title:", currentTitle);
+            //            String newContent = JOptionPane.showInputDialog(this, "Edit Content:", currentContent);
+            //
+            //            if (newTitle != null && newContent != null) {
+                //                instructorCourseManager.editLesson(courseId, lessonId, newTitle, newContent, ins);
+                //                lessonsTable.setValueAt(newTitle, selectedRow, 0);
+                //                lessonsTable.setValueAt(newContent, selectedRow, 2);
+                //            }
+            //        }
     }//GEN-LAST:event_editLessonActionPerformed
 
     private void deleteLessonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deleteLessonActionPerformed
@@ -187,10 +221,14 @@ public class ManageLessonsPanel extends javax.swing.JPanel {
         }
     }//GEN-LAST:event_deleteLessonActionPerformed
 
+    /**
+     * @param args the command line arguments
+     */
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel actionpanel;
     private javax.swing.JButton addLesson;
+    private javax.swing.JButton addQuizBtn;
     private javax.swing.JButton deleteLesson;
     private javax.swing.JButton editLesson;
     private javax.swing.JPanel jPanel1;
