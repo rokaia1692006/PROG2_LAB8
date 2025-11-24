@@ -21,9 +21,12 @@ public class CertificateView extends javax.swing.JPanel {
      * Creates new form CertificateView
      */
     Students currentStudent;
+
+    
     public CertificateView(Students currentStudent) {
         initComponents();
         this.currentStudent=currentStudent;
+
        
         
         
@@ -50,17 +53,23 @@ public class CertificateView extends javax.swing.JPanel {
                           break;
                           }
                       }
-                   if(selectedCourse!=null)
+                   if(selectedCourse==null)
                 {
-                    
-                   CertificateReport dialog = new CertificateReport(null, true,currentStudent,selectedCourse);
-                   dialog.setLocationRelativeTo(null);
-                   dialog.setVisible(true);
+                    JOptionPane.showMessageDialog(null, "ERROR!!!");
+                   
                 }
                    else
                 {
-                    JOptionPane.showMessageDialog(null, "ERROR!!", "Error", JOptionPane.ERROR_MESSAGE);
+                    if (!selectedCourse.CertificateGeneration(currentStudent, selectedCourse.getCourseId())) {
+                           return;  //fe quiz mesh bayen w kda kda fel class btzhr el joptionpane
+                      }
+                   CertificateReport dialog = new CertificateReport(null, true,currentStudent,selectedCourse);
+                   dialog.setLocationRelativeTo(null);
+                   dialog.setVisible(true);
+                   
+                   
                 }
+                   
                   }
                 }
               });
