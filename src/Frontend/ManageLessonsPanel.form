@@ -34,6 +34,8 @@
                       <Component id="editLesson" min="-2" pref="154" max="-2" attributes="0"/>
                       <EmptySpace type="unrelated" max="-2" attributes="0"/>
                       <Component id="deleteLesson" min="-2" pref="171" max="-2" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Component id="addQuizBtn" min="-2" pref="171" max="-2" attributes="0"/>
                   </Group>
               </Group>
               <EmptySpace max="32767" attributes="0"/>
@@ -48,6 +50,7 @@
                   <Component id="addLesson" alignment="3" max="32767" attributes="0"/>
                   <Component id="editLesson" alignment="3" max="32767" attributes="0"/>
                   <Component id="deleteLesson" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="addQuizBtn" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace max="-2" attributes="0"/>
               <Component id="jPanel1" min="-2" max="-2" attributes="0"/>
@@ -157,5 +160,13 @@
         </DimensionLayout>
       </Layout>
     </Container>
+    <Component class="javax.swing.JButton" name="addQuizBtn">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Add quiz"/>
+      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="addQuizBtnActionPerformed"/>
+      </Events>
+    </Component>
   </SubComponents>
 </Form>

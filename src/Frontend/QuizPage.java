@@ -43,10 +43,14 @@ public class QuizPage extends javax.swing.JDialog {
         jsonFile.ADDattemptStudent(stu.getId(), attempt);
         int score=attempt.getScore();
         boolean passed=attempt.isPassed();
-        JOptionPane.showMessageDialog(this, "Done!\nScore: "+score+"/"+quiz.getQuestions().size()+"\nPassed: "+(passed?"Yes":"No"));
+        String finalMsg="Done!\nScore: "+score+"/"+quiz.getQuestions().size()+"\nPassed: "+(passed?"Yes":"No")+"\nCorrect answers: ";
+        for(int i=0;i<quiz.getQuestions().size();i++)
+            finalMsg+="Q"+(i+1)+": "+quiz.getQuestions().get(i).getOptions()[quiz.getQuestions().get(i).getCorrect()]+"\n";
+        JOptionPane.showMessageDialog(this, finalMsg);
         this.dispose();
         
     }
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
