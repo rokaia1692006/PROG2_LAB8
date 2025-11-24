@@ -20,7 +20,7 @@ public class LessonVieww extends javax.swing.JDialog {
     private Lesson  l;
     private Students stu;
     
-    public LessonVieww(java.awt.Frame parent, boolean modal,Lesson l, Students stu,ispassed listen) {
+    public LessonVieww(java.awt.Frame parent, boolean modal,Lesson l, Students stu) {
         super(parent, modal);
         initComponents();
         this.l = l;
