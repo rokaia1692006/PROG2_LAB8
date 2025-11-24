@@ -47,7 +47,12 @@ public class jsonFile {
    
     
     }
+public static void ADDattemptStudent(String id,StudentQuizAttempt a){
+Students s = udB.containsStudent(id);
+s.ADDattempt(a);
+udB.SAVE();
 
+}
     public jsonFile() {
      
 
