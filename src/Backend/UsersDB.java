@@ -146,10 +146,7 @@ private static ArrayList<Quiz> quizess = new ArrayList<>();
               for(int i = 0; i < insarr.length(); i++){
                   JSONObject ins = insarr.getJSONObject(i);
                   String id = ins.getString("ID").trim();
-                  if(containsInstructor(id) != null){ 
-                      
-                      continue;
-                  }
+                  if(containsInstructor(id) != null) continue;
                   String name = ins.getString("Name").trim();
                   String email = ins.getString("Email").trim();
                   String password = ins.getString("PasswordHash").trim();
