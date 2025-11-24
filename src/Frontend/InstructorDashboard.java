@@ -307,9 +307,8 @@ public class InstructorDashboard extends javax.swing.JFrame {
         int selectedRow=courseTable.getSelectedRow();
         if(selectedRow!=-1){
             String courseId=courseTable.getValueAt(selectedRow, 1).toString();
-            JPanel newPanel = new ManageLessonsPanel(courseId, ins, coursesDb);
-            actionpanel.setLayout(new BorderLayout());
-            actionpanel.add(newPanel, BorderLayout.CENTER);
+            ManageLessonFrame manageFrame = new ManageLessonFrame(courseId, ins, coursesDb);
+            manageFrame.setVisible(true);
         } 
     }
 

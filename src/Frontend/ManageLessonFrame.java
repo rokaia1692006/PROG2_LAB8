@@ -1,6 +1,6 @@
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JPanel.java to edit this template
+ * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
 package Frontend;
 
@@ -19,15 +19,15 @@ import javax.swing.table.DefaultTableModel;
  *
  * @author malak
  */
-public class ManageLessonsFrame extends javax.swing.JFrame {
+public class ManageLessonFrame extends javax.swing.JFrame {
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(InstructorDashboard.class.getName());
     private Instructor ins;
     private String courseId;
      private InstructorLessonManager instructorLessonManager;
     /**
-     * Creates new form ManageLessonsPanel
+     * Creates new form ManageLessonFrame
      */
-    public ManageLessonsFrame(String courseId, Instructor ins, jsonFile db) {
+    public ManageLessonFrame(String courseId, Instructor ins, jsonFile db) {
         this.courseId=courseId;
         this.ins=ins;
         this.instructorLessonManager=new InstructorLessonManager(db);
@@ -54,6 +54,7 @@ public class ManageLessonsFrame extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        addQuizBtn = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         lessonsTable = new javax.swing.JTable();
         actionpanel = new javax.swing.JPanel();
@@ -61,7 +62,15 @@ public class ManageLessonsFrame extends javax.swing.JFrame {
         editLesson = new javax.swing.JButton();
         deleteLesson = new javax.swing.JButton();
         jPanel1 = new javax.swing.JPanel();
-        addQuizBtn = new javax.swing.JButton();
+
+        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+
+        addQuizBtn.setText("Add quiz");
+        addQuizBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                addQuizBtnActionPerformed(evt);
+            }
+        });
 
         lessonsTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -119,15 +128,8 @@ public class ManageLessonsFrame extends javax.swing.JFrame {
             .addGap(0, 44, Short.MAX_VALUE)
         );
 
-        addQuizBtn.setText("Add quiz");
-        addQuizBtn.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                addQuizBtnActionPerformed(evt);
-            }
-        });
-
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
-        this.setLayout(layout);
+        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
+        getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
@@ -167,29 +169,38 @@ public class ManageLessonsFrame extends javax.swing.JFrame {
                 .addComponent(actionpanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
+
+        pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void addQuizBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addQuizBtnActionPerformed
+        // TODO add your handling code here:
+        CreateQuiz dialog = new CreateQuiz((Frame) this.getParent(), true);
+        dialog.setLocationRelativeTo((Frame) this.getParent());
+        dialog.setVisible(true);
+    }//GEN-LAST:event_addQuizBtnActionPerformed
+
     private void addLessonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addLessonActionPerformed
-        
+
     }//GEN-LAST:event_addLessonActionPerformed
 
     private void editLessonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editLessonActionPerformed
 
-//        int selectedRow = lessonsTable.getSelectedRow();
-//        if (selectedRow != -1) {
-//            String lessonId = lessonsTable.getValueAt(selectedRow, 1).toString();
-//            String currentTitle = lessonsTable.getValueAt(selectedRow, 0).toString();
-//            String currentContent = lessonsTable.getValueAt(selectedRow, 2).toString();
-//
-//            String newTitle = JOptionPane.showInputDialog(this, "Edit Title:", currentTitle);
-//            String newContent = JOptionPane.showInputDialog(this, "Edit Content:", currentContent);
-//
-//            if (newTitle != null && newContent != null) {
-//                instructorCourseManager.editLesson(courseId, lessonId, newTitle, newContent, ins);
-//                lessonsTable.setValueAt(newTitle, selectedRow, 0);
-//                lessonsTable.setValueAt(newContent, selectedRow, 2);
-//            }
-//        }
+        //        int selectedRow = lessonsTable.getSelectedRow();
+        //        if (selectedRow != -1) {
+            //            String lessonId = lessonsTable.getValueAt(selectedRow, 1).toString();
+            //            String currentTitle = lessonsTable.getValueAt(selectedRow, 0).toString();
+            //            String currentContent = lessonsTable.getValueAt(selectedRow, 2).toString();
+            //
+            //            String newTitle = JOptionPane.showInputDialog(this, "Edit Title:", currentTitle);
+            //            String newContent = JOptionPane.showInputDialog(this, "Edit Content:", currentContent);
+            //
+            //            if (newTitle != null && newContent != null) {
+                //                instructorCourseManager.editLesson(courseId, lessonId, newTitle, newContent, ins);
+                //                lessonsTable.setValueAt(newTitle, selectedRow, 0);
+                //                lessonsTable.setValueAt(newContent, selectedRow, 2);
+                //            }
+            //        }
     }//GEN-LAST:event_editLessonActionPerformed
 
     private void deleteLessonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deleteLessonActionPerformed
@@ -210,13 +221,9 @@ public class ManageLessonsFrame extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_deleteLessonActionPerformed
 
-    private void addQuizBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addQuizBtnActionPerformed
-        // TODO add your handling code here:
-        CreateQuiz dialog = new CreateQuiz((Frame) this.getParent(), true);
-        dialog.setLocationRelativeTo((Frame) this.getParent());
-        dialog.setVisible(true);
-    }//GEN-LAST:event_addQuizBtnActionPerformed
-
+    /**
+     * @param args the command line arguments
+     */
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel actionpanel;
