@@ -72,11 +72,11 @@ public class jsonFile {
        }
        public  static void addStudent(Students s){
        udB.addStudent(s);
-           SAVE();
+           udB.SAVE();
        }
         public  static void addInstructor(Instructor i){
         udB.addInstructor(i);
-        SAVE();
+        udB.SAVE();
         }
         public  static Instructor containsInstructor(String id){
         return udB.containsInstructor(id);
@@ -110,7 +110,7 @@ public class jsonFile {
       }
        public static  void updatecourse (String insID, String CId , String title, String description){
        cdb.updatecourse(udB, cdb, insID, CId, title, description);
-           SAVE();
+           cdb.SAVE();
        }
        public static void  DeleteCourse(String cId , String insID){
            CoursesDB.DeleteCourse(udB,cdb,cId,insID );
