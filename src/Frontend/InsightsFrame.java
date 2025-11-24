@@ -78,9 +78,9 @@ public class InsightsFrame extends javax.swing.JFrame {
         jLabel3.setFont(new java.awt.Font("Dialog", 3, 14)); // NOI18N
         jLabel3.setText("Number of Students completed the course:  ");
 
-        avgScore.setText("jLabel4");
+        avgScore.setText("");
 
-        numCompSt.setText("jLabel5");
+        numCompSt.setText("0");
 
         chart.setText("Show Chart");
         chart.addActionListener(new java.awt.event.ActionListener() {

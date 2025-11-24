@@ -91,9 +91,9 @@
                 },
                 {
                     "CourseID": "C_lIpyQXzmaI",
-                    "CourseProgress": 0,
+                    "CourseProgress": 100,
                     "AllLessons": 1,
-                    "LessonsDone": {"L_JeqFhPCJpM": false}
+                    "LessonsDone": {"L_JeqFhPCJpM": true}
                 }
             ],
             "Email": "stuu@gm.com",
@@ -101,6 +101,66 @@
             "ID": "S_Oj6fNu2MMS",
             "PasswordHash": "yuJVK3DsdN0znYh8RX0TkDUUO5W9YZXnjaFZ4Lv+5kwWg+tzNRgr5ashngvaAvz0HNGV4PPz2F4q6yhkOp2KSQ==",
             "Name": "stuu"
+        },
+        {
+            "QuizAttempts": [
+                {
+                    "Passed": false,
+                    "Score": 0,
+                    "Answers": [1],
+                    "LessonID": "Q_r7QefvrFQB",
+                    "QuizID": "Q_r7QefvrFQB"
+                },
+                {
+                    "Passed": false,
+                    "Score": 1,
+                    "Answers": [2],
+                    "LessonID": "Q_r7QefvrFQB",
+                    "QuizID": "Q_r7QefvrFQB"
+                },
+                {
+                    "Passed": false,
+                    "Score": 2,
+                    "Answers": [
+                        0,
+                        1
+                    ],
+                    "LessonID": "Q002",
+                    "QuizID": "Q002"
+                }
+            ],
+            "Salt": "rSua/nUpbl251pYVPC53yw==",
+            "Enrolled_Courses": [
+                {
+                    "CourseID": "C_R2vzI08qOL",
+                    "CourseProgress": 0,
+                    "AllLessons": 1,
+                    "LessonsDone": {"L_cleO4no6LV": false}
+                },
+                {
+                    "CourseID": "C_SI5BII99sI",
+                    "CourseProgress": 0,
+                    "AllLessons": 0,
+                    "LessonsDone": {}
+                },
+                {
+                    "CourseID": "C_PoXMJizQYW",
+                    "CourseProgress": 0,
+                    "AllLessons": 0,
+                    "LessonsDone": {}
+                },
+                {
+                    "CourseID": "C_lIpyQXzmaI",
+                    "CourseProgress": 0,
+                    "AllLessons": 1,
+                    "LessonsDone": {"L_JeqFhPCJpM": false}
+                }
+            ],
+            "Email": "skajs@gm.com",
+            "Certificates": [],
+            "ID": "S_MZ0zBxF839",
+            "PasswordHash": "Lr/Abo5MDyGFLhdHkAM8+e48sVi/2aI3ah59WvpIm7mJ5pre7q9oq89mtL8PxZ0+WzqARzCsSxww9pvRhXS/EQ==",
+            "Name": "jksjd"
         }
     ],
     "Instructors": [
