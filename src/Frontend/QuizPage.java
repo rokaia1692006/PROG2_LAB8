@@ -41,6 +41,8 @@ public class QuizPage extends javax.swing.JDialog {
         }
         StudentQuizAttempt attempt=new StudentQuizAttempt(stu.getId(), quiz.getQuizid(), quiz, answers);
         jsonFile.ADDattemptStudent(stu.getId(), attempt);
+        stu.getQuizAttempts().add(attempt);
+        quiz.hasPassed(attempt.getScore());
         int score=attempt.getScore();
         boolean passed=attempt.isPassed();
         String finalMsg="Done!\nScore: "+score+"/"+quiz.getQuestions().size()+"\nPassed: "+(passed?"Yes":"No")+"\nCorrect answers: ";

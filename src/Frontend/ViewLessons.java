@@ -15,10 +15,6 @@ import java.util.ArrayList;
 import javax.swing.DefaultListModel;
 import javax.swing.JOptionPane;
 
-
-import javax.swing.JOptionPane;
-
-
 /**
  *
  * @author DELL
@@ -34,77 +30,67 @@ public class ViewLessons extends javax.swing.JPanel {
     private StudentDashboardFrame MainFrame;
 
     
-     private StudentProgressInCourse studetProgressInCourse;
-     
+    private StudentProgressInCourse studetProgressInCourse;
+
     
     public ViewLessons(Course course, Students currentStudent,StudentDashboardFrame MainFrame) {
         
-          initComponents();
-          this.course = course;
+        initComponents();
+        this.course = course;
           this.currentStudent=currentStudent;
-          this.MainFrame = MainFrame;
-          this.studetProgressInCourse = currentStudent.SearchINEnrolled(course.getCourseId());
-          progressBar.setValue((int) studetProgressInCourse.getOverallProgress());
+        this.MainFrame = MainFrame;
+        this.studetProgressInCourse = currentStudent.SearchINEnrolled(course.getCourseId());
+        progressBar.setValue((int) studetProgressInCourse.getOverallProgress());
           if(this.studetProgressInCourse  == null){
-          ArrayList<String> lessonIDs = new ArrayList<>();
-          for (Lesson l : course.getLessons()) {
+            ArrayList<String> lessonIDs = new ArrayList<>();
+            for (Lesson l : course.getLessons()) {
             
     System.out.println("LessonID: '" + l.getLessonID() + "'");
 
 
-          lessonIDs.add(l.getLessonID());
-          }
-          currentStudent.newEnrollCourses(course.getCourseId(), lessonIDs);
-          this.studetProgressInCourse = currentStudent.SearchINEnrolled(course.getCourseId());
-          }
-         
+                lessonIDs.add(l.getLessonID());
+            }
+            currentStudent.newEnrollCourses(course.getCourseId(), lessonIDs);
+            this.studetProgressInCourse = currentStudent.SearchINEnrolled(course.getCourseId());
+        }
 
-      loadLessons();
+
+        loadLessons();
     }
-    
+
     private void loadLessons(){
         
-         ArrayList<Lesson> lessons = course.getLessons();
-       
-       DefaultListModel<String> listmodel = new DefaultListModel<>();
-           for (int i = 0; i < lessons.size(); i++) {
-           Lesson l = lessons.get(i);
-           studetProgressInCourse.getLessonsDone();
-           listmodel.addElement(l.getTitle());
-           }
-            lessonsList.setModel(listmodel);
-            
-             lessonsList.addMouseListener(new MouseAdapter() {
-        @Override
-        public void mouseClicked(MouseEvent e) {
-            if (e.getClickCount() == 2) {
-                int index = lessonsList.getSelectedIndex();
-                if (index != -1) {
-                    Lesson selected = lessons.get(index);
-                   LessonVieww lDialog = new LessonVieww(null, true, selected, currentStudent);
-                    lDialog.setLocationRelativeTo(null);
-                  lDialog.setVisible(true);
-                   ArrayList<StudentQuizAttempt> d =  currentStudent.getQuizAttempts();
-               boolean ispassed = false;
-               for(StudentQuizAttempt s : d){
-               if(s.getLessonId().equals(selected.getLessonID())){
-                ispassed = s.isPassed();
-               }
-               
-               }
-               if(!ispassed){
-                   markdoneButton.setEnabled(false);
-               }else{
-               markdoneButton.setEnabled(true);
-               }
-                   
-            }
-            }
-                     }
-             });
+        ArrayList<Lesson> lessons = course.getLessons();
 
-           
-           
+        DefaultListModel<String> listmodel = new DefaultListModel<>();
+        for (int i = 0; i < lessons.size(); i++) {
+            Lesson l = lessons.get(i);
+            studetProgressInCourse.getLessonsDone();
+            listmodel.addElement(l.getTitle());
+        }
+        lessonsList.setModel(listmodel);
+
+        lessonsList.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                if (e.getClickCount() == 2) {
+                    int index = lessonsList.getSelectedIndex();
+                    if (index != -1) {
+                        Lesson selected = lessons.get(index);
+                   LessonVieww lDialog = new LessonVieww(null, true, selected, currentStudent);
+                        lDialog.setLocationRelativeTo(null);
+                        lDialog.setVisible(true);
+
+                        markdoneButton.setEnabled(true);
+                    }
+                   
+                }
+            }
+                    
+             });
+                    
+        
+
     }
 
     /**
@@ -134,7 +120,7 @@ public class ViewLessons extends javax.swing.JPanel {
             public String getElementAt(int i) { return strings[i]; }
         });
         jScrollPane1.setViewportView(lessonsList);
-
+           
         lessonstxt.setFont(new java.awt.Font("Dutch801 Rm BT", 3, 24)); // NOI18N
         lessonstxt.setText("Lessons:");
 
@@ -142,7 +128,7 @@ public class ViewLessons extends javax.swing.JPanel {
         markdoneButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 markdoneButtonActionPerformed(evt);
-            }
+    }
         });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
@@ -179,19 +165,19 @@ public class ViewLessons extends javax.swing.JPanel {
 
     private void markdoneButtonActionPerformed(java.awt.event.ActionEvent evt) {
         int index = lessonsList.getSelectedIndex();
-        
+
         
              if(index != -1 )
            {
             ArrayList<Lesson> lessons = course.getLessons();
             Lesson lesson = lessons.get(index);
               // JOptionPane.showMessageDialog(null, lessons.get(index).getLessonID());
-                       
+
              //n3mlha mark enaha done
               
                float prog =  currentStudent.UpdateLesson(course.getCourseId(),lesson.getLessonID());
             DefaultListModel<String> listModel = (DefaultListModel<String>) lessonsList.getModel();
-            
+
             
             for (int i = 0; i < lessons.size(); i++) {
                 Lesson l = lessons.get(i);
@@ -202,19 +188,19 @@ public class ViewLessons extends javax.swing.JPanel {
                 }
                 else
                 {
-                     listModel.set(i, l.getTitle()); 
+                    listModel.set(i, l.getTitle());
                 }
                 
             
             }
-            
+
           
             int progress = (int) (prog);
             
-             progressBar.setValue(progress); 
+            progressBar.setValue(progress);
                
 
-            }
+        }
     }
 
 
