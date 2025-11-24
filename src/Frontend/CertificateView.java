@@ -26,7 +26,7 @@ public class CertificateView extends javax.swing.JPanel {
     public CertificateView(Students currentStudent) {
         initComponents();
         this.currentStudent=currentStudent;
-        
+
        
         
         
@@ -53,27 +53,20 @@ public class CertificateView extends javax.swing.JPanel {
                           break;
                           }
                       }
-                   if(selectedCourse!=null)
+                   if(selectedCourse==null)
                 {
-                    
-                   CertificateReport dialog = new CertificateReport(null, true,currentStudent,selectedCourse);
-                   dialog.setLocationRelativeTo(null);
-                   dialog.setVisible(true);
+                    JOptionPane.showMessageDialog(null, "ERROR!!!");
+                   
                 }
                    else
                 {
-                    //y3ne mfish certificate
-                    if(selectedCourse.CertificateGeneration(currentStudent,selectedCourse.getCourseId()))
-                {
-                     CertificateReport dialog = new CertificateReport(null, true,currentStudent,selectedCourse);
-                    dialog.setLocationRelativeTo(null);
-                    dialog.setVisible(true);
-                }
-                    else
-                {
-                    //3mlt el JOptionPane message fel class,
-                    return; //no certificates, bye!
-                }
+                    if (!selectedCourse.CertificateGeneration(currentStudent, selectedCourse.getCourseId())) {
+                           return;  //fe quiz mesh bayen w kda kda fel class btzhr el joptionpane
+                      }
+                   CertificateReport dialog = new CertificateReport(null, true,currentStudent,selectedCourse);
+                   dialog.setLocationRelativeTo(null);
+                   dialog.setVisible(true);
+                   
                    
                 }
                    
