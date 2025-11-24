@@ -56,7 +56,12 @@
         {
             "QuizAttempts": [],
             "Salt": "1DrMXdxZYjagW5C+MpEjmg==",
-            "Enrolled_Courses": [],
+            "Enrolled_Courses": [{
+                "CourseID": "C_R6dfR9Lo4F",
+                "CourseProgress": 100,
+                "AllLessons": 1,
+                "LessonsDone": {"L_ybcNgfENym": true}
+            }],
             "Email": "ddd@gm.com",
             "Certificates": [],
             "ID": "S_pRQYMX7Qol",
