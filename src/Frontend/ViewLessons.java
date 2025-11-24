@@ -80,7 +80,7 @@ public class ViewLessons extends javax.swing.JPanel {
                 int index = lessonsList.getSelectedIndex();
                 if (index != -1) {
                     Lesson selected = lessons.get(index);
-                   LessonVieww lDialog = new LessonVieww(null, true, selected);
+                   LessonVieww lDialog = new LessonVieww(null, true, selected, currentStudent);
                     lDialog.setLocationRelativeTo(null);
                   lDialog.setVisible(true);
                    

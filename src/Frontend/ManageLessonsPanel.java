@@ -10,6 +10,7 @@ import Backend.InstructorLessonManager;
 import Backend.StudentProgressInCourse;
 import Backend.Students;
 import Backend.jsonFile;
+import java.awt.Frame;
 import java.util.ArrayList;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
@@ -31,6 +32,17 @@ public class ManageLessonsPanel extends javax.swing.JPanel {
         this.ins=ins;
         this.instructorLessonManager=new InstructorLessonManager(db);
         initComponents();
+        addQuizBtn.setEnabled(false);
+        lessonsTable.addMouseListener(new java.awt.event.MouseAdapter() {
+            @Override
+            public void mouseClicked(java.awt.event.MouseEvent e) {
+                if (e.getClickCount() == 2) { // double click
+                    int selectedRow = lessonsTable.getSelectedRow();
+                    if (selectedRow != -1) 
+                        addQuizBtn.setEnabled(true);
+                }
+            }
+        });
     }
 
     /**
@@ -49,6 +61,7 @@ public class ManageLessonsPanel extends javax.swing.JPanel {
         editLesson = new javax.swing.JButton();
         deleteLesson = new javax.swing.JButton();
         jPanel1 = new javax.swing.JPanel();
+        addQuizBtn = new javax.swing.JButton();
 
         lessonsTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -106,6 +119,13 @@ public class ManageLessonsPanel extends javax.swing.JPanel {
             .addGap(0, 44, Short.MAX_VALUE)
         );
 
+        addQuizBtn.setText("Add quiz");
+        addQuizBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                addQuizBtnActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
@@ -125,7 +145,9 @@ public class ManageLessonsPanel extends javax.swing.JPanel {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(editLesson, javax.swing.GroupLayout.PREFERRED_SIZE, 154, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(deleteLesson, javax.swing.GroupLayout.PREFERRED_SIZE, 171, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(deleteLesson, javax.swing.GroupLayout.PREFERRED_SIZE, 171, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(addQuizBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 171, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -135,7 +157,8 @@ public class ManageLessonsPanel extends javax.swing.JPanel {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(addLesson, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(editLesson, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(deleteLesson))
+                    .addComponent(deleteLesson)
+                    .addComponent(addQuizBtn))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -187,10 +210,18 @@ public class ManageLessonsPanel extends javax.swing.JPanel {
         }
     }//GEN-LAST:event_deleteLessonActionPerformed
 
+    private void addQuizBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addQuizBtnActionPerformed
+        // TODO add your handling code here:
+        CreateQuiz dialog = new CreateQuiz((Frame) this.getParent(), true);
+        dialog.setLocationRelativeTo((Frame) this.getParent());
+        dialog.setVisible(true);
+    }//GEN-LAST:event_addQuizBtnActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel actionpanel;
     private javax.swing.JButton addLesson;
+    private javax.swing.JButton addQuizBtn;
     private javax.swing.JButton deleteLesson;
     private javax.swing.JButton editLesson;
     private javax.swing.JPanel jPanel1;
