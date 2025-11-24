@@ -5,6 +5,7 @@
 package Frontend;
 
 import Backend.Lesson;
+import Backend.Students;
 
 /**
  *
@@ -17,12 +18,13 @@ public class LessonVieww extends javax.swing.JDialog {
      */
     
     private Lesson  l;
-    private StudentDashboardFrame MainFrame;
+    private Students stu;
     
-    public LessonVieww(java.awt.Frame parent, boolean modal,Lesson l) {
+    public LessonVieww(java.awt.Frame parent, boolean modal,Lesson l, Students stu) {
         super(parent, modal);
         initComponents();
         this.l = l;
+        this.stu=stu;
         lessontitleTXT.setText(l.getTitle());
         lessonContentTXT.setText(l.getContent());
         leesonResourcesTXT.setText((l.getResources().toString()));
@@ -111,7 +113,7 @@ public class LessonVieww extends javax.swing.JDialog {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        QuizPage page = new QuizPage((java.awt.Frame) this.getParent(),true,l.getQuiz());
+        QuizPage page = new QuizPage((java.awt.Frame) this.getParent(),true,l.getQuiz(), stu);
         page.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_jButton1ActionPerformed
